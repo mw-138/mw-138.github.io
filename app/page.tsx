@@ -9,14 +9,14 @@ export default function Home() {
       <div className="hero min-h-screen bg-base-200">
         <div className="hero-content text-center">
           <div className="max-w-md">
-            <h1 className="text-5xl font-bold">Hi, I'm Matthew Watson</h1>
+            {/* <h1 className="text-5xl font-bold">Hi, I'm Matthew Watson</h1>
             <p className="py-6">
               I am a games programmer from the United Kingdom with 7+ years of
               self-taught and College tuition using Unity and C#.
             </p>
             <Link className="btn btn-primary" href="/about">
               About Me
-            </Link>
+            </Link> */}
           </div>
         </div>
       </div>
