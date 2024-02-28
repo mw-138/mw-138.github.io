@@ -1,0 +1,11 @@
+[{
+  "id":"test",
+  "title":"Test",
+  "description": "This is a test game",
+  "thumbnail":"https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
+},{
+  "id":"test2",
+  "title":"Test 2",
+  "description": "This is a test game 2",
+  "thumbnail":"https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
+}]
