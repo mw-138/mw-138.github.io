@@ -16,6 +16,7 @@ const GameDevelopmentPage = () => {
             description={game.description}
             thumbnail={game.thumbnail}
             link={`/portfolios/game-development/${game.id}`}
+            pageUrl={game.page_url}
           />
         ))}
       </div>
