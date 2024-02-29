@@ -7,6 +7,7 @@ interface PortfolioCardProps {
   description: string;
   thumbnail: string;
   link: string;
+  pageUrl: string;
 }
 
 const PortfolioCard = (props: PortfolioCardProps) => {
@@ -25,8 +26,13 @@ const PortfolioCard = (props: PortfolioCardProps) => {
         <h2 className="card-title">{props.title}</h2>
         <p>{props.description}</p>
         <div className="card-actions justify-end">
+          {props.pageUrl !== "" && (
+            <Link href={props.pageUrl} className="btn btn-primary">
+              Visit Game
+            </Link>
+          )}
           <Link href={props.link} className="btn btn-primary">
-            Visit
+            Learn More
           </Link>
         </div>
       </div>
