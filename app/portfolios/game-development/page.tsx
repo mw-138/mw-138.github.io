@@ -2,7 +2,7 @@ import Footer from "@/app/components/Footer";
 import Navbar from "@/app/components/Navbar";
 import PortfolioCard from "@/app/components/PortfolioCard";
 import React from "react";
-import GameList from "./[id]/data/games.json";
+import GameList from "@/_data/games.json";
 
 const GameDevelopmentPage = () => {
   return (
