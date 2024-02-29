@@ -1,9 +1,10 @@
 import React from "react";
-import GameList from "./data/games.json";
+import GameList from "@/_data/games.json";
 import { notFound } from "next/navigation";
 import Navbar from "@/app/components/Navbar";
 import Footer from "@/app/components/Footer";
 import Image from "next/image";
+import Pagination from "@/app/components/Pagination";
 
 export async function generateMetadata({
   params: { id },
@@ -18,8 +19,8 @@ export async function generateMetadata({
 }
 
 export async function generateStaticParams() {
-  return GameList.map((entry) => {
-    entry.id;
+  return GameList.map((game) => {
+    id: game.id;
   });
 }
 
@@ -32,6 +33,17 @@ const GamePage = async ({ params: { id } }: { params: { id: string } }) => {
     <>
       <Navbar />
       <div className="p-5 bg-base-200 text-base-content">
+        <Pagination
+          className="mb-5"
+          entries={[
+            { label: "Home", link: "/" },
+            { label: "Portfolios", link: "/portfolios" },
+            {
+              label: "Game Development Portfolios",
+              link: "/portfolios/game-development",
+            },
+          ]}
+        />
         <section className="mb-5 last:mb-0">
           <Image
             src={game.thumbnail}

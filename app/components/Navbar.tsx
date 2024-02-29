@@ -38,25 +38,19 @@ const Navbar = () => {
               <summary>Portfolios</summary>
               <ul className="p-2 bg-base-100 rounded-t-none right-0">
                 <li>
-                  <a>
-                    <Link href="/portfolios/game-development">
-                      Game Development
-                    </Link>
-                  </a>
+                  <Link href="/portfolios/game-development">
+                    Game Development
+                  </Link>
                 </li>
                 <li>
-                  <a>
-                    <Link href="/portfolios/software-development">
-                      Software Development
-                    </Link>
-                  </a>
+                  <Link href="/portfolios/software-development">
+                    Software Development
+                  </Link>
                 </li>
                 <li>
-                  <a>
-                    <Link href="/portfolios/web-development">
-                      Web Development
-                    </Link>
-                  </a>
+                  <Link href="/portfolios/web-development">
+                    Web Development
+                  </Link>
                 </li>
               </ul>
             </details>
