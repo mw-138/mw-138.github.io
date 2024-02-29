@@ -19,9 +19,9 @@ export async function generateMetadata({
 }
 
 export async function generateStaticParams() {
-  return GameList.map((game) => {
-    id: game.id;
-  });
+  return GameList.map((game) => ({
+    id: game.id,
+  }));
 }
 
 const GamePage = async ({ params: { id } }: { params: { id: string } }) => {
