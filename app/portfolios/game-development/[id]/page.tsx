@@ -39,28 +39,61 @@ const GamePage = async ({ params: { id } }: { params: { id: string } }) => {
             { label: "Home", link: "/" },
             { label: "Portfolios", link: "/portfolios" },
             {
-              label: "Game Development Portfolios",
+              label: "Game Development",
               link: "/portfolios/game-development",
             },
           ]}
         />
-        <section className="mb-5 last:mb-0">
-          <Image
-            src={game.thumbnail}
-            width={300}
-            height={300}
-            alt=""
-            className="rounded-xl"
-          />
-        </section>
-        <section className="mb-5 last:mb-0">
-          <h1 className="text-2xl font-bold">Title</h1>
-          <p>{game.title}</p>
-        </section>
-        <section className="mb-5 last:mb-0">
-          <h1 className="text-2xl font-bold">Description</h1>
-          <p>{game.description}</p>
-        </section>
+        <div className="w-full h-fit flex">
+          <div className="w-96 flex flex-col">
+            <h1 className="font-extrabold text-2xl">{game.title}</h1>
+            <div className="divider" />
+            <p>{game.description}</p>
+            <div className="divider" />
+            <p>{game.year}</p>
+          </div>
+          <div className="divider divider-horizontal" />
+          <div className="flex-1">
+            {game.screenshots.length > 0 && (
+              <>
+                <h1 className="font-extrabold text-2xl">Screenshots</h1>
+                <div className="divider" />
+                <div className="carousel w-full h-96">
+                  {game.screenshots.map((screenshot, index) => (
+                    <div
+                      key={index}
+                      id={`item_${index}`}
+                      className="carousel-item w-full"
+                    >
+                      <img src={screenshot} className="w-full object-contain" />
+                    </div>
+                  ))}
+                </div>
+                <div className="flex justify-center w-full py-2 gap-2">
+                  {game.screenshots.map((_screenshot, index) => (
+                    <a
+                      key={index}
+                      href={`#item_${index}`}
+                      className="btn btn-xs"
+                    >
+                      {index + 1}
+                    </a>
+                  ))}
+                </div>
+              </>
+            )}
+            {game.videos.length > 0 && (
+              <>
+                <div className="divider" />
+                <h1 className="font-extrabold text-2xl">Videos</h1>
+                <div className="divider" />
+              </>
+            )}
+            {game.screenshots.length == 0 && game.videos.length == 0 && (
+              <h1>No media available</h1>
+            )}
+          </div>
+        </div>
       </div>
       <Footer />
     </>
