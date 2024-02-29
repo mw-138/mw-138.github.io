@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <footer className="footer items-center p-4 bg-base-100 text-base-content">
       <aside className="items-center grid-flow-col">
-        <p>Copyright © 2024 - All right reserved</p>
+        <p>Copyright © 2024 - All rights reserved</p>
       </aside>
       <nav className="grid-flow-col gap-4 md:place-self-center md:justify-self-end">
         <Link
