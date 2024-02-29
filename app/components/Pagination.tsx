@@ -17,7 +17,7 @@ const Pagination = (props: PaginationProps) => {
     <div className={`text-sm breadcrumbs ${className}`}>
       <ul>
         {entries.map((entry, index) => (
-          <li>
+          <li key={index}>
             <Link href={entry.link}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
