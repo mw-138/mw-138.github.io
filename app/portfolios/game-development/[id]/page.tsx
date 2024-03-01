@@ -1,5 +1,5 @@
 import React from "react";
-import GameList from "@/_data/games.json";
+import { GameList } from "@/_data/Games";
 import { notFound } from "next/navigation";
 import Navbar from "@/app/components/Navbar";
 import Footer from "@/app/components/Footer";
@@ -46,11 +46,21 @@ const GamePage = async ({ params: { id } }: { params: { id: string } }) => {
         />
         <div className="w-full h-fit flex">
           <div className="w-96 flex flex-col">
-            <h1 className="font-extrabold text-2xl">{game.title}</h1>
-            <div className="divider" />
-            <p>{game.description}</p>
-            <div className="divider" />
-            <p>{game.year}</p>
+            {game.title && (
+              <h1 className="font-extrabold text-2xl">{game.title}</h1>
+            )}
+            {game.description && (
+              <>
+                <div className="divider" />
+                <p>{game.description}</p>
+              </>
+            )}
+            {game.year && (
+              <>
+                <div className="divider" />
+                <p>{game.year}</p>
+              </>
+            )}
           </div>
           <div className="divider divider-horizontal" />
           <div className="flex-1">
@@ -65,7 +75,13 @@ const GamePage = async ({ params: { id } }: { params: { id: string } }) => {
                       id={`item_${index}`}
                       className="carousel-item w-full"
                     >
-                      <img src={screenshot} className="w-full object-contain" />
+                      <Image
+                        src={screenshot}
+                        width={0}
+                        height={0}
+                        alt=""
+                        className="w-full object-contain"
+                      />
                     </div>
                   ))}
                 </div>

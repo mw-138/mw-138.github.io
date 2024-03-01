@@ -2,7 +2,7 @@ import Footer from "@/app/components/Footer";
 import Navbar from "@/app/components/Navbar";
 import PortfolioCard from "@/app/components/PortfolioCard";
 import React from "react";
-import GameList from "@/_data/games.json";
+import { GameList } from "@/_data/Games";
 
 const GameDevelopmentPage = () => {
   return (
@@ -15,8 +15,8 @@ const GameDevelopmentPage = () => {
             title={game.title}
             description={game.description}
             thumbnail={game.thumbnail}
-            link={`/portfolios/game-development/${game.id}`}
-            pageUrl={game.page_url}
+            link={game.SiteUrl()}
+            pageUrl={game.pageUrl}
           />
         ))}
       </div>
