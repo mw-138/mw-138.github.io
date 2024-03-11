@@ -48,7 +48,7 @@ const PortfoliosPage = async () => {
           link="/portfolios/game-development"
           image="https://assets-global.website-files.com/5b651f8b5fc94c4e27470a81/622227fd2ce3cc0455a88166_blog-gamedev-fullsize.png"
         />
-        <Card
+        {/* <Card
           title="Software Development"
           link="/portfolios/software-development"
           image="https://www.perforce.com/sites/default/files/styles/social_preview_image/public/image/2020-01/image-blog-future-software-development.png?itok=eO9Fa9k-"
@@ -57,7 +57,7 @@ const PortfoliosPage = async () => {
           title="Web Development"
           link="/portfolios/web-development"
           image="https://miro.medium.com/v2/resize:fit:12000/0*tQQ7SLPOJfxaG4ZY"
-        />
+        /> */}
       </div>
       <Footer />
     </>

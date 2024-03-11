@@ -1,5 +1,10 @@
 import { StaticImageData } from "next/image";
 
+export enum GameEngine {
+  Unity = "Unity",
+  UnrealEngine = "Unreal Engine",
+}
+
 export default class Game {
   public isHighlighted: boolean;
   public visible: boolean;
@@ -7,6 +12,7 @@ export default class Game {
   public title: string;
   public description: string;
   public year: number;
+  public engine: GameEngine;
   public thumbnail: StaticImageData;
   public pageUrl: string;
   public screenshots: StaticImageData[];
@@ -19,6 +25,7 @@ export default class Game {
     title: string,
     description: string,
     year: number,
+    engine: GameEngine,
     thumbnail: StaticImageData,
     pageUrl: string,
     screenshots: StaticImageData[],
@@ -30,13 +37,14 @@ export default class Game {
     this.title = title;
     this.description = description;
     this.year = year;
+    this.engine = engine;
     this.thumbnail = thumbnail;
     this.pageUrl = pageUrl;
     this.screenshots = screenshots;
     this.videos = videos;
   }
 
-  public SiteUrl(): string {
+  public GetSiteUrl(): string {
     return `/portfolios/game-development/${this.id}`;
   }
 }

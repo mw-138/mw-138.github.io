@@ -35,7 +35,7 @@ export default function Home() {
               key={index}
               title={game.title}
               description={game.description}
-              link={game.SiteUrl()}
+              link={game.GetSiteUrl()}
               thumbnail={game.thumbnail}
               pageUrl={game.pageUrl}
             />

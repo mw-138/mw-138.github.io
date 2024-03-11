@@ -8,14 +8,14 @@ const GameDevelopmentPage = () => {
   return (
     <main>
       <Navbar />
-      <div className="grid grid-cols-4 place-items-center place-content-center gap-10 bg-base-200 p-20">
+      <div className="grid xl:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 place-items-center place-content-center gap-10 bg-base-200 p-20">
         {GameList.map((game, index) => (
           <PortfolioCard
             key={index}
             title={game.title}
             description={game.description}
             thumbnail={game.thumbnail}
-            link={game.SiteUrl()}
+            link={game.GetSiteUrl()}
             pageUrl={game.pageUrl}
           />
         ))}
