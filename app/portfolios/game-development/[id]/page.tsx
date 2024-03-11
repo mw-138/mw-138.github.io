@@ -44,7 +44,7 @@ const GamePage = async ({ params: { id } }: { params: { id: string } }) => {
             },
           ]}
         />
-        <div className="w-full h-fit flex">
+        <div className="w-full h-fit flex xl:flex-row flex-col">
           <div className="w-96 flex flex-col">
             {game.title && (
               <h1 className="font-extrabold text-2xl">{game.title}</h1>
@@ -52,13 +52,22 @@ const GamePage = async ({ params: { id } }: { params: { id: string } }) => {
             {game.description && (
               <>
                 <div className="divider" />
+                <h1 className="font-extrabold text-2xl">Description</h1>
                 <p>{game.description}</p>
               </>
             )}
             {game.year && (
               <>
                 <div className="divider" />
+                <h1 className="font-extrabold text-2xl">Year</h1>
                 <p>{game.year}</p>
+              </>
+            )}
+            {game.engine && (
+              <>
+                <div className="divider" />
+                <h1 className="font-extrabold text-2xl">Engine</h1>
+                <p>{game.engine}</p>
               </>
             )}
           </div>
@@ -66,8 +75,9 @@ const GamePage = async ({ params: { id } }: { params: { id: string } }) => {
           <div className="flex-1">
             {game.screenshots.length > 0 && (
               <>
+                <div className="divider xl:hidden" />
                 <h1 className="font-extrabold text-2xl">Screenshots</h1>
-                <div className="divider" />
+                <div className="xl:divider" />
                 <div className="carousel w-full h-96">
                   {game.screenshots.map((screenshot, index) => (
                     <div

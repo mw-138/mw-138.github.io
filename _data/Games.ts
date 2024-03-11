@@ -1,4 +1,4 @@
-import Game from "@/app/classes/Game";
+import Game, { GameEngine } from "@/app/classes/Game";
 
 import PixelPlatformer_Screenshot01 from "@/public/games/pixel_platformer/screenshot_01.png";
 
@@ -39,8 +39,9 @@ export const GameList: Game[] = [
     true,
     "pixel_platformer",
     "Pixel Platformer",
-    "",
+    "A 2D platformer prototype game.",
     2024,
+    GameEngine.Unity,
     PixelPlatformer_Screenshot01,
     "",
     [PixelPlatformer_Screenshot01],
@@ -51,8 +52,9 @@ export const GameList: Game[] = [
     true,
     "rpg_board_game",
     "RPG Board Game",
-    "",
+    "A prototype game based on Monopoly where the place rolls a dice and moves around the board collecting resources and fighting enemies. When the player moves around the entire board, the tiles re-generate and change the contents of each tile.",
     2024,
+    GameEngine.Unity,
     RpgBoardGame_Screenshot01,
     "",
     [
@@ -67,8 +69,9 @@ export const GameList: Game[] = [
     true,
     "money_catcher",
     "Money Catcher",
-    "Money Catcher is a game where you catch money falling from the sky and obtain a score as high as possible in 60 seconds.",
+    "Money Catcher is a game where you catch money falling from the sky and obtain a score as high as possible in 60 seconds whilst also being able to collect pickups that extend the clock.",
     2018,
+    GameEngine.Unity,
     MoneyCatcher_Screenshot01,
     "",
     [
@@ -85,6 +88,7 @@ export const GameList: Game[] = [
     "Wave Survival",
     "This is a first-person zombie survival game created in Unity that was made for a college assignment. In this game, you fight waves of enemies whilst also being able to unlock new areas of the map, get new weapons with an RPG loot system, weapon upgrades and boss fights.",
     2020,
+    GameEngine.Unity,
     WaveSurvival_Screenshot01,
     "",
     [WaveSurvival_Screenshot01],
@@ -97,6 +101,7 @@ export const GameList: Game[] = [
     "RPG Clicker",
     "An RPG clicker game that includes enemies, bosses and loot. Collect loot to be able to do more damage to your enemies.",
     2018,
+    GameEngine.Unity,
     RpgClicker_Screenshot01,
     "",
     [
@@ -114,6 +119,7 @@ export const GameList: Game[] = [
     "John Lowe's Darts Adventure",
     "This is game that I was apart of developing at Bubble Creations within a small group of developers and artists. The game contains multiple game modes such as story missions, bonus games, 9 dart challenges and arcade games. The main gameplay loop is you throw darts at enemies in different game modes to earn rewards.",
     2022,
+    GameEngine.Unity,
     Jlda_Screenshot01,
     "",
     [
@@ -132,8 +138,9 @@ export const GameList: Game[] = [
     true,
     "bobs_adventure",
     "Bob's Adventure",
-    "",
+    "A prototype platformer game.",
     2023,
+    GameEngine.Unity,
     BobsAdventure_Screenshot01,
     "",
     [BobsAdventure_Screenshot01],
@@ -146,6 +153,7 @@ export const GameList: Game[] = [
     "Pigeon and Pete",
     "Pigeon & Pete is a game I worked on as part of a game jam with 3 other people. It's a puzzle platformer game where you take control of both Pigeon and Pete to solve puzzles by pooping and platforming.",
     2022,
+    GameEngine.Unity,
     PigeonAndPete_Screenshot01,
     "",
     [
