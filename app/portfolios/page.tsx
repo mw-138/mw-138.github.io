@@ -42,7 +42,7 @@ const PortfoliosPage = async () => {
   return (
     <>
       <Navbar />
-      <div className="flex justify-evenly p-20">
+      <div className="flex justify-evenly p-20 bg-base-200">
         <Card
           title="Game Development"
           link="/portfolios/game-development"
