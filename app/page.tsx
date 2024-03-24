@@ -18,7 +18,7 @@ export default function Home() {
             <h1 className="text-5xl font-bold">Hi, I&apos;m Matthew Watson</h1>
             <p className="py-6">
               I am a programmer from the United Kingdom with 7+ years of
-              self-taught and College tuition using Unity and C#.
+              experience using Unity and C#.
             </p>
             <Link className="btn btn-primary" href="/about">
               About Me
