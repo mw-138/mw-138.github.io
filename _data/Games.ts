@@ -33,6 +33,8 @@ import PigeonAndPete_Screenshot03 from "@/public/games/pigeon_and_pete/screensho
 import PigeonAndPete_Screenshot04 from "@/public/games/pigeon_and_pete/screenshot_04.png";
 import PigeonAndPete_Screenshot05 from "@/public/games/pigeon_and_pete/screenshot_05.png";
 
+import CoinCatcher_Screenshot01 from "@/public/games/coin_catcher/screenshot_01.png";
+
 export const GameList: Game[] = [
   new Game(
     true,
@@ -65,7 +67,7 @@ export const GameList: Game[] = [
     []
   ),
   new Game(
-    true,
+    false,
     true,
     "money_catcher",
     "Money Catcher",
@@ -163,6 +165,19 @@ export const GameList: Game[] = [
       PigeonAndPete_Screenshot04,
       PigeonAndPete_Screenshot05,
     ],
+    []
+  ),
+  new Game(
+    true,
+    true,
+    "coin_catcher",
+    "Coin Catcher",
+    "Coin Catcher is a 2D platformer where the objective is to collect as many coins as possible under the time limit while dodging danger falling from the sky. The game is based off a previous game called Money Catcher that was only just a prototype.",
+    2024,
+    GameEngine.Unity,
+    CoinCatcher_Screenshot01,
+    "https://lionstargames.itch.io/coin-catcher",
+    [CoinCatcher_Screenshot01],
     []
   ),
 ];
