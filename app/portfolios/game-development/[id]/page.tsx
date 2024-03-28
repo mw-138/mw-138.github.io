@@ -70,6 +70,13 @@ const GamePage = async ({ params: { id } }: { params: { id: string } }) => {
                 <p>{game.engine}</p>
               </>
             )}
+            {game.pageUrl && (
+              <>
+                <div className="divider" />
+                <h1 className="font-extrabold text-2xl">Link</h1>
+                <a href={game.pageUrl}>{game.pageUrl}</a>
+              </>
+            )}
           </div>
           <div className="divider divider-horizontal" />
           <div className="flex-1">
