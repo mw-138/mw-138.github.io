@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <main>
       <Navbar />
-      <section className="hero min-h-screen bg-base-200">
+      <section className="hero min-h-screen bg-base-200 bg-[url('/games/coin_catcher/screenshot_01.png')] bg-blend-overlay">
         <div className="hero-content text-center">
           <div className="max-w-md">
             <h1 className="text-5xl font-bold">Hi, I&apos;m Matthew Watson</h1>

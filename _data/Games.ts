@@ -34,6 +34,13 @@ import PigeonAndPete_Screenshot04 from "@/public/games/pigeon_and_pete/screensho
 import PigeonAndPete_Screenshot05 from "@/public/games/pigeon_and_pete/screenshot_05.png";
 
 import CoinCatcher_Screenshot01 from "@/public/games/coin_catcher/screenshot_01.png";
+import CoinCatcher_Screenshot02 from "@/public/games/coin_catcher/screenshot_02.png";
+import CoinCatcher_Screenshot03 from "@/public/games/coin_catcher/screenshot_03.png";
+import CoinCatcher_Screenshot04 from "@/public/games/coin_catcher/screenshot_04.png";
+import CoinCatcher_Screenshot05 from "@/public/games/coin_catcher/screenshot_05.png";
+import CoinCatcher_Screenshot06 from "@/public/games/coin_catcher/screenshot_06.png";
+import CoinCatcher_Screenshot07 from "@/public/games/coin_catcher/screenshot_07.png";
+import CoinCatcher_Screenshot08 from "@/public/games/coin_catcher/screenshot_08.png";
 
 export const GameList: Game[] = [
   new Game(
@@ -177,7 +184,16 @@ export const GameList: Game[] = [
     GameEngine.Unity,
     CoinCatcher_Screenshot01,
     "https://lionstargames.itch.io/coin-catcher",
-    [CoinCatcher_Screenshot01],
+    [
+      CoinCatcher_Screenshot01,
+      CoinCatcher_Screenshot02,
+      CoinCatcher_Screenshot03,
+      CoinCatcher_Screenshot04,
+      CoinCatcher_Screenshot05,
+      CoinCatcher_Screenshot06,
+      CoinCatcher_Screenshot07,
+      CoinCatcher_Screenshot08,
+    ],
     []
   ),
 ];
