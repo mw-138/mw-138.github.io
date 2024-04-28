@@ -5,6 +5,7 @@ import Navbar from "@/app/components/Navbar";
 import Footer from "@/app/components/Footer";
 import Image from "next/image";
 import Pagination from "@/app/components/Pagination";
+import Link from "next/link";
 
 export async function generateMetadata({
   params: { id },
@@ -73,8 +74,9 @@ const GamePage = async ({ params: { id } }: { params: { id: string } }) => {
             {game.pageUrl && (
               <>
                 <div className="divider" />
-                <h1 className="font-extrabold text-2xl">Link</h1>
-                <a href={game.pageUrl}>{game.pageUrl}</a>
+                <Link href={game.pageUrl} className="btn btn-primary">
+                  Visit Game Page
+                </Link>
               </>
             )}
           </div>
