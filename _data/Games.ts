@@ -82,7 +82,7 @@ export const GameList: Game[] = [
     2018,
     GameEngine.Unity,
     MoneyCatcher_Screenshot01,
-    "",
+    "https://lionstargames.itch.io/money-catcher",
     [
       MoneyCatcher_Screenshot01,
       MoneyCatcher_Screenshot02,
@@ -99,7 +99,7 @@ export const GameList: Game[] = [
     2020,
     GameEngine.Unity,
     WaveSurvival_Screenshot01,
-    "",
+    "https://lionstargames.itch.io/waved-based-survival",
     [WaveSurvival_Screenshot01],
     []
   ),
@@ -112,7 +112,7 @@ export const GameList: Game[] = [
     2018,
     GameEngine.Unity,
     RpgClicker_Screenshot01,
-    "",
+    "https://lionstargames.itch.io/rpg-clicker",
     [
       RpgClicker_Screenshot01,
       RpgClicker_Screenshot02,
