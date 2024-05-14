@@ -20,9 +20,17 @@ export default function Home() {
               I am a programmer from the United Kingdom with 7+ years of
               experience using Unity and C#.
             </p>
-            <Link className="btn btn-primary" href="/about">
-              About Me
-            </Link>
+            <div className="flex justify-center items-center gap-5">
+              <Link className="btn btn-primary" href="/about">
+                About Me
+              </Link>
+              <Link
+                className="btn btn-primary"
+                href="/portfolios/game-development/coin_catcher"
+              >
+                Visit Highlighted Game
+              </Link>
+            </div>
           </div>
         </div>
       </section>

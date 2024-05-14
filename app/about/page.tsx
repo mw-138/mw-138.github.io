@@ -24,13 +24,13 @@ class Skill {
 const AboutPage = () => {
   const skills: Skill[] = [
     new Skill("C#", 3),
-    new Skill("C++", 1.5),
+    new Skill("C++", 2),
+    new Skill("Unity", 3),
+    new Skill("Unreal Engine", 1.5),
     new Skill("HTML", 1.5),
     new Skill("CSS", 1.5),
     new Skill("React", 1.5),
-    new Skill("Unity", 3),
-    new Skill("Unreal Engine", 2),
-    new Skill("Python", 1),
+    new Skill("Python", 1.5),
   ].sort((a, b) => b.rating - a.rating);
 
   const Section = (props: AboutPageProps) => {
@@ -51,7 +51,7 @@ const AboutPage = () => {
           min={1}
           max="4"
           value={props.rating}
-          className="range"
+          className="range cursor-default"
           step="0.5"
         />
         <div className="w-full flex justify-between text-xs px-2">
@@ -69,8 +69,9 @@ const AboutPage = () => {
       <Navbar />
       <Section title="About Me">
         <p>
-          I am a games programmer from the United Kingdom with 7+ years of
-          self-taught and College tuition using Unity and C#.
+          I am a programmer from the United Kingdom with 7+ years of self-taught
+          and College tuition using Unity and C#. I am also self-taught in many
+          other languages and development frameworks featured below.
         </p>
         <br />
         <p>
@@ -86,15 +87,13 @@ const AboutPage = () => {
           <li>Storyboarding</li>
         </ul>
         <br />
-        <p>
-          In my studies, I focussed more on programming as that is the area I
-          hold more interest within game development.
-        </p>
-        <br />
         <p>Projects I have worked on are visible in my portfolio pages.</p>
       </Section>
       <Section title="Education">
-        <p>BSc (Hons 2:1) Computer Science Degree</p>
+        <ul className="list-disc ml-5">
+          <li>BSc (Hons 2:1) Computer Science Degree</li>
+          <li>C++ Diploma</li>
+        </ul>
       </Section>
       <Section title="Technical Skills">
         <table className="table table-bordered">
