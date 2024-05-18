@@ -1,5 +1,5 @@
 import React from "react";
-import { GameList } from "@/_data/Games";
+import { Projects } from "@/_data/Projects";
 import { notFound } from "next/navigation";
 import Navbar from "@/app/components/Navbar";
 import Footer from "@/app/components/Footer";
@@ -12,22 +12,22 @@ export async function generateMetadata({
 }: {
   params: { id: string };
 }) {
-  const game = GameList.find((entry) => entry.id === id);
-  const title = game ? game.title : "No Game Found";
+  const project = Projects.find((entry) => entry.id === id);
+  const title = project ? project.title : "No Project Found";
   return {
     title: title,
   };
 }
 
 export async function generateStaticParams() {
-  return GameList.map((game) => ({
-    id: game.id,
+  return Projects.map((project) => ({
+    id: project.id,
   }));
 }
 
-const GamePage = async ({ params: { id } }: { params: { id: string } }) => {
-  const game = GameList.find((entry) => entry.id === id);
-  if (!game) {
+const ProjectPage = async ({ params: { id } }: { params: { id: string } }) => {
+  const project = Projects.find((entry) => entry.id === id);
+  if (!project) {
     notFound();
   }
   return (
@@ -38,57 +38,69 @@ const GamePage = async ({ params: { id } }: { params: { id: string } }) => {
           className="mb-5"
           entries={[
             { label: "Home", link: "/" },
-            { label: "Portfolios", link: "/portfolios" },
-            {
-              label: "Game Development",
-              link: "/portfolios/game-development",
-            },
+            { label: "Projects", link: "/projects" },
           ]}
         />
         <div className="w-full h-fit flex xl:flex-row flex-col">
           <div className="w-96 flex flex-col">
-            {game.title && (
-              <h1 className="font-extrabold text-2xl">{game.title}</h1>
+            {project.title && (
+              <h1 className="font-extrabold text-2xl">{project.title}</h1>
             )}
-            {game.description && (
+            {project.description && (
               <>
                 <div className="divider" />
                 <h1 className="font-extrabold text-2xl">Description</h1>
-                <p>{game.description}</p>
+                <p>{project.description}</p>
               </>
             )}
-            {game.year && (
+            {project.year && (
               <>
                 <div className="divider" />
                 <h1 className="font-extrabold text-2xl">Year</h1>
-                <p>{game.year}</p>
+                <p>{project.year}</p>
               </>
             )}
-            {game.engine && (
+            {project.toolsUsed && (
               <>
                 <div className="divider" />
-                <h1 className="font-extrabold text-2xl">Engine</h1>
-                <p>{game.engine}</p>
+                <h1 className="font-extrabold text-2xl">Tools Used</h1>
+                <p>{project.GetFormattedToolsUsed()}</p>
               </>
             )}
-            {game.pageUrl && (
+            {project.languagesUsed && (
               <>
                 <div className="divider" />
-                <Link href={game.pageUrl} className="btn btn-primary">
-                  Visit Game Page
+                <h1 className="font-extrabold text-2xl">
+                  Languages/Markup Syntax Used
+                </h1>
+                <p>{project.GetFormattedLanguagesUsed()}</p>
+              </>
+            )}
+            {project.pageUrl && (
+              <>
+                <div className="divider" />
+                <Link href={project.pageUrl} className="btn btn-primary">
+                  Visit Project Page
                 </Link>
+              </>
+            )}
+            {project.tags && (
+              <>
+                <div className="divider" />
+                <h1 className="font-extrabold text-2xl">Tags</h1>
+                <p>{project.GetFormattedTags()}</p>
               </>
             )}
           </div>
           <div className="divider divider-horizontal" />
           <div className="flex-1">
-            {game.screenshots.length > 0 && (
+            {project.screenshots.length > 0 && (
               <>
                 <div className="divider xl:hidden" />
                 <h1 className="font-extrabold text-2xl">Screenshots</h1>
                 <div className="xl:divider" />
                 <div className="carousel w-full h-96">
-                  {game.screenshots.map((screenshot, index) => (
+                  {project.screenshots.map((screenshot, index) => (
                     <div
                       key={index}
                       id={`item_${index}`}
@@ -105,7 +117,7 @@ const GamePage = async ({ params: { id } }: { params: { id: string } }) => {
                   ))}
                 </div>
                 <div className="flex justify-center w-full py-2 gap-2">
-                  {game.screenshots.map((_screenshot, index) => (
+                  {project.screenshots.map((_screenshot, index) => (
                     <a
                       key={index}
                       href={`#item_${index}`}
@@ -117,14 +129,14 @@ const GamePage = async ({ params: { id } }: { params: { id: string } }) => {
                 </div>
               </>
             )}
-            {game.videos.length > 0 && (
+            {project.videos.length > 0 && (
               <>
                 <div className="divider" />
                 <h1 className="font-extrabold text-2xl">Videos</h1>
                 <div className="divider" />
               </>
             )}
-            {game.screenshots.length == 0 && game.videos.length == 0 && (
+            {project.screenshots.length == 0 && project.videos.length == 0 && (
               <h1>No media available</h1>
             )}
           </div>
@@ -135,4 +147,4 @@ const GamePage = async ({ params: { id } }: { params: { id: string } }) => {
   );
 };
 
-export default GamePage;
+export default ProjectPage;
