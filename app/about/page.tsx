@@ -99,8 +99,8 @@ const AboutPage = () => {
         <table className="table table-bordered">
           <thead>
             <tr>
-              <th>Name</th>
-              <th>Email</th>
+              <th>Skill</th>
+              <th>Experience Level</th>
             </tr>
           </thead>
           <tbody>
