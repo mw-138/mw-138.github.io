@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import Navbar from "@/app/components/Navbar";
 import Footer from "@/app/components/Footer";
 import Image from "next/image";
-import Pagination from "@/app/components/Pagination";
+import Breadcrumbs from "@/app/components/Breadcrumbs";
 import Link from "next/link";
 
 export async function generateMetadata({
@@ -34,7 +34,7 @@ const ProjectPage = async ({ params: { id } }: { params: { id: string } }) => {
     <>
       <Navbar />
       <div className="p-5 bg-base-200 text-base-content">
-        <Pagination
+        <Breadcrumbs
           className="mb-5"
           entries={[
             { label: "Home", link: "/" },
@@ -118,11 +118,7 @@ const ProjectPage = async ({ params: { id } }: { params: { id: string } }) => {
                 </div>
                 <div className="flex justify-center w-full py-2 gap-2">
                   {project.screenshots.map((_screenshot, index) => (
-                    <a
-                      key={index}
-                      href={`#item_${index}`}
-                      className="btn btn-xs"
-                    >
+                    <a key={index} href={`#item_${index}`} className="btn">
                       {index + 1}
                     </a>
                   ))}

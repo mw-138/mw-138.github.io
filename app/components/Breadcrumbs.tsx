@@ -1,17 +1,17 @@
 import Link from "next/link";
 import React from "react";
 
-interface PaginationEntry {
+interface BreadcrumbsEntry {
   label: string;
   link: string;
 }
 
-interface PaginationProps {
-  entries: PaginationEntry[];
+interface BreadcrumbsProps {
+  entries: BreadcrumbsEntry[];
   className?: string;
 }
 
-const Pagination = (props: PaginationProps) => {
+const Breadcrumbs = (props: BreadcrumbsProps) => {
   const { entries, className } = props;
   return (
     <div className={`text-sm breadcrumbs ${className}`}>
@@ -41,4 +41,4 @@ const Pagination = (props: PaginationProps) => {
   );
 };
 
-export default Pagination;
+export default Breadcrumbs;
