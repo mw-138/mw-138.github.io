@@ -34,7 +34,7 @@ export default function Home() {
       <section className="bg-base-300 flex flex-col p-20">
         <h1 className="text-3xl font-bold">Highlighted Projects</h1>
         <div className="divider" />
-        <div className="flex justify-between flex-1">
+        <div className="flex justify-between flex-1 flex-col md:flex-row gap-4">
           {getHighlightedProjects().map((project, index) => (
             <ProjectCard key={index} project={project} />
           ))}
