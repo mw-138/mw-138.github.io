@@ -33,7 +33,6 @@ export default class Project {
   public id: string;
   public title: string;
   public description: string;
-  public year: number;
   public toolsUsed: Tool[];
   public languagesUsed: Language[];
   public thumbnail: StaticImageData;
@@ -48,7 +47,6 @@ export default class Project {
     id: string,
     title: string,
     description: string,
-    year: number,
     toolsUsed: Tool[],
     languagesUsed: Language[],
     thumbnail: StaticImageData,
@@ -62,7 +60,6 @@ export default class Project {
     this.id = id;
     this.title = title;
     this.description = description;
-    this.year = year;
     this.toolsUsed = toolsUsed;
     this.languagesUsed = languagesUsed;
     this.thumbnail = thumbnail;

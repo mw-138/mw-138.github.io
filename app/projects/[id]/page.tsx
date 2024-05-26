@@ -53,11 +53,11 @@ const ProjectPage = async ({ params: { id } }: { params: { id: string } }) => {
                 <p>{project.description}</p>
               </>
             )}
-            {project.year && (
+            {project.publishDate && (
               <>
                 <div className="divider" />
                 <h1 className="text-2xl font-extrabold">Year</h1>
-                <p>{project.year}</p>
+                <p>{project.publishDate.getFullYear()}</p>
               </>
             )}
             {project.toolsUsed && (
