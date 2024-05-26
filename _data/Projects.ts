@@ -54,9 +54,11 @@ import NetflixReDesign_Screenshot02 from "@/public/projects/netflix_redesign/scr
 
 import MinimalPortfolio01_Screenshot01 from "@/public/projects/minimal_portfolio_01/screenshot_01.png";
 
+import TynesideNews_Screenshot01 from "@/public/projects/tyneside_news/screenshot_01.png";
+
 export const Projects: Project[] = [
   new Project(
-    true,
+    new Date("01/01/2024"),
     true,
     "pixel_platformer",
     "Pixel Platformer",
@@ -71,7 +73,7 @@ export const Projects: Project[] = [
     [Tag.Game],
   ),
   new Project(
-    true,
+    new Date("01/01/2024"),
     true,
     "rpg_board_game",
     "RPG Board Game",
@@ -90,7 +92,7 @@ export const Projects: Project[] = [
     [Tag.Game],
   ),
   new Project(
-    false,
+    new Date("01/01/2024"),
     true,
     "money_catcher",
     "Money Catcher",
@@ -109,7 +111,7 @@ export const Projects: Project[] = [
     [Tag.Game],
   ),
   new Project(
-    false,
+    new Date("01/01/2024"),
     true,
     "wave_survival",
     "Wave Survival",
@@ -124,7 +126,7 @@ export const Projects: Project[] = [
     [Tag.Game],
   ),
   new Project(
-    false,
+    new Date("01/01/2024"),
     true,
     "rpg_clicker",
     "RPG Clicker",
@@ -144,7 +146,7 @@ export const Projects: Project[] = [
     [Tag.Game],
   ),
   new Project(
-    false,
+    new Date("01/01/2024"),
     true,
     "jlda",
     "John Lowe's Darts Adventure",
@@ -167,7 +169,7 @@ export const Projects: Project[] = [
     [Tag.Game],
   ),
   new Project(
-    false,
+    new Date("01/01/2024"),
     true,
     "bobs_adventure",
     "Bob's Adventure",
@@ -182,7 +184,7 @@ export const Projects: Project[] = [
     [Tag.Game],
   ),
   new Project(
-    false,
+    new Date("01/01/2024"),
     true,
     "pigeon_and_pete",
     "Pigeon and Pete",
@@ -203,7 +205,7 @@ export const Projects: Project[] = [
     [Tag.Game],
   ),
   new Project(
-    true,
+    new Date("01/01/2024"),
     true,
     "coin_catcher",
     "Coin Catcher",
@@ -227,7 +229,7 @@ export const Projects: Project[] = [
     [Tag.Game],
   ),
   new Project(
-    true,
+    new Date("01/01/2024"),
     true,
     "miyoo_mini_theme_preview",
     "Miyoo Mini Theme Preview",
@@ -246,7 +248,7 @@ export const Projects: Project[] = [
     [Tag.Software],
   ),
   new Project(
-    false,
+    new Date("02/28/2024"),
     true,
     "portfolio",
     "Portfolio",
@@ -261,7 +263,7 @@ export const Projects: Project[] = [
     [Tag.Website],
   ),
   new Project(
-    true,
+    new Date("05/26/2024"),
     true,
     "netflix_redesign",
     "Netflix Re-Design",
@@ -276,7 +278,7 @@ export const Projects: Project[] = [
     [Tag.Website],
   ),
   new Project(
-    true,
+    new Date("05/26/2024"),
     true,
     "minimal_portfolio_01",
     "Minimal Portfolio 01",
@@ -287,6 +289,21 @@ export const Projects: Project[] = [
     MinimalPortfolio01_Screenshot01,
     "/websites/minimal_portfolio_01",
     [MinimalPortfolio01_Screenshot01],
+    [],
+    [Tag.Website],
+  ),
+  new Project(
+    new Date("05/26/2024"),
+    true,
+    "tyneside_news",
+    "Tyneside News",
+    "A minimal news website for a fictional news publication.",
+    2024,
+    [Tool.VsCode, Tool.NextJs, Tool.React, Tool.TailwindCSS],
+    [Language.TypeScript, Language.HTML, Language.CSS],
+    TynesideNews_Screenshot01,
+    "/websites/tyneside_news",
+    [TynesideNews_Screenshot01],
     [],
     [Tag.Website],
   ),
