@@ -10,7 +10,7 @@ import Requests, {
 } from "./data_fetching";
 import MovieRow from "./components/MovieRow";
 
-const Page = async () => {
+const page = async () => {
   const popular = await performMovieQuery(Requests.Popular);
   const upcoming = await getUpcomingMovies();
   const nowPlaying = await performMovieQuery(Requests.NowPlaying);
@@ -60,4 +60,4 @@ const Page = async () => {
   );
 };
 
-export default Page;
+export default page;
