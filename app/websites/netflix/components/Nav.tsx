@@ -104,9 +104,8 @@ const Nav = () => {
           <Logo />
           <ul className="flex flex-row gap-2">
             {mainNavItems.map((item, index) => (
-              <li>
+              <li key={index}>
                 <Link
-                  key={index}
                   href={item.href}
                   className={`rounded-md bg-transparent px-4 py-2 text-white transition-all hover:bg-netflix-red ${item.hide}:flex hidden`}
                 >
@@ -118,9 +117,8 @@ const Nav = () => {
         </div>
         <ul className="hidden flex-row gap-2 md:flex">
           {authenticationNavItems.map((item, index) => (
-            <li>
+            <li key={index}>
               <Link
-                key={index}
                 href={item.href}
                 className="rounded-md bg-transparent px-4 py-2 text-white transition-all hover:bg-netflix-red"
               >
@@ -151,9 +149,8 @@ const Nav = () => {
         </div>
         <ul className="flex flex-col gap-2">
           {mainNavItems.map((item, index) => (
-            <li>
+            <li key={index}>
               <Link
-                key={index}
                 href={item.href}
                 className={`mx-4 flex items-center gap-2 rounded-md px-4 py-2 text-white transition-all hover:bg-netflix-red`}
               >
@@ -165,9 +162,8 @@ const Nav = () => {
         </ul>
         <ul className="absolute bottom-5 left-5 flex flex-row gap-2">
           {authenticationNavItems.map((item, index) => (
-            <li>
+            <li key={index}>
               <Link
-                key={index}
                 href={item.href}
                 className="flex items-center gap-2 rounded-md bg-transparent px-4 py-2 text-white transition-all hover:bg-netflix-red"
               >
