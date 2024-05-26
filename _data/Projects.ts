@@ -265,7 +265,7 @@ export const Projects: Project[] = [
     true,
     "netflix_redesign",
     "Netflix Re-Design",
-    "A Netflix re-design that uses TMDB api to retrieve movies and TV shows.",
+    "A Netflix re-design that uses TMDB API to retrieve movies and TV shows.",
     2024,
     [Tool.VsCode, Tool.NextJs, Tool.React, Tool.TailwindCSS],
     [Language.TypeScript, Language.HTML, Language.CSS],
