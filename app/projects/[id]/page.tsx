@@ -33,7 +33,7 @@ const ProjectPage = async ({ params: { id } }: { params: { id: string } }) => {
   return (
     <>
       <Navbar />
-      <div className="p-5 bg-base-200 text-base-content">
+      <div className="bg-base-200 p-5 text-base-content">
         <Breadcrumbs
           className="mb-5"
           entries={[
@@ -41,36 +41,36 @@ const ProjectPage = async ({ params: { id } }: { params: { id: string } }) => {
             { label: "Projects", link: "/projects" },
           ]}
         />
-        <div className="w-full h-fit flex xl:flex-row flex-col">
-          <div className="w-96 flex flex-col">
+        <div className="flex h-fit w-full flex-col xl:flex-row">
+          <div className="flex w-96 flex-col">
             {project.title && (
-              <h1 className="font-extrabold text-2xl">{project.title}</h1>
+              <h1 className="text-2xl font-extrabold">{project.title}</h1>
             )}
             {project.description && (
               <>
                 <div className="divider" />
-                <h1 className="font-extrabold text-2xl">Description</h1>
+                <h1 className="text-2xl font-extrabold">Description</h1>
                 <p>{project.description}</p>
               </>
             )}
             {project.year && (
               <>
                 <div className="divider" />
-                <h1 className="font-extrabold text-2xl">Year</h1>
+                <h1 className="text-2xl font-extrabold">Year</h1>
                 <p>{project.year}</p>
               </>
             )}
             {project.toolsUsed && (
               <>
                 <div className="divider" />
-                <h1 className="font-extrabold text-2xl">Tools Used</h1>
+                <h1 className="text-2xl font-extrabold">Tools Used</h1>
                 <p>{project.GetFormattedToolsUsed()}</p>
               </>
             )}
             {project.languagesUsed && (
               <>
                 <div className="divider" />
-                <h1 className="font-extrabold text-2xl">
+                <h1 className="text-2xl font-extrabold">
                   Languages/Markup Syntax Used
                 </h1>
                 <p>{project.GetFormattedLanguagesUsed()}</p>
@@ -79,7 +79,7 @@ const ProjectPage = async ({ params: { id } }: { params: { id: string } }) => {
             {project.tags && (
               <>
                 <div className="divider" />
-                <h1 className="font-extrabold text-2xl">Tags</h1>
+                <h1 className="text-2xl font-extrabold">Tags</h1>
                 <p>{project.GetFormattedTags()}</p>
               </>
             )}
@@ -97,9 +97,9 @@ const ProjectPage = async ({ params: { id } }: { params: { id: string } }) => {
             {project.screenshots.length > 0 && (
               <>
                 <div className="divider xl:hidden" />
-                <h1 className="font-extrabold text-2xl">Screenshots</h1>
+                <h1 className="text-2xl font-extrabold">Screenshots</h1>
                 <div className="xl:divider" />
-                <div className="carousel w-full h-96">
+                <div className="carousel h-96 w-full">
                   {project.screenshots.map((screenshot, index) => (
                     <div
                       key={index}
@@ -116,7 +116,7 @@ const ProjectPage = async ({ params: { id } }: { params: { id: string } }) => {
                     </div>
                   ))}
                 </div>
-                <div className="flex justify-center w-full py-2 gap-2">
+                <div className="flex w-full justify-center gap-2 py-2">
                   {project.screenshots.map((_screenshot, index) => (
                     <a key={index} href={`#item_${index}`} className="btn">
                       {index + 1}
@@ -128,7 +128,7 @@ const ProjectPage = async ({ params: { id } }: { params: { id: string } }) => {
             {project.videos.length > 0 && (
               <>
                 <div className="divider" />
-                <h1 className="font-extrabold text-2xl">Videos</h1>
+                <h1 className="text-2xl font-extrabold">Videos</h1>
                 <div className="divider" />
               </>
             )}
