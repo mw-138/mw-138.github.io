@@ -35,7 +35,7 @@ const AboutPage = () => {
 
   const Section = (props: AboutPageProps) => {
     return (
-      <section className="bg-base-200 p-5 m-5">
+      <section className="bg-base-200 p-5">
         <h1 className="text-2xl font-bold">{props.title}</h1>
         <div className="divider" />
         <div>{props.children}</div>
@@ -54,7 +54,7 @@ const AboutPage = () => {
           className="range cursor-default"
           step="0.5"
         />
-        <div className="w-full flex justify-between text-xs px-2">
+        <div className="hidden w-full justify-between px-2 text-xs md:flex">
           <span>Beginner</span>
           <span>Intermediate</span>
           <span>Advanced</span>
@@ -81,7 +81,7 @@ const AboutPage = () => {
         </p>
         <br />
         <p>These included the following:</p>
-        <ul className="list-disc ml-5">
+        <ul className="ml-5 list-disc">
           <li>Programming</li>
           <li>3D Modelling</li>
           <li>Storyboarding</li>
@@ -90,13 +90,13 @@ const AboutPage = () => {
         <p>Projects I have worked on are visible in my portfolio pages.</p>
       </Section>
       <Section title="Education">
-        <ul className="list-disc ml-5">
+        <ul className="ml-5 list-disc">
           <li>BSc (Hons 2:1) Computer Science Degree</li>
           <li>C++ Diploma</li>
         </ul>
       </Section>
       <Section title="Technical Skills">
-        <table className="table table-bordered">
+        <table className="table-bordered table">
           <thead>
             <tr>
               <th>Skill</th>

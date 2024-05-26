@@ -5,6 +5,11 @@ export enum Tool {
   UnrealEngine = "Unreal Engine",
   DotNet = ".NET",
   ASP = "ASP",
+  VsCode = "VS Code",
+  VisualStudio = "Visual Studio",
+  React = "React",
+  NextJs = "NextJS",
+  TailwindCSS = "Tailwind CSS",
 }
 
 export enum Language {
@@ -13,11 +18,13 @@ export enum Language {
   HTML = "HTML",
   CSS = "CSS",
   Razor = "Razor",
+  TypeScript = "TypeScript",
 }
 
 export enum Tag {
   Game = "Game",
   Software = "Software",
+  Website = "Website",
 }
 
 export default class Project {

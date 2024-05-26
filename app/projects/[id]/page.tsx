@@ -76,19 +76,19 @@ const ProjectPage = async ({ params: { id } }: { params: { id: string } }) => {
                 <p>{project.GetFormattedLanguagesUsed()}</p>
               </>
             )}
+            {project.tags && (
+              <>
+                <div className="divider" />
+                <h1 className="font-extrabold text-2xl">Tags</h1>
+                <p>{project.GetFormattedTags()}</p>
+              </>
+            )}
             {project.pageUrl && (
               <>
                 <div className="divider" />
                 <Link href={project.pageUrl} className="btn btn-primary">
                   Visit Project Page
                 </Link>
-              </>
-            )}
-            {project.tags && (
-              <>
-                <div className="divider" />
-                <h1 className="font-extrabold text-2xl">Tags</h1>
-                <p>{project.GetFormattedTags()}</p>
               </>
             )}
           </div>

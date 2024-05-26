@@ -13,6 +13,9 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      colors: {
+        "netflix-red": "#d81f26",
+      },
     },
   },
   plugins: [require("daisyui")],
@@ -50,20 +53,21 @@ const config: Config = {
       "dim",
       "nord",
       "sunset",
-      // {
-      //   mytheme: {
-      //     primary: "#E5E5E5",
-      //     secondary: "#1E293B",
-      //     accent: "#F97316",
-      //     neutral: "#0a0905",
-      //     "base-100": "#101010",
-      //     info: "#0EA5E9",
-      //     success: "#22C55E",
-      //     warning: "#EAB308",
-      //     error: "#EF4444",
-      //   },
-      // },
+      {
+        mytheme: {
+          primary: "#E5E5E5",
+          secondary: "#1E293B",
+          accent: "#F97316",
+          neutral: "#0a0905",
+          "base-100": "#101010",
+          info: "#0EA5E9",
+          success: "#22C55E",
+          warning: "#EAB308",
+          error: "#EF4444",
+        },
+      },
     ],
   },
 };
+
 export default config;

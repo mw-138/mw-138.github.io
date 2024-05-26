@@ -46,6 +46,9 @@ import MiyooMiniThemePreview_Screenshot01 from "@/public/projects/miyoo_mini_the
 import MiyooMiniThemePreview_Screenshot02 from "@/public/projects/miyoo_mini_theme_preview/screenshot_02.png";
 import MiyooMiniThemePreview_Screenshot03 from "@/public/projects/miyoo_mini_theme_preview/screenshot_03.png";
 
+import NetflixReDesign_Screenshot01 from "@/public/projects/netflix_redesign/screenshot_01.png";
+import NetflixReDesign_Screenshot02 from "@/public/projects/netflix_redesign/screenshot_02.png";
+
 export const Projects: Project[] = [
   new Project(
     true,
@@ -60,7 +63,7 @@ export const Projects: Project[] = [
     "",
     [PixelPlatformer_Screenshot01],
     [],
-    [Tag.Game]
+    [Tag.Game],
   ),
   new Project(
     true,
@@ -79,7 +82,7 @@ export const Projects: Project[] = [
       RpgBoardGame_Screenshot03,
     ],
     [],
-    [Tag.Game]
+    [Tag.Game],
   ),
   new Project(
     false,
@@ -98,7 +101,7 @@ export const Projects: Project[] = [
       MoneyCatcher_Screenshot03,
     ],
     [],
-    [Tag.Game]
+    [Tag.Game],
   ),
   new Project(
     false,
@@ -113,7 +116,7 @@ export const Projects: Project[] = [
     "https://lionstargames.itch.io/waved-based-survival",
     [WaveSurvival_Screenshot01],
     [],
-    [Tag.Game]
+    [Tag.Game],
   ),
   new Project(
     false,
@@ -133,7 +136,7 @@ export const Projects: Project[] = [
       RpgClicker_Screenshot04,
     ],
     [],
-    [Tag.Game]
+    [Tag.Game],
   ),
   new Project(
     false,
@@ -156,7 +159,7 @@ export const Projects: Project[] = [
       Jlda_Screenshot07,
     ],
     [],
-    [Tag.Game]
+    [Tag.Game],
   ),
   new Project(
     false,
@@ -171,7 +174,7 @@ export const Projects: Project[] = [
     "",
     [BobsAdventure_Screenshot01],
     [],
-    [Tag.Game]
+    [Tag.Game],
   ),
   new Project(
     false,
@@ -192,7 +195,7 @@ export const Projects: Project[] = [
       PigeonAndPete_Screenshot05,
     ],
     [],
-    [Tag.Game]
+    [Tag.Game],
   ),
   new Project(
     true,
@@ -216,7 +219,7 @@ export const Projects: Project[] = [
       CoinCatcher_Screenshot08,
     ],
     [],
-    [Tag.Game]
+    [Tag.Game],
   ),
   new Project(
     true,
@@ -235,6 +238,36 @@ export const Projects: Project[] = [
       MiyooMiniThemePreview_Screenshot03,
     ],
     [],
-    [Tag.Software]
+    [Tag.Software],
+  ),
+  new Project(
+    false,
+    true,
+    "portfolio",
+    "Portfolio",
+    "",
+    2024,
+    [Tool.VsCode, Tool.NextJs, Tool.React, Tool.TailwindCSS],
+    [Language.TypeScript, Language.HTML, Language.CSS],
+    NetflixReDesign_Screenshot01,
+    "",
+    [NetflixReDesign_Screenshot01],
+    [],
+    [Tag.Website],
+  ),
+  new Project(
+    true,
+    true,
+    "netflix_redesign",
+    "Netflix Re-Design",
+    "A Netflix re-design that uses TMDB api to retrieve movies and TV shows.",
+    2024,
+    [Tool.VsCode, Tool.NextJs, Tool.React, Tool.TailwindCSS],
+    [Language.TypeScript, Language.HTML, Language.CSS],
+    NetflixReDesign_Screenshot01,
+    "/websites/netflix",
+    [NetflixReDesign_Screenshot01, NetflixReDesign_Screenshot02],
+    [],
+    [Tag.Website],
   ),
 ];

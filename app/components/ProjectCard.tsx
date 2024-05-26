@@ -9,7 +9,7 @@ interface PortfolioCardProps {
 
 const ProjectCard = (props: PortfolioCardProps) => {
   return (
-    <div className="card w-96 bg-base-100 image-full">
+    <div className="card image-full w-auto bg-base-100 md:w-96">
       <figure>
         <Image
           src={props.project.thumbnail}

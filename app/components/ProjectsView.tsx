@@ -9,6 +9,7 @@ enum SortBy {
   All = "All",
   Game = "Game",
   Software = "Software",
+  Website = "Website",
 }
 
 type SortRadioProps = {
@@ -38,6 +39,8 @@ export const ProjectsView = () => {
         return project.tags.includes(Tag.Game);
       case SortBy.Software:
         return project.tags.includes(Tag.Software);
+      case SortBy.Website:
+        return project.tags.includes(Tag.Website);
       default:
         return true;
     }
@@ -45,15 +48,15 @@ export const ProjectsView = () => {
 
   return (
     <div className="bg-base-200">
-      <div className="px-24 py-12 pb-0 flex gap-4 flex-col">
-        Sort By Tag
-        <form className="flex gap-4">
+      <div className="flex flex-col gap-4 px-24 py-12 pb-0">
+        <span>Sort By Tag</span>
+        <form className="flex flex-col gap-4 sm:flex-row">
           {Object.values(SortBy).map((sortOption, index) => (
             <SortRadio key={index} sortBy={sortOption} />
           ))}
         </form>
       </div>
-      <div className="grid xl:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 place-items-center place-content-center gap-10 p-20 pt-10">
+      <div className="grid place-content-center place-items-center gap-10 p-20 pt-10 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-4">
         {filteredProjects.map((project, index) => (
           <ProjectCard key={index} project={project} />
         ))}
