@@ -11,7 +11,7 @@ const WebsiteNavigation = () => {
             <Link href="/projects">
               <span>
                 <MdChevronLeft size={20} />
-              </span>{" "}
+              </span>
               Return To Projects
             </Link>
           </li>
