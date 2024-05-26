@@ -28,7 +28,7 @@ export enum Tag {
 }
 
 export default class Project {
-  public isHighlighted: boolean;
+  public publishDate: Date;
   public visible: boolean;
   public id: string;
   public title: string;
@@ -43,7 +43,7 @@ export default class Project {
   public tags: Tag[];
 
   constructor(
-    isHighlighted: boolean,
+    publishDate: Date,
     visible: boolean,
     id: string,
     title: string,
@@ -55,9 +55,9 @@ export default class Project {
     pageUrl: string,
     screenshots: StaticImageData[],
     videos: string[],
-    tags: Tag[]
+    tags: Tag[],
   ) {
-    this.isHighlighted = isHighlighted;
+    this.publishDate = publishDate;
     this.visible = visible;
     this.id = id;
     this.title = title;

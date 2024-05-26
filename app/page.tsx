@@ -4,15 +4,41 @@ import Footer from "./components/Footer";
 import ProjectCard from "./components/ProjectCard";
 import { Projects } from "@/_data/Projects";
 
-export default function Home() {
-  const highlightedProjects = Projects.filter(
-    (project) => project.isHighlighted,
+import React from "react";
+
+const page = () => {
+  const highlightedProjects = Projects.filter((project) => {
+    const projects = [
+      "coin_catcher",
+      "netflix_redesign",
+      "portfolio",
+      "pixel_platformer",
+    ];
+    return projects.includes(project.id);
+  })
+    .sort((a, b) => b.publishDate.getTime() - new Date().getTime())
+    .slice(0, 4);
+
+  const recentProjects = Projects.sort(
+    (a, b) => b.publishDate.getTime() - new Date().getTime(),
   ).slice(0, 4);
+
+  const highlightedProject = Projects.find(
+    (project) => project.id === "coin_catcher",
+  );
 
   return (
     <main>
       <Navbar />
-      <section className="hero min-h-screen bg-base-200 bg-[url('/projects/coin_catcher/screenshot_01.png')] bg-blend-overlay">
+      <section
+        className="hero min-h-screen bg-base-200 bg-blend-overlay"
+        style={{
+          backgroundImage:
+            highlightedProject && highlightedProject.screenshots.length > 0
+              ? `url('${highlightedProject.screenshots[0].src}')`
+              : "",
+        }}
+      >
         <div className="hero-content text-center">
           <div className="max-w-md">
             <h1 className="text-2xl font-bold md:text-5xl">
@@ -26,7 +52,10 @@ export default function Home() {
               <Link className="btn btn-primary" href="/about">
                 About Me
               </Link>
-              <Link className="btn btn-primary" href="/projects/coin_catcher">
+              <Link
+                className="btn btn-primary"
+                href={highlightedProject ? highlightedProject.GetSiteUrl() : ""}
+              >
                 Visit Highlighted Project
               </Link>
             </div>
@@ -34,6 +63,15 @@ export default function Home() {
         </div>
       </section>
       <section className="flex flex-col bg-base-300 p-20">
+        <h1 className="text-3xl font-bold">Recent Projects</h1>
+        <div className="divider" />
+        <div className="flex flex-1 flex-col justify-between gap-4 md:flex-row">
+          {recentProjects.map((project, index) => (
+            <ProjectCard key={index} project={project} />
+          ))}
+        </div>
+      </section>
+      <section className="flex flex-col bg-base-300 p-20 pt-0">
         <h1 className="text-3xl font-bold">Highlighted Projects</h1>
         <div className="divider" />
         <div className="flex flex-1 flex-col justify-between gap-4 md:flex-row">
@@ -45,4 +83,6 @@ export default function Home() {
       <Footer />
     </main>
   );
-}
+};
+
+export default page;
