@@ -1,3 +1,3 @@
 # Portfolio
 
-###### Made using NextJS
+###### Made using NextJS, TypeScript, and TailwindCSS
