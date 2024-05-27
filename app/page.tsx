@@ -17,11 +17,14 @@ const page = () => {
     return projects.includes(project.id);
   })
     .sort((a, b) => b.publishDate.getTime() - new Date().getTime())
+    .filter((project) => project.visible)
     .slice(0, 4);
 
   const recentProjects = Projects.sort(
     (a, b) => b.publishDate.getTime() - new Date().getTime(),
-  ).slice(0, 4);
+  )
+    .filter((project) => project.visible)
+    .slice(0, 4);
 
   const highlightedProject = Projects.find(
     (project) => project.id === "coin_catcher",

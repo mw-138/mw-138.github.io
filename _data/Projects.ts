@@ -281,7 +281,7 @@ export const Projects: Project[] = [
   ),
   new Project(
     new Date("05/26/2024"),
-    true,
+    false,
     "tyneside_news",
     "Tyneside News",
     "A minimal news website for a fictional news publication.",

@@ -44,7 +44,7 @@ export const ProjectsView = () => {
       default:
         return true;
     }
-  });
+  }).filter((project) => project.visible);
 
   return (
     <div className="bg-base-200">
