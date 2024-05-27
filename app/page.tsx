@@ -2,7 +2,7 @@ import Link from "next/link";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ProjectCard from "./components/ProjectCard";
-import { Projects } from "@/_data/Projects";
+import { Projects } from "@/data/Projects";
 
 import React from "react";
 
@@ -42,12 +42,12 @@ const page = () => {
         }}
       >
         <div className="hero-content text-center">
-          <div className="max-w-md">
+          <div className="max-w-sm md:max-w-xl">
             <h1 className="text-2xl font-bold md:text-5xl">
               Hi, I&apos;m Matthew Watson
             </h1>
             <p className="py-6 text-sm md:text-lg">
-              I am a programmer from the United Kingdom with 7+ years of
+              I am a junior programmer from the United Kingdom with 7+ years of
               experience using Unity and C#.
             </p>
             <div className="flex flex-col items-center justify-center gap-5 md:flex-row">
