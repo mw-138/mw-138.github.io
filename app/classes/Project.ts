@@ -28,12 +28,11 @@ export enum Tag {
 }
 
 export default class Project {
-  public isHighlighted: boolean;
+  public publishDate: Date;
   public visible: boolean;
   public id: string;
   public title: string;
   public description: string;
-  public year: number;
   public toolsUsed: Tool[];
   public languagesUsed: Language[];
   public thumbnail: StaticImageData;
@@ -43,26 +42,24 @@ export default class Project {
   public tags: Tag[];
 
   constructor(
-    isHighlighted: boolean,
+    publishDate: Date,
     visible: boolean,
     id: string,
     title: string,
     description: string,
-    year: number,
     toolsUsed: Tool[],
     languagesUsed: Language[],
     thumbnail: StaticImageData,
     pageUrl: string,
     screenshots: StaticImageData[],
     videos: string[],
-    tags: Tag[]
+    tags: Tag[],
   ) {
-    this.isHighlighted = isHighlighted;
+    this.publishDate = publishDate;
     this.visible = visible;
     this.id = id;
     this.title = title;
     this.description = description;
-    this.year = year;
     this.toolsUsed = toolsUsed;
     this.languagesUsed = languagesUsed;
     this.thumbnail = thumbnail;
