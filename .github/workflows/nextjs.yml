@@ -51,7 +51,7 @@ jobs:
           fi
       - name: Set Environment Variables
         env:
-          TMDB_API_KEY: 596618f23f3e23501897e02979f122ed
+          TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
         run: |
           echo "" > .env.local
           echo TMDB_API_KEY=$TMDB_API_KEY >> .env.local
