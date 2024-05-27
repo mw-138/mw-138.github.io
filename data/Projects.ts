@@ -197,7 +197,7 @@ export const Projects: Project[] = [
     [Tag.Game],
   ),
   new Project(
-    new Date("01/01/2024"),
+    new Date("03/27/2024"),
     true,
     "coin_catcher",
     "Coin Catcher",
