@@ -3,7 +3,7 @@
 import React from "react";
 import MovieCard from "./MovieCard";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
-import { Movie } from "../data_fetching";
+import { Movie } from "../dataFetching";
 
 type MovieRowProps = {
   rowId: number;

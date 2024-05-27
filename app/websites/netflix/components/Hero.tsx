@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Movie, getMoviePosterUrl } from "../data_fetching";
+import { Movie, getMoviePosterUrl } from "../dataFetching";
 
 type HeroProps = {
   movie: Movie;
