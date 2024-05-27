@@ -11,7 +11,7 @@ const page = () => {
       <main className="bg-white font-['Josefin_Sans'] text-black">
         <Nav />
         <section className="p-4">
-          <h1 className="text-md pb-4 font-bold uppercase">Recent</h1>
+          <h1 className="pb-4 text-2xl font-bold uppercase">Recent</h1>
           <div className="flex flex-col gap-4">
             {Articles.map((item, index) => (
               <NewsCard key={index} news={item} />
