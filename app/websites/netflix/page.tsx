@@ -7,7 +7,7 @@ import Requests, {
   getRandomMovie,
   getUpcomingMovies,
   performMovieQuery,
-} from "./data_fetching";
+} from "./dataFetching";
 import MovieRow from "./components/MovieRow";
 
 const page = async () => {

@@ -10,7 +10,7 @@ import {
   FaStar,
   FaStarHalf,
 } from "react-icons/fa";
-import { Movie, getMovieBackdropUrl } from "../data_fetching";
+import { Movie, getMovieBackdropUrl } from "../dataFetching";
 
 type MovieCardProps = {
   movie: Movie;
