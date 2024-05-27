@@ -1,4 +1,4 @@
-const ApiKey = process.env.tmdbApiKey;
+const ApiKey = process.env.TMDB_API_KEY;
 
 const Requests = {
   Popular: `https://api.themoviedb.org/3/movie/popular?api_key=${ApiKey}&language=en-US&page=1`,
