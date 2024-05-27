@@ -22,7 +22,7 @@ const NavTab = ({ entry }: NavTabProps) => {
   const [active, setActive] = useState<boolean>(false);
   return (
     <li
-      className="relative flex cursor-pointer items-center justify-center border-r border-black p-2 uppercase transition-colors first:border-l hover:bg-black hover:text-white"
+      className="relative flex cursor-pointer items-center justify-center border-r border-black px-4 py-2 uppercase transition-colors first:border-l hover:bg-black hover:text-white"
       onClick={() => setActive(!active)}
       onMouseEnter={() => setActive(true)}
       onMouseLeave={() => setActive(false)}
