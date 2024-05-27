@@ -242,7 +242,7 @@ export const Projects: Project[] = [
     true,
     "portfolio",
     "Portfolio",
-    "My personal portfolio that showcases my skills, abilities and my projects.",
+    "My personal portfolio that showcases my skills, abilities and my projects. When I push changes to the main branch from the development branch, I use GitHub Actions to automatically create a web build using GitHub Pages which hosts the website.",
     [Tool.VsCode, Tool.NextJs, Tool.React, Tool.TailwindCSS],
     [Language.TypeScript, Language.HTML, Language.CSS],
     Portfolio_Screenshot01,
