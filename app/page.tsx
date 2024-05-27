@@ -12,7 +12,8 @@ const page = () => {
       "coin_catcher",
       "netflix_redesign",
       "portfolio",
-      "pixel_platformer",
+      // "pixel_platformer",
+      "miyoo_mini_theme_preview",
     ];
     return projects.includes(project.id);
   })
@@ -26,9 +27,7 @@ const page = () => {
     .filter((project) => project.visible)
     .slice(0, 4);
 
-  const highlightedProject = Projects.find(
-    (project) => project.id === "coin_catcher",
-  );
+  const heroProject = Projects.find((project) => project.id === "coin_catcher");
 
   return (
     <main>
@@ -37,8 +36,8 @@ const page = () => {
         className="hero min-h-screen bg-base-200 bg-blend-overlay"
         style={{
           backgroundImage:
-            highlightedProject && highlightedProject.screenshots.length > 0
-              ? `url('${highlightedProject.screenshots[0].src}')`
+            heroProject && heroProject.screenshots.length > 0
+              ? `url('${heroProject.screenshots[0].src}')`
               : "",
         }}
       >
@@ -57,7 +56,7 @@ const page = () => {
               </Link>
               <Link
                 className="btn btn-primary"
-                href={highlightedProject ? highlightedProject.GetSiteUrl() : ""}
+                href={heroProject ? heroProject.GetSiteUrl() : ""}
               >
                 Visit Highlighted Project
               </Link>
@@ -65,7 +64,27 @@ const page = () => {
           </div>
         </div>
       </section>
-      <section className="flex flex-col bg-base-300 p-20">
+      {[
+        // {
+        //   title: "Recent Projects",
+        //   projects: recentProjects,
+        // },
+        {
+          title: "Highlighted Projects",
+          projects: highlightedProjects,
+        },
+      ].map((item, index) => (
+        <section key={index} className="flex flex-col bg-base-300 p-20">
+          <h1 className="text-3xl font-bold">{item.title}</h1>
+          <div className="divider" />
+          <div className="flex flex-1 flex-col justify-between gap-4 md:flex-row">
+            {item.projects.map((project, index) => (
+              <ProjectCard key={index} project={project} />
+            ))}
+          </div>
+        </section>
+      ))}
+      {/* <section className="flex flex-col bg-base-300 p-20">
         <h1 className="text-3xl font-bold">Recent Projects</h1>
         <div className="divider" />
         <div className="flex flex-1 flex-col justify-between gap-4 md:flex-row">
@@ -73,8 +92,8 @@ const page = () => {
             <ProjectCard key={index} project={project} />
           ))}
         </div>
-      </section>
-      <section className="flex flex-col bg-base-300 p-20 pt-0">
+      </section> */}
+      {/* <section className="flex flex-col bg-base-300 p-20">
         <h1 className="text-3xl font-bold">Highlighted Projects</h1>
         <div className="divider" />
         <div className="flex flex-1 flex-col justify-between gap-4 md:flex-row">
@@ -82,7 +101,7 @@ const page = () => {
             <ProjectCard key={index} project={project} />
           ))}
         </div>
-      </section>
+      </section> */}
       <Footer />
     </main>
   );
