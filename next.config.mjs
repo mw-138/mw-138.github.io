@@ -4,6 +4,9 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  env: {
+    tmdbApiKey: process.env.TMDB_API_KEY,
+  },
 };
 
 export default nextConfig;
