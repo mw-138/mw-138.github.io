@@ -49,6 +49,12 @@ jobs:
             echo "Unable to determine package manager"
             exit 1
           fi
+      - name: Set Environment Variables
+        env:
+          TMDB_API_KEY: 596618f23f3e23501897e02979f122ed
+        run: |
+          echo "" > .env.local
+          echo TMDB_API_KEY=$TMDB_API_KEY >> .env.local
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
