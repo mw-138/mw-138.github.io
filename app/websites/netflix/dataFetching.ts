@@ -1,4 +1,4 @@
-const ApiKey = process.env.tmdbApiKey;
+const ApiKey = process.env.TMDB_API_KEY;
 const ApiUrl = "https://api.themoviedb.org/3";
 const ApiImageUrl = "https://image.tmdb.org/t/p";
 const ApiKeyParameter = `api_key=${ApiKey}`;
