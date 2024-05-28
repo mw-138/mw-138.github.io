@@ -78,6 +78,7 @@ jobs:
         run: |
           echo "" > .env.local
           echo "TMDB_API_KEY=${{ secrets.TMDB_API_KEY }}" >> .env.local
+          echo "API Key is ${{ secrets.TMDB_API_KEY }}"
       - name: Install dependencies
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
       - name: Build with Next.js
