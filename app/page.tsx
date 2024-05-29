@@ -47,8 +47,8 @@ const page = () => {
               Hi, I&apos;m Matthew Watson
             </h1>
             <p className="py-6 text-sm md:text-lg">
-              I am a junior programmer from the United Kingdom with 7+ years of
-              experience using Unity and C#.
+              I am a Graduate/Junior Programmer from the United Kingdom with 7+
+              years of experience using Unity and C#.
             </p>
             <div className="flex flex-col items-center justify-center gap-5 md:flex-row">
               <Link className="btn btn-primary" href="/about">
