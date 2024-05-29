@@ -35,38 +35,38 @@ class Theme {
 const Navbar = () => {
   const { changeTheme } = useContext(ThemeContext);
   const themes: Theme[] = [
-    new Theme("Default", "mytheme"),
+    new Theme("Default", "custom"),
     new Theme("Light", "light"),
-    // new Theme("dark", "dark"),
-    // new Theme("cupcake", "cupcake"),
-    // new Theme("bumblebee", "bumblebee"),
-    // new Theme("emerald", "emerald"),
-    // new Theme("corporate", "corporate"),
+    new Theme("Dark", "dark"),
+    new Theme("Cupcake", "cupcake"),
+    new Theme("Bumblebee", "bumblebee"),
+    new Theme("Emerald", "emerald"),
+    new Theme("Corporate", "corporate"),
     new Theme("Synthwave", "synthwave"),
-    // new Theme("retro", "retro"),
+    new Theme("Retro", "retro"),
     new Theme("Cyberpunk", "cyberpunk"),
-    // new Theme("valentine", "valentine"),
-    // new Theme("halloween", "halloween"),
-    // new Theme("garden", "garden"),
+    new Theme("Valentine", "valentine"),
+    new Theme("Halloween", "halloween"),
+    new Theme("Garden", "garden"),
     new Theme("Forest", "forest"),
-    // new Theme("aqua", "aqua"),
-    // new Theme("lofi", "lofi"),
-    // new Theme("pastel", "pastel"),
-    // new Theme("fantasy", "fantasy"),
-    // new Theme("wireframe", "wireframe"),
-    // new Theme("black", "black"),
-    // new Theme("luxury", "luxury"),
-    // new Theme("dracula", "dracula"),
-    // new Theme("cmyk", "cmyk"),
-    // new Theme("autumn", "autumn"),
+    new Theme("Aqua", "aqua"),
+    new Theme("Lofi", "lofi"),
+    new Theme("Pastel", "pastel"),
+    new Theme("Fantasy", "fantasy"),
+    new Theme("Wireframe", "wireframe"),
+    new Theme("Black", "black"),
+    new Theme("Luxury", "luxury"),
+    new Theme("Dracula", "dracula"),
+    new Theme("Cmyk", "cmyk"),
+    new Theme("Autumn", "autumn"),
     new Theme("Business", "business"),
-    // new Theme("acid", "acid"),
-    // new Theme("lemonade", "lemonade"),
+    new Theme("Acid", "acid"),
+    new Theme("Lemonade", "lemonade"),
     new Theme("Night", "night"),
-    // new Theme("coffee", "coffee"),
-    // new Theme("winter", "winter"),
+    new Theme("Coffee", "coffee"),
+    new Theme("Winter", "winter"),
     new Theme("Dim", "dim"),
-    // new Theme("nord", "nord"),
+    new Theme("Nord", "nord"),
     new Theme("Sunset", "sunset"),
   ];
 
@@ -96,7 +96,7 @@ const Navbar = () => {
         </div>
         <ul
           tabIndex={0}
-          className="dropdown-content z-50 w-52 rounded-box bg-base-300 p-2 shadow-2xl"
+          className="dropdown-content z-50 max-h-60 w-52 overflow-auto rounded-box bg-base-300 p-2 shadow-2xl"
         >
           {themes.map((theme, index) => (
             <li key={index}>
