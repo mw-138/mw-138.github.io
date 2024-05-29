@@ -6,7 +6,7 @@ import ProjectCard from "./ProjectCard";
 import { Tag } from "../classes/Project";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 
-enum SortByType {
+enum SortByTag {
   All = "All",
   Game = "Game",
   Software = "Software",
@@ -60,7 +60,7 @@ const SortDropdown = <T extends Record<string, unknown>>({
 };
 
 export const ProjectsView = () => {
-  const [sortByType, setSortByType] = useState<SortByType>(SortByType.All);
+  const [sortByTag, setSortByTag] = useState<SortByTag>(SortByTag.All);
   const [sortByDescriptor, setSortByDescriptor] = useState<SortByDescriptor>(
     SortByDescriptor.Title,
   );
@@ -73,11 +73,11 @@ export const ProjectsView = () => {
     let filter = true;
     const isVisible = project.visible;
 
-    if (sortByType === SortByType.Game) {
+    if (sortByTag === SortByTag.Game) {
       filter = project.tags.includes(Tag.Game);
-    } else if (sortByType === SortByType.Software) {
+    } else if (sortByTag === SortByTag.Software) {
       filter = project.tags.includes(Tag.Software);
-    } else if (sortByType === SortByType.Website) {
+    } else if (sortByTag === SortByTag.Website) {
       filter = project.tags.includes(Tag.Website);
     }
 
@@ -108,10 +108,10 @@ export const ProjectsView = () => {
         <div>
           <SortDropdown
             tabIndex={0}
-            label="Type"
-            options={SortByType}
-            selectedOption={sortByType}
-            onSelect={setSortByType}
+            label="Tag"
+            options={SortByTag}
+            selectedOption={sortByTag}
+            onSelect={setSortByTag}
           />
           <SortDropdown
             tabIndex={1}
