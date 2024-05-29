@@ -96,7 +96,7 @@ const Navbar = () => {
         </div>
         <ul
           tabIndex={0}
-          className="dropdown-content z-50 max-h-60 w-52 overflow-auto rounded-box bg-base-300 p-2 shadow-2xl"
+          className="dropdown-content z-50 flex max-h-60 w-52 flex-col gap-2 overflow-auto rounded-box bg-base-300 p-2 shadow-2xl"
         >
           {themes.map((theme, index) => (
             <li key={index}>
