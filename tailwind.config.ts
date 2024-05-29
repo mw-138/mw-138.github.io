@@ -54,7 +54,7 @@ const config: Config = {
       "nord",
       "sunset",
       {
-        mytheme: {
+        custom: {
           primary: "#E5E5E5",
           secondary: "#1E293B",
           accent: "#F97316",
