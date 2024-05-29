@@ -58,7 +58,7 @@ import TynesideNews_Screenshot01 from "@/public/projects/tyneside_news/screensho
 
 export const Projects: Project[] = [
   new Project(
-    new Date("01/01/2024"),
+    new Date("03/21/2024"),
     true,
     "pixel_platformer",
     "Pixel Platformer",
@@ -72,7 +72,7 @@ export const Projects: Project[] = [
     [Tag.Game],
   ),
   new Project(
-    new Date("01/01/2024"),
+    new Date("02/11/2024"),
     true,
     "rpg_board_game",
     "RPG Board Game",
@@ -90,7 +90,7 @@ export const Projects: Project[] = [
     [Tag.Game],
   ),
   new Project(
-    new Date("01/01/2018"),
+    new Date("01/03/2018"),
     true,
     "money_catcher",
     "Money Catcher",
@@ -108,7 +108,7 @@ export const Projects: Project[] = [
     [Tag.Game],
   ),
   new Project(
-    new Date("01/01/2020"),
+    new Date("01/14/2022"),
     true,
     "wave_survival",
     "Wave Survival",
@@ -122,7 +122,7 @@ export const Projects: Project[] = [
     [Tag.Game],
   ),
   new Project(
-    new Date("01/01/2018"),
+    new Date("05/27/2018"),
     true,
     "rpg_clicker",
     "RPG Clicker",
@@ -141,7 +141,7 @@ export const Projects: Project[] = [
     [Tag.Game],
   ),
   new Project(
-    new Date("01/01/2022"),
+    new Date("08/16/2022"),
     true,
     "jlda",
     "John Lowe's Darts Adventure",
@@ -163,7 +163,7 @@ export const Projects: Project[] = [
     [Tag.Game],
   ),
   new Project(
-    new Date("01/01/2023"),
+    new Date("05/27/2023"),
     true,
     "bobs_adventure",
     "Bob's Adventure",
@@ -177,7 +177,7 @@ export const Projects: Project[] = [
     [Tag.Game],
   ),
   new Project(
-    new Date("01/01/2022"),
+    new Date("05/27/2022"),
     true,
     "pigeon_and_pete",
     "Pigeon and Pete",
@@ -185,7 +185,7 @@ export const Projects: Project[] = [
     [Tool.Unity],
     [Language.CSharp],
     PigeonAndPete_Screenshot01,
-    "",
+    "https://moholty.itch.io/pigeon-and-pete",
     [
       PigeonAndPete_Screenshot01,
       PigeonAndPete_Screenshot02,
@@ -220,7 +220,7 @@ export const Projects: Project[] = [
     [Tag.Game],
   ),
   new Project(
-    new Date("01/01/2024"),
+    new Date("05/18/2024"),
     true,
     "miyoo_mini_theme_preview",
     "Miyoo Mini Theme Preview",
