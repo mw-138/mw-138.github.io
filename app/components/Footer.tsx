@@ -3,7 +3,7 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="footer items-center bg-base-100 p-4 text-xs text-base-content">
+    <footer className="footer flex items-center justify-between bg-base-100 p-4 text-base-content">
       <aside className="grid-flow-col items-center">
         <p>
           Copyright © Matthew Watson {new Date().getFullYear()} - All Rights
