@@ -1,5 +1,8 @@
 "use client";
-import { createContext, useState, useEffect } from "react";
+
+import { createContext, useState, useEffect, ReactNode } from "react";
+
+const DefaultTheme: string = "custom";
 
 type ThemeContextValue = {
   theme: string;
@@ -7,23 +10,31 @@ type ThemeContextValue = {
 };
 
 export const ThemeContext = createContext<ThemeContextValue>({
-  theme: "mytheme",
+  theme: DefaultTheme,
   changeTheme: (theme: string) => {},
 });
 
-export const ThemeProvider = ({ children }: any) => {
-  const [theme, setTheme] = useState<string>("mytheme");
+interface ThemeProviderProps {
+  children: ReactNode;
+}
+
+export const ThemeProvider = ({ children }: ThemeProviderProps) => {
+  const [theme, setTheme] = useState<string>(DefaultTheme);
   const [isMounted, setIsMounted] = useState<boolean>(false);
 
   useEffect(() => {
-    setIsMounted(true);
-    const storedTheme = localStorage.getItem("theme") || "mytheme";
-    setTheme(storedTheme);
+    if (typeof window !== "undefined") {
+      const storedTheme = localStorage.getItem("theme") || DefaultTheme;
+      setTheme(storedTheme);
+      setIsMounted(true);
+    }
   }, []);
 
   const changeTheme = (theme: string) => {
     setTheme(theme);
-    localStorage.setItem("theme", theme);
+    if (typeof window !== "undefined") {
+      localStorage.setItem("theme", theme);
+    }
   };
 
   return isMounted ? (
@@ -31,8 +42,8 @@ export const ThemeProvider = ({ children }: any) => {
       {children}
     </ThemeContext.Provider>
   ) : (
-    <div className="flex h-screen items-center justify-center gap-4 bg-black text-3xl font-bold uppercase">
-      <span className="loading loading-infinity loading-lg" />
+    <div className="flex h-screen items-center justify-center gap-4 bg-base-100 text-3xl font-bold uppercase">
+      <span className="loading loading-infinity loading-lg text-base-content" />
     </div>
   );
 };
