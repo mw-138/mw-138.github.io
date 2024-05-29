@@ -4,7 +4,7 @@ import { Projects } from "@/data/Projects";
 import React, { useState } from "react";
 import ProjectCard from "./ProjectCard";
 import { Tag } from "../classes/Project";
-import { FaChevronDown, FaChevronUp } from "react-icons/fa";
+import { FaChevronDown, FaChevronUp, FaSearch } from "react-icons/fa";
 
 enum SortByTag {
   All = "All",
@@ -128,12 +128,15 @@ export const ProjectsView = () => {
             onSelect={setSortByOrder}
           />
         </div>
-        <input
-          type="text"
-          placeholder="Enter project title..."
-          className="w-full rounded-md p-2 lg:w-1/2"
-          onChange={handleSearchInputChange}
-        />
+        <label className="input flex items-center gap-2 max-md:w-full">
+          <input
+            type="text"
+            className="grow"
+            placeholder="Search"
+            onChange={handleSearchInputChange}
+          />
+          <FaSearch />
+        </label>
       </div>
       <div className="grid place-content-center place-items-center gap-10 p-20 pt-10 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-4">
         {filteredProjects.map((project, index) => (
