@@ -14,14 +14,16 @@ const page = () => {
       <main className="font-['Roboto'] selection:bg-premier-league-purple selection:text-white">
         <Navbar teams={AlphabeticalTeams} />
         <div className="flex flex-row gap-4 bg-white p-4 text-premier-league-purple">
-          <div className="w-1/6 overflow-hidden rounded-lg border-2 border-premier-league-purple bg-white text-premier-league-purple">
-            <div className="bg-premier-league-purple p-2 text-center font-bold text-white">
-              Premier League
+          <div className="w-1/6 bg-white text-premier-league-purple">
+            <div className="overflow-hidden rounded-lg border-2 border-premier-league-purple">
+              <div className="bg-premier-league-purple p-2 text-center font-bold text-white">
+                Premier League
+              </div>
+              <LeagueTable
+                teams={SortedTeams}
+                style={LeagueTableStyle.Condensed}
+              />
             </div>
-            <LeagueTable
-              teams={SortedTeams}
-              style={LeagueTableStyle.Condensed}
-            />
           </div>
           <div className="flex w-5/6 flex-col gap-2">
             <LeagueTable teams={SortedTeams} style={LeagueTableStyle.Full} />
@@ -33,8 +35,8 @@ const page = () => {
                     key={fixtureIndex}
                     className="flex items-center justify-center gap-2 rounded border border-gray-300 bg-gray-200 px-4 py-2 text-premier-league-purple"
                   >
-                    <span className="flex flex-row items-center justify-center gap-1">
-                      {fixture.homeTeam.abbreviation}
+                    <div className="flex flex-1 flex-row items-center justify-end gap-1">
+                      <span>{fixture.homeTeam.abbreviation}</span>
                       <Image
                         src={fixture.homeTeam.image}
                         width={28}
@@ -42,11 +44,11 @@ const page = () => {
                         alt=""
                         className="aspect-square"
                       />
-                    </span>
-                    <span className="flex w-24 items-center justify-center rounded bg-premier-league-purple px-2 py-1 text-white">
+                    </div>
+                    <div className="w-24 rounded bg-premier-league-purple px-2 py-1 text-center text-white">
                       {fixture.homeScore} - {fixture.awayScore}
-                    </span>
-                    <span className="flex flex-row items-center justify-center gap-1">
+                    </div>
+                    <div className="flex flex-1 flex-row items-center justify-start gap-1">
                       <Image
                         src={fixture.awayTeam.image}
                         width={28}
@@ -54,8 +56,8 @@ const page = () => {
                         alt=""
                         className="aspect-square"
                       />
-                      {fixture.awayTeam.abbreviation}
-                    </span>
+                      <span>{fixture.awayTeam.abbreviation}</span>
+                    </div>
                   </div>
                 ))}
               </div>
