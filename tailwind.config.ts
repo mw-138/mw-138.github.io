@@ -15,6 +15,11 @@ const config: Config = {
       },
       colors: {
         "netflix-red": "#d81f26",
+        "premier-league-purple": "#38003C",
+        "premier-league-blue": "#04f5ff",
+        "premier-league-pink": "	#e90052",
+        "premier-league-green": "#00ff85",
+        "premier-league-yellow": "#EAFF04",
       },
     },
   },
