@@ -4,10 +4,12 @@ import React from "react";
 import NewsCard from "./components/NewsCard";
 import Nav from "./components/Nav";
 import { Articles } from "./articles";
+import ProjectWipBanner from "@/app/components/ProjectWipBanner";
 
 const page = () => {
   return (
     <>
+      <ProjectWipBanner />
       <main className="bg-white font-['Josefin_Sans'] text-black">
         <Nav />
         <section className="p-4">

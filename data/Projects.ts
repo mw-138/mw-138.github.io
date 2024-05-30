@@ -56,6 +56,8 @@ import MinimalPortfolio01_Screenshot01 from "@/public/projects/minimal_portfolio
 
 import TynesideNews_Screenshot01 from "@/public/projects/tyneside_news/screenshot_01.png";
 
+import PremierLeagueReDesign_Screenshot01 from "@/public/projects/premier_league_redesign/screenshot_01.png";
+
 export const Projects: Project[] = [
   new Project(
     new Date("03/21/2024"),
@@ -290,6 +292,20 @@ export const Projects: Project[] = [
     TynesideNews_Screenshot01,
     "/websites/tyneside_news",
     [TynesideNews_Screenshot01],
+    [],
+    [Tag.Website],
+  ),
+  new Project(
+    new Date("05/29/2024"),
+    true,
+    "premier_league_redesign",
+    "Premier League Re-Design",
+    "A Premier League website re-design. The site features a league table with fixture simulation.",
+    [Tool.VsCode, Tool.NextJs, Tool.React, Tool.TailwindCSS],
+    [Language.TypeScript, Language.HTML, Language.CSS],
+    PremierLeagueReDesign_Screenshot01,
+    "/websites/premier_league_redesign",
+    [PremierLeagueReDesign_Screenshot01],
     [],
     [Tag.Website],
   ),
