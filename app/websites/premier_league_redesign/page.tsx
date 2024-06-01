@@ -3,7 +3,7 @@ import WebsiteNavigation from "@/app/components/WebsiteNavigation";
 import React from "react";
 import Navbar from "./components/Navbar";
 import ProjectWipBanner from "@/app/components/ProjectWipBanner";
-import { Teams, SortedTeams, AlphabeticalTeams, GameWeeks } from "./teams";
+import { FixtureSim, AlphabeticalTeams, GameWeeks } from "./teams";
 import LeagueTable, { LeagueTableStyle } from "./components/LeagueTable";
 import Image from "next/image";
 
@@ -20,17 +20,20 @@ const page = () => {
                 Premier League
               </div>
               <LeagueTable
-                teams={SortedTeams}
+                teams={FixtureSim.teams}
                 style={LeagueTableStyle.Condensed}
               />
             </div>
           </div>
           <div className="flex w-5/6 flex-col gap-2">
-            <LeagueTable teams={SortedTeams} style={LeagueTableStyle.Full} />
+            <LeagueTable
+              teams={FixtureSim.teams}
+              style={LeagueTableStyle.Full}
+            />
             {GameWeeks.map((gameweek, index) => (
               <div key={index} className="flex flex-col gap-2">
-                <h1 className="font-bold uppercase">GameWeek {index + 1}</h1>
-                {gameweek.map((fixture, fixtureIndex) => (
+                <h1 className="font-bold uppercase">GameWeek {gameweek.num}</h1>
+                {gameweek.fixtures.map((fixture, fixtureIndex) => (
                   <div
                     key={fixtureIndex}
                     className="flex items-center justify-center gap-2 rounded border border-gray-300 bg-gray-200 px-4 py-2 text-premier-league-purple"
@@ -45,9 +48,15 @@ const page = () => {
                         className="aspect-square"
                       />
                     </div>
-                    <div className="w-24 rounded bg-premier-league-purple px-2 py-1 text-center text-white">
-                      {fixture.homeScore} - {fixture.awayScore}
-                    </div>
+                    {fixture.hasBeenPlayed ? (
+                      <div className="w-24 rounded bg-premier-league-purple px-2 py-1 text-center text-white">
+                        {fixture.homeScore} - {fixture.awayScore}
+                      </div>
+                    ) : (
+                      <div className="w-24 rounded bg-premier-league-purple px-2 py-1 text-center text-white">
+                        vs
+                      </div>
+                    )}
                     <div className="flex flex-1 flex-row items-center justify-start gap-1">
                       <Image
                         src={fixture.awayTeam.image}

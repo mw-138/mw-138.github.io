@@ -165,19 +165,9 @@ export const Teams: Team[] = [
   ),
 ];
 
-export const FixtureSim = new FixtureSimulator([...Teams]);
-export const GameWeeks = FixtureSim.distributeFixturesToGameweeks(
-  FixtureSim.fixtures,
-  38,
-);
-
-export const SortedTeams = [...Teams].sort((a, b) => {
-  const pointsDifference = b.getPoints() - a.getPoints();
-  if (pointsDifference !== 0) {
-    return pointsDifference;
-  }
-  return b.getGoalDifference() - a.getGoalDifference();
-});
+export const FixtureSim = new FixtureSimulator(Teams, 38);
+export const GameWeeks = FixtureSim.gameweeks;
+FixtureSim.simulateGameweeks(GameWeeks, FixtureSim.maxGameweeks);
 
 export const AlphabeticalTeams = [...Teams].sort((a, b) =>
   a.name.localeCompare(b.name),
