@@ -6,17 +6,14 @@ import Gameweek from "./Gameweek";
 export default class FixtureSimulator {
   public teams: Team[];
   public fixtures: Fixture[];
-  public maxGameweeks: number;
+  public numGameweeks: number;
   public gameweeks: Gameweek[];
 
-  constructor(teams: Team[], maxGameweeks: number) {
+  constructor(teams: Team[], numGameweeks: number) {
     this.teams = teams;
     this.fixtures = this.generateFixtures();
-    this.maxGameweeks = maxGameweeks;
-    this.gameweeks = this.distributeFixturesToGameweeks(
-      this.fixtures,
-      this.maxGameweeks,
-    );
+    this.numGameweeks = numGameweeks;
+    this.gameweeks = this.distributeFixturesToGameweeks(this.fixtures);
   }
 
   public generateFixtures(): Fixture[] {
@@ -57,13 +54,13 @@ export default class FixtureSimulator {
     fixture.homeScore = poissonRandom(homeExpectedGoals);
     fixture.awayScore = poissonRandom(awayExpectedGoals);
 
-    if (fixture.didHomeWin()) {
+    if (fixture.didHomeTeamWin()) {
       fixture.homeTeam.gamesWon++;
       fixture.awayTeam.gamesLost++;
-    } else if (fixture.didAwayWin()) {
+    } else if (fixture.didAwayTeamWin()) {
       fixture.homeTeam.gamesLost++;
       fixture.awayTeam.gamesWon++;
-    } else if (fixture.didDraw()) {
+    } else if (fixture.isDraw()) {
       fixture.homeTeam.gamesDrawn++;
       fixture.awayTeam.gamesDrawn++;
     }
@@ -118,18 +115,15 @@ export default class FixtureSimulator {
     }
   }
 
-  public distributeFixturesToGameweeks(
-    fixtures: Fixture[],
-    numGameweeks: number,
-  ): Gameweek[] {
+  public distributeFixturesToGameweeks(fixtures: Fixture[]): Gameweek[] {
     const gameweeks: Gameweek[] = Array.from(
-      { length: numGameweeks },
+      { length: this.numGameweeks },
       (_, i) => new Gameweek(i + 1, []),
     );
     let currentGameweek = 0;
     fixtures.forEach((fixture) => {
       let placed = false;
-      for (let gameweek = 0; gameweek < numGameweeks; gameweek++) {
+      for (let gameweek = 0; gameweek < this.numGameweeks; gameweek++) {
         if (
           !gameweeks[gameweek].fixtures.some(
             (f) =>
@@ -146,7 +140,7 @@ export default class FixtureSimulator {
       }
       if (!placed) {
         currentGameweek++;
-        if (currentGameweek >= numGameweeks) {
+        if (currentGameweek >= this.numGameweeks) {
           currentGameweek = 0;
         }
         gameweeks[currentGameweek].fixtures.push(fixture);

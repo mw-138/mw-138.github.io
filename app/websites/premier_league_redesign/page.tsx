@@ -32,7 +32,9 @@ const page = () => {
             />
             {GameWeeks.map((gameweek, index) => (
               <div key={index} className="flex flex-col gap-2">
-                <h1 className="font-bold uppercase">GameWeek {gameweek.num}</h1>
+                <h1 className="font-bold uppercase">
+                  GameWeek {gameweek.number}
+                </h1>
                 {gameweek.fixtures.map((fixture, fixtureIndex) => (
                   <div
                     key={fixtureIndex}
