@@ -1,4 +1,3 @@
-import { poissonRandom } from "@/utils";
 import Team from "./Team";
 
 export enum FixtureResult {
@@ -22,15 +21,15 @@ export default class Fixture {
     this.hasBeenPlayed = false;
   }
 
-  public didHomeWin(): boolean {
+  public didHomeTeamWin(): boolean {
     return this.homeScore > this.awayScore;
   }
 
-  public didAwayWin(): boolean {
+  public didAwayTeamWin(): boolean {
     return this.awayScore > this.homeScore;
   }
 
-  public didDraw(): boolean {
+  public isDraw(): boolean {
     return this.homeScore === this.awayScore;
   }
 
@@ -40,15 +39,15 @@ export default class Fixture {
 
     if (!isHomeTeam && !isAwayTeam) return FixtureResult.Loss;
 
-    if (isHomeTeam && this.didHomeWin()) {
+    if (isHomeTeam && this.didHomeTeamWin()) {
       return FixtureResult.Win;
-    } else if (isHomeTeam && this.didAwayWin()) {
+    } else if (isHomeTeam && this.didAwayTeamWin()) {
       return FixtureResult.Loss;
-    } else if (isAwayTeam && this.didAwayWin()) {
+    } else if (isAwayTeam && this.didAwayTeamWin()) {
       return FixtureResult.Win;
-    } else if (isAwayTeam && this.didHomeWin()) {
+    } else if (isAwayTeam && this.didHomeTeamWin()) {
       return FixtureResult.Loss;
-    } else if (this.didDraw()) {
+    } else if (this.isDraw()) {
       return FixtureResult.Draw;
     }
 
