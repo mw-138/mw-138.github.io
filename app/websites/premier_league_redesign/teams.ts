@@ -143,7 +143,7 @@ export const Teams: Team[] = [
     4,
   ),
   new Team(
-    "Tottenham Hotspurs",
+    "Tottenham Hotspur",
     "Spurs",
     "TOT",
     "https://resources.premierleague.com/premierleague/badges/50/t6.png",
