@@ -26,6 +26,8 @@ export default class FixtureSimulator {
         firstFixture.simulate();
         reverseFixture.simulate();
         fixtures.push(firstFixture, reverseFixture);
+        home.fixtures = shuffleArray(home.fixtures);
+        away.fixtures = shuffleArray(away.fixtures);
       }
       this.teams.splice(1, 0, this.teams.pop()!);
     }
