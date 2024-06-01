@@ -1,11 +1,11 @@
 import Fixture from "./Fixture";
 
 export default class Gameweek {
-  public num: number;
+  public number: number;
   public fixtures: Fixture[];
 
-  constructor(num: number, fixtures: Fixture[]) {
-    this.num = num;
+  constructor(number: number, fixtures: Fixture[]) {
+    this.number = number;
     this.fixtures = fixtures;
   }
 }
