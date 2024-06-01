@@ -1,5 +1,26 @@
 import Fixture from "./Fixture";
 
+export interface TeamPlainObject {
+  name: string;
+  shortName: string;
+  abbreviation: string;
+  image: string;
+  skillRating: number;
+  gamesPlayed: number;
+  gamesWon: number;
+  gamesDrawn: number;
+  gamesLost: number;
+  goalsFor: number;
+  goalsAgainst: number;
+  fixtures: Fixture[];
+  positions: number[];
+  currentPosition: number;
+  previousPosition: number;
+  goalDifference: number;
+  finalFiveFixtures: Fixture[];
+  points: number;
+}
+
 export default class Team {
   public name: string;
   public shortName: string;
@@ -13,6 +34,7 @@ export default class Team {
   public goalsFor: number;
   public goalsAgainst: number;
   public fixtures: Fixture[];
+  public positions: number[];
 
   constructor(
     name: string,
@@ -33,6 +55,30 @@ export default class Team {
     this.goalsFor = 0;
     this.goalsAgainst = 0;
     this.fixtures = [];
+    this.positions = [];
+  }
+
+  public toPlainObject(): TeamPlainObject {
+    return {
+      name: this.name,
+      shortName: this.shortName,
+      abbreviation: this.abbreviation,
+      image: this.image,
+      skillRating: this.skillRating,
+      gamesPlayed: this.gamesPlayed,
+      gamesWon: this.gamesWon,
+      gamesDrawn: this.gamesDrawn,
+      gamesLost: this.gamesLost,
+      goalsFor: this.goalsFor,
+      goalsAgainst: this.goalsAgainst,
+      fixtures: this.fixtures,
+      positions: this.positions,
+      currentPosition: this.getCurrentPosition(),
+      previousPosition: this.getPreviousPosition(),
+      goalDifference: this.getGoalDifference(),
+      finalFiveFixtures: this.getFinalFiveFixtures(),
+      points: this.getPoints(),
+    };
   }
 
   public getGoalDifference(): number {
@@ -73,5 +119,13 @@ export default class Team {
 
   public getFinalFiveFixtures(): Fixture[] {
     return this.fixtures.slice(-5);
+  }
+
+  public getCurrentPosition(): number {
+    return this.positions[this.positions.length - 1];
+  }
+
+  public getPreviousPosition(): number {
+    return this.positions[this.positions.length - 2];
   }
 }

@@ -12,12 +12,14 @@ export default class Fixture {
   public awayTeam: Team;
   public homeScore: number;
   public awayScore: number;
+  public hasBeenPlayed: boolean;
 
   constructor(homeTeam: Team, awayTeam: Team) {
     this.homeTeam = homeTeam;
     this.awayTeam = awayTeam;
     this.homeScore = 0;
     this.awayScore = 0;
+    this.hasBeenPlayed = false;
   }
 
   public didHomeWin(): boolean {
@@ -51,42 +53,5 @@ export default class Fixture {
     }
 
     return FixtureResult.Loss;
-  }
-
-  public simulate(): void {
-    const homeAdvantage = 0.15;
-
-    const homeExpectedGoals = this.homeTeam.getExpectedGoals(
-      this.homeTeam.skillRating,
-      this.awayTeam.skillRating,
-      homeAdvantage,
-    );
-    const awayExpectedGoals = this.awayTeam.getExpectedGoals(
-      this.awayTeam.skillRating,
-      this.homeTeam.skillRating,
-    );
-
-    this.homeScore = poissonRandom(homeExpectedGoals);
-    this.awayScore = poissonRandom(awayExpectedGoals);
-
-    if (this.didHomeWin()) {
-      this.homeTeam.gamesWon++;
-      this.awayTeam.gamesLost++;
-    } else if (this.didAwayWin()) {
-      this.homeTeam.gamesLost++;
-      this.awayTeam.gamesWon++;
-    } else if (this.didDraw()) {
-      this.homeTeam.gamesDrawn++;
-      this.awayTeam.gamesDrawn++;
-    }
-
-    this.homeTeam.goalsFor += this.homeScore;
-    this.homeTeam.goalsAgainst += this.awayScore;
-
-    this.awayTeam.goalsFor += this.awayScore;
-    this.awayTeam.goalsAgainst += this.homeScore;
-
-    this.homeTeam.gamesPlayed++;
-    this.awayTeam.gamesPlayed++;
   }
 }
