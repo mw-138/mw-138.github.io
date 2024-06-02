@@ -1,8 +1,11 @@
-export async function fetchData(url: string): Promise<any> {
+export async function fetchData(
+  url: string,
+  init?: RequestInit | undefined,
+): Promise<any> {
   const urlPrefix =
-    process.env.NODE_ENV === "production"
-      ? "https://mw-138.github.io/"
-      : "http://localhost:3000";
-  const response = await fetch(`${urlPrefix}/${url}`);
+    process.env.NODE_ENV === "development"
+      ? "http://localhost:3000"
+      : "https://mw-138.github.io/";
+  const response = await fetch(`${urlPrefix}/${url}`, init);
   return await response.json();
 }
