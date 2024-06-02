@@ -114,6 +114,7 @@ export default class FixtureSimulator {
 
   private assignTeamFixtures(): void {
     this.teams.forEach((team) => {
+      team.fixtures = [];
       this.gameweeks.forEach((gameweek) => {
         const teamFixtures = gameweek.fixtures.filter(
           (t) => t.homeTeam === team || t.awayTeam === team,
