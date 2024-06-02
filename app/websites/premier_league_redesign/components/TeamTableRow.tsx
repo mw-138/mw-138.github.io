@@ -11,10 +11,11 @@ type TeamTableRowProps = {
 };
 
 const TeamTableRow = ({ isFull, team }: TeamTableRowProps) => {
-  const getBorderColor = (index: number) => {
+  const getBorderColor = () => {
     if (!isFull) {
       return "border-gray-200";
     }
+    const index = team.getCurrentPosition() - 1;
     if (index === 0 || index === 3 || index === 4) {
       return "border-premier-league-blue";
     } else if (index === 16) {
@@ -23,7 +24,7 @@ const TeamTableRow = ({ isFull, team }: TeamTableRowProps) => {
     return "border-gray-200";
   };
 
-  const getPositionChangeIcon = (team: Team) => {
+  const getPositionChangeIcon = () => {
     const current = team.getCurrentPosition();
     const previous = team.getPreviousPosition();
 
@@ -44,12 +45,12 @@ const TeamTableRow = ({ isFull, team }: TeamTableRowProps) => {
   return (
     <>
       <tr
-        className={`border-b ${getBorderColor(team.getCurrentPosition() - 1)} text-center last:border-none`}
+        className={`border-b ${getBorderColor()} text-center last:border-none`}
       >
         <td>
           <span className="flex flex-row items-center justify-center gap-2">
             {team.getCurrentPosition()}
-            {getPositionChangeIcon(team)}
+            {getPositionChangeIcon()}
           </span>
         </td>
         <td>
