@@ -27,14 +27,14 @@ export default class FixtureSimulator {
         const away = this.teams[numTeams - 1 - i];
         const firstFixture = new Fixture(home, away);
         const reverseFixture = new Fixture(away, home);
-        home.fixtures.push(firstFixture, reverseFixture);
-        away.fixtures.push(firstFixture, reverseFixture);
+        // home.fixtures.push(firstFixture, reverseFixture);
+        // away.fixtures.push(firstFixture, reverseFixture);
         fixtures.push(firstFixture, reverseFixture);
       }
       this.teams.splice(1, 0, this.teams.pop()!);
     }
 
-    this.teams.forEach((team) => (team.fixtures = shuffleArray(team.fixtures)));
+    // this.teams.forEach((team) => (team.fixtures = shuffleArray(team.fixtures)));
 
     return fixtures;
   }
