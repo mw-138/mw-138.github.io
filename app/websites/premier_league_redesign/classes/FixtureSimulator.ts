@@ -147,6 +147,12 @@ export default class FixtureSimulator {
         gameweeks[currentGameweek].fixtures.push(fixture);
       }
     });
+    this.teams.forEach((team) => {
+      const teamFixtures = fixtures.filter(
+        (f) => f.homeTeam === team || f.awayTeam === team,
+      );
+      team.fixtures.push(...teamFixtures);
+    });
     return gameweeks;
   }
 }
