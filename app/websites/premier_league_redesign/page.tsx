@@ -3,14 +3,12 @@ import WebsiteNavigation from "@/app/components/WebsiteNavigation";
 import React from "react";
 import Navbar from "./components/Navbar";
 import ProjectWipBanner from "@/app/components/ProjectWipBanner";
-import { AlphabeticalTeams, Teams } from "./teams";
+import { AlphabeticalTeams, FixtureSim, GameWeeks, Teams } from "./teams";
 import LeagueTable, { LeagueTableStyle } from "./components/LeagueTable";
 import Image from "next/image";
 import FixtureSimulator from "./classes/FixtureSimulator";
 
 const page = () => {
-  const FixtureSim = new FixtureSimulator(Teams, 38);
-  const GameWeeks = FixtureSim.gameweeks;
   return (
     <>
       <ProjectWipBanner />
