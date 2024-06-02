@@ -14,6 +14,7 @@ export default class FixtureSimulator {
     this.fixtures = this.generateFixtures();
     this.numGameweeks = numGameweeks;
     this.gameweeks = this.distributeFixturesToGameweeks(this.fixtures);
+    this.assignTeamFixtures();
     this.simulateGameweeks(this.gameweeks, this.numGameweeks);
   }
 
@@ -27,14 +28,10 @@ export default class FixtureSimulator {
         const away = this.teams[numTeams - 1 - i];
         const firstFixture = new Fixture(home, away);
         const reverseFixture = new Fixture(away, home);
-        // home.fixtures.push(firstFixture, reverseFixture);
-        // away.fixtures.push(firstFixture, reverseFixture);
         fixtures.push(firstFixture, reverseFixture);
       }
       this.teams.splice(1, 0, this.teams.pop()!);
     }
-
-    // this.teams.forEach((team) => (team.fixtures = shuffleArray(team.fixtures)));
 
     return fixtures;
   }
@@ -122,6 +119,7 @@ export default class FixtureSimulator {
       (_, i) => new Gameweek(i + 1, []),
     );
     let currentGameweek = 0;
+    fixtures = shuffleArray(fixtures);
     fixtures.forEach((fixture) => {
       let placed = false;
       for (let gameweek = 0; gameweek < this.numGameweeks; gameweek++) {
@@ -147,12 +145,19 @@ export default class FixtureSimulator {
         gameweeks[currentGameweek].fixtures.push(fixture);
       }
     });
-    this.teams.forEach((team) => {
-      const teamFixtures = fixtures.filter(
-        (f) => f.homeTeam === team || f.awayTeam === team,
-      );
-      team.fixtures.push(...teamFixtures);
-    });
     return gameweeks;
+  }
+
+  private assignTeamFixtures(): void {
+    this.teams.forEach((team) => {
+      this.gameweeks.forEach((gameweek) => {
+        const teamFixtures = gameweek.fixtures.filter(
+          (t) => t.homeTeam === team || t.awayTeam === team,
+        );
+        if (teamFixtures.length > 0) {
+          team.fixtures.push(...teamFixtures);
+        }
+      });
+    });
   }
 }
