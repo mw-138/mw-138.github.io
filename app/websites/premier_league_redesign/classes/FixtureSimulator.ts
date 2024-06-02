@@ -14,9 +14,10 @@ export default class FixtureSimulator {
     this.fixtures = this.generateFixtures();
     this.numGameweeks = numGameweeks;
     this.gameweeks = this.distributeFixturesToGameweeks(this.fixtures);
+    this.assignTeamFixtures();
   }
 
-  public generateFixtures(): Fixture[] {
+  private generateFixtures(): Fixture[] {
     const fixtures: Fixture[] = [];
     const numTeams = this.teams.length;
 
@@ -26,14 +27,10 @@ export default class FixtureSimulator {
         const away = this.teams[numTeams - 1 - i];
         const firstFixture = new Fixture(home, away);
         const reverseFixture = new Fixture(away, home);
-        home.fixtures.push(firstFixture, reverseFixture);
-        away.fixtures.push(firstFixture, reverseFixture);
         fixtures.push(firstFixture, reverseFixture);
       }
       this.teams.splice(1, 0, this.teams.pop()!);
     }
-
-    this.teams.forEach((team) => (team.fixtures = shuffleArray(team.fixtures)));
 
     return fixtures;
   }
@@ -77,7 +74,7 @@ export default class FixtureSimulator {
     fixture.hasBeenPlayed = true;
   }
 
-  public sortTeams(): void {
+  private sortTeams(): void {
     this.teams = this.teams.sort((a, b) => {
       const pointsDifference = b.getPoints() - a.getPoints();
       if (pointsDifference !== 0) {
@@ -101,12 +98,12 @@ export default class FixtureSimulator {
     });
   }
 
-  public simulateGameweek(gameweek: Gameweek): void {
+  private simulateGameweek(gameweek: Gameweek): void {
     gameweek.fixtures.forEach((fixture) => this.simulateFixture(fixture));
     this.sortTeams();
   }
 
-  public simulateGameweeks(gameweeks: Gameweek[], numGameweeks: number): void {
+  private simulateGameweeks(gameweeks: Gameweek[], numGameweeks: number): void {
     if (numGameweeks <= 0 || numGameweeks > gameweeks.length) return;
 
     for (let index = 0; index < numGameweeks; index++) {
@@ -115,12 +112,26 @@ export default class FixtureSimulator {
     }
   }
 
-  public distributeFixturesToGameweeks(fixtures: Fixture[]): Gameweek[] {
+  private assignTeamFixtures(): void {
+    this.teams.forEach((team) => {
+      this.gameweeks.forEach((gameweek) => {
+        const teamFixtures = gameweek.fixtures.filter(
+          (t) => t.homeTeam === team || t.awayTeam === team,
+        );
+        if (teamFixtures.length > 0) {
+          team.fixtures.push(...teamFixtures);
+        }
+      });
+    });
+  }
+
+  private distributeFixturesToGameweeks(fixtures: Fixture[]): Gameweek[] {
     const gameweeks: Gameweek[] = Array.from(
       { length: this.numGameweeks },
       (_, i) => new Gameweek(i + 1, []),
     );
     let currentGameweek = 0;
+    fixtures = shuffleArray(fixtures);
     fixtures.forEach((fixture) => {
       let placed = false;
       for (let gameweek = 0; gameweek < this.numGameweeks; gameweek++) {
