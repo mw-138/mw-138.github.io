@@ -11,7 +11,6 @@ import FixtureSimulator from "./classes/FixtureSimulator";
 const page = () => {
   const FixtureSim = new FixtureSimulator(Teams, 38);
   const GameWeeks = FixtureSim.gameweeks;
-  FixtureSim.simulateGameweeks(GameWeeks, FixtureSim.numGameweeks);
   return (
     <>
       <ProjectWipBanner />
