@@ -103,7 +103,7 @@ export default class FixtureSimulator {
     this.sortTeams();
   }
 
-  private simulateGameweeks(gameweeks: Gameweek[], numGameweeks: number): void {
+  public simulateGameweeks(gameweeks: Gameweek[], numGameweeks: number): void {
     if (numGameweeks <= 0 || numGameweeks > gameweeks.length) return;
 
     for (let index = 0; index < numGameweeks; index++) {
