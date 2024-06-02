@@ -165,9 +165,9 @@ export const Teams: Team[] = [
   ),
 ];
 
-export const FixtureSim = new FixtureSimulator(Teams, 38);
-export const GameWeeks = FixtureSim.gameweeks;
-FixtureSim.simulateGameweeks(GameWeeks, FixtureSim.numGameweeks);
+// export const FixtureSim = new FixtureSimulator(Teams, 38);
+// export const GameWeeks = FixtureSim.gameweeks;
+// FixtureSim.simulateGameweeks(GameWeeks, FixtureSim.numGameweeks);
 
 export const AlphabeticalTeams = [...Teams].sort((a, b) =>
   a.name.localeCompare(b.name),
