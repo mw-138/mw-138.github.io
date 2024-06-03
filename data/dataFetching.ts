@@ -1,4 +1,4 @@
-export async function fetchData(
+export async function fetchLocalData(
   url: string,
   init?: RequestInit | undefined,
 ): Promise<any> {

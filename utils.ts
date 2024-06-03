@@ -29,3 +29,14 @@ export function shuffleArray<T>(array: T[]): T[] {
   }
   return shuffledArray;
 }
+
+export function getRandomElement<T>(arr: T[]): T {
+  const randomIndex = Math.floor(Math.random() * arr.length);
+  return arr[randomIndex];
+}
+
+export async function delay(ms: number): Promise<void> {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+}

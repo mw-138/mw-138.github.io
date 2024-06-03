@@ -2,7 +2,7 @@ import Link from "next/link";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ProjectCard from "./components/ProjectCard";
-import { Projects } from "@/data/Projects";
+import { Projects } from "@/data/projects";
 
 import React from "react";
 

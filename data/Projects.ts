@@ -54,8 +54,6 @@ import NetflixReDesign_Screenshot02 from "@/public/projects/netflix_redesign/scr
 
 import MinimalPortfolio01_Screenshot01 from "@/public/projects/minimal_portfolio_01/screenshot_01.png";
 
-import TynesideNews_Screenshot01 from "@/public/projects/tyneside_news/screenshot_01.png";
-
 import PremierLeagueReDesign_Screenshot01 from "@/public/projects/premier_league_redesign/screenshot_01.png";
 
 export const Projects: Project[] = [
@@ -278,20 +276,6 @@ export const Projects: Project[] = [
     MinimalPortfolio01_Screenshot01,
     "/websites/minimal_portfolio_01",
     [MinimalPortfolio01_Screenshot01],
-    [],
-    [Tag.Website],
-  ),
-  new Project(
-    new Date("05/26/2024"),
-    false,
-    "tyneside_news",
-    "Tyneside News",
-    "A minimal news website for a fictional news publication.",
-    [Tool.VsCode, Tool.NextJs, Tool.React, Tool.TailwindCSS],
-    [Language.TypeScript, Language.HTML, Language.CSS],
-    TynesideNews_Screenshot01,
-    "/websites/tyneside_news",
-    [TynesideNews_Screenshot01],
     [],
     [Tag.Website],
   ),
