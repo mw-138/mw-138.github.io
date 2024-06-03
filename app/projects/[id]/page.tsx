@@ -1,5 +1,5 @@
 import React from "react";
-import { Projects } from "@/data/Projects";
+import { Projects } from "@/data/projects";
 import { notFound } from "next/navigation";
 import Navbar from "@/app/components/Navbar";
 import Footer from "@/app/components/Footer";
