@@ -21,9 +21,9 @@ import {
   MdDelete,
   MdDeleteForever,
   MdFileUpload,
-  MdImportExport,
   MdSave,
 } from "react-icons/md";
+import { FaFileImport } from "react-icons/fa";
 
 type SubscriptionType = "monthly" | "yearly";
 
@@ -343,7 +343,7 @@ export default function Page() {
                 onClick={() => setIsImporting(true)}
                 className="flex flex-row items-center gap-2 rounded-md bg-white/20 px-4 py-2 text-xs text-white shadow-lg ring-1 ring-white/5 transition-colors hover:bg-white/40 active:bg-white/50 disabled:bg-red-500/50 disabled:text-red-300/50"
               >
-                <MdImportExport />
+                <FaFileImport />
                 Import
               </button>
               <button
