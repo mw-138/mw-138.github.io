@@ -552,7 +552,7 @@ export default function Page() {
                 className="rounded-md bg-slate-200 p-2 text-slate-800 placeholder-slate-800"
               />
               <button
-                className="flex flex-row items-center justify-center gap-2 rounded-md bg-slate-500 p-2 text-slate-100 transition-colors hover:bg-slate-600 active:bg-slate-400 disabled:bg-red-900 disabled:text-red-700"
+                className="flex flex-row items-center justify-center gap-2 rounded-md bg-green-500 p-2 text-slate-100 transition-colors hover:bg-green-600 active:bg-green-400 disabled:bg-red-900 disabled:text-red-700"
                 onClick={importSubscriptions}
                 disabled={importCode === ""}
               >
