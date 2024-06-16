@@ -15,11 +15,14 @@ import {
   MdBackup,
   MdCancel,
   MdClear,
+  MdClose,
   MdDelete,
   MdDeleteForever,
+  MdFileUpload,
   MdImportExport,
   MdSave,
 } from "react-icons/md";
+import ProgressButton from "../life_simulator/components/ProgressButton";
 
 type SubscriptionType = "monthly" | "yearly";
 
@@ -249,6 +252,12 @@ export default function Page() {
     setSubscriptions(subs);
   }
 
+  async function copyToClipboard(text: string): Promise<void> {
+    try {
+      await navigator.clipboard.writeText(text);
+    } catch (err) {}
+  }
+
   const [locale, setLocale] = useLocalStorageState<string>(
     "subscription_tracker_locale",
     "en-UK",
@@ -261,6 +270,9 @@ export default function Page() {
   function formatToCurrencyString(num: number): string {
     return formatCurrency(num, locale, currency);
   }
+
+  const [importing, setImporting] = useState<boolean>(false);
+  const [importJson, setImportJson] = useState<string>("");
 
   return (
     <>
@@ -311,18 +323,38 @@ export default function Page() {
                 </option>
               ))}
             </select>
-            {/* <button className="flex flex-row items-center gap-2 rounded-md bg-white/20 px-4 py-2 text-white shadow-lg ring-1 ring-white/5 disabled:bg-red-500/50 disabled:text-red-300/50">
+            <button
+              onClick={() => copyToClipboard(JSON.stringify(subscriptions))}
+              className="flex flex-row items-center gap-2 rounded-md bg-white/20 px-4 py-2 text-white shadow-lg ring-1 ring-white/5 transition-colors hover:bg-white/40 disabled:bg-red-500/50 disabled:text-red-300/50"
+            >
               <MdBackup />
               Backup
             </button>
-            <button className="flex flex-row items-center gap-2 rounded-md bg-white/20 px-4 py-2 text-white shadow-lg ring-1 ring-white/5 disabled:bg-red-500/50 disabled:text-red-300/50">
+            <button
+              onClick={() => setImporting(true)}
+              className="flex flex-row items-center gap-2 rounded-md bg-white/20 px-4 py-2 text-white shadow-lg ring-1 ring-white/5 transition-colors hover:bg-white/40 disabled:bg-red-500/50 disabled:text-red-300/50"
+            >
               <MdImportExport />
               Import
             </button>
-            <button className="flex flex-row items-center gap-2 rounded-md bg-white/20 px-4 py-2 text-white shadow-lg ring-1 ring-white/5 disabled:bg-red-500/50 disabled:text-red-300/50">
+            <button
+              onClick={() => setSubscriptions([])}
+              className="flex flex-row items-center gap-2 rounded-md bg-white/20 px-4 py-2 text-white shadow-lg ring-1 ring-white/5 transition-colors hover:bg-white/40 disabled:bg-red-500/50 disabled:text-red-300/50"
+            >
               <MdDeleteForever />
               Delete All
-            </button> */}
+            </button>
+            {/* <ProgressButton
+              speed={10}
+              progressFill="bg-red-500/50"
+              className="flex flex-row items-center gap-2 rounded-md bg-white/20 px-4 py-2 text-white shadow-lg ring-1 ring-white/5 transition-colors hover:bg-white/40 disabled:bg-red-500/50 disabled:text-red-300/50"
+              onComplete={() => setSubscriptions([])}
+            >
+              <div className="flex flex-row items-center gap-2">
+                <MdDeleteForever />
+                Delete All
+              </div>
+            </ProgressButton> */}
           </div>
         </div>
         <div className="flex flex-1 flex-row gap-4 overflow-hidden">
@@ -465,6 +497,53 @@ export default function Page() {
           </div>
         </div>
       </main>
+      {importing && (
+        <div className="absolute left-0 top-0 flex h-full w-full items-center justify-center bg-black/50 backdrop-blur-md">
+          <div className="relative flex flex-col gap-2 rounded-md bg-white p-4 text-black">
+            <h1 className="font-bold uppercase">Import Subscriptions</h1>
+            <form
+              className="flex flex-col gap-2"
+              onSubmit={() => {
+                setSubscriptions(JSON.parse(importJson));
+                setImporting(false);
+                setImportJson("");
+              }}
+            >
+              <label htmlFor="import_json">Enter JSON String</label>
+              <input
+                type="text"
+                name="label"
+                placeholder="Enter JSON"
+                onChange={(e: any) => setImportJson(e.target.value)}
+                value={importJson}
+                className="rounded-md bg-black/20 p-2 text-black placeholder-black/50 shadow-lg ring-1 ring-black/5"
+              />
+              <button
+                className="flex flex-row items-center justify-center gap-2 rounded-md bg-black p-2 text-white shadow-lg ring-1 ring-black/5 disabled:bg-red-500/50 disabled:text-red-900/50"
+                onClick={() => {
+                  setSubscriptions(JSON.parse(importJson));
+                  setImporting(false);
+                  setImportJson("");
+                }}
+                disabled={importJson === ""}
+              >
+                <MdFileUpload />
+                Submit
+              </button>
+              <button
+                className="flex flex-row items-center justify-center gap-2 rounded-md bg-black p-2 text-white shadow-lg ring-1 ring-black/5 disabled:bg-red-500/50 disabled:text-red-900/50"
+                onClick={() => {
+                  setImporting(false);
+                  setImportJson("");
+                }}
+              >
+                <MdClose />
+                Close
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
       <WebsiteNavigation />
       <Footer />
     </>
