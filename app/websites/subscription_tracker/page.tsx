@@ -2,9 +2,12 @@
 
 import Footer from "@/app/components/Footer";
 import WebsiteNavigation from "@/app/components/WebsiteNavigation";
-import React, { FormEvent, useEffect, useState } from "react";
+import React, { FormEvent, useState } from "react";
 import useLocalStorageState from "../../../utils/useLocalStorageState";
 import {
+  compressJSON,
+  copyToClipboard,
+  decompressJSON,
   formatCurrency,
   formatDateToYyyyMmDd,
   generateUUID,
@@ -14,7 +17,6 @@ import {
   MdAdd,
   MdBackup,
   MdCancel,
-  MdClear,
   MdClose,
   MdDelete,
   MdDeleteForever,
@@ -22,20 +24,11 @@ import {
   MdImportExport,
   MdSave,
 } from "react-icons/md";
-import ProgressButton from "../life_simulator/components/ProgressButton";
 
 type SubscriptionType = "monthly" | "yearly";
 
 interface Subscription {
   id: string;
-  label: string;
-  price: number;
-  type: SubscriptionType;
-  nextPaymentDate: string;
-  isPaused: boolean;
-}
-
-interface SubscriptionFormData {
   label: string;
   price: number;
   type: SubscriptionType;
@@ -94,7 +87,8 @@ export default function Page() {
   >("subscriptions_tracker", []);
   const [selectedSubscriptionIndex, setSelectedSubscriptionIndex] =
     useState<number>(-1);
-  const [formData, setFormData] = useState<SubscriptionFormData>({
+  const [formData, setFormData] = useState<Subscription>({
+    id: "",
     label: "",
     price: 0,
     type: "monthly",
@@ -103,7 +97,20 @@ export default function Page() {
   });
   const [editingSubscription, setEditingSubscription] =
     useState<boolean>(false);
+  const [locale, setLocale] = useLocalStorageState<string>(
+    "subscription_tracker_locale",
+    "en-UK",
+  );
+  const [currency, setCurrency] = useLocalStorageState<string>(
+    "subscription_tracker_currency",
+    "GBP",
+  );
+  const [isImporting, setIsImporting] = useState<boolean>(false);
+  const [importCode, setImportCode] = useState<string>("");
   const sortedSubscriptions = subscriptions.sort((a, b) => {
+    if (isSubscriptionDueToday(a) !== isSubscriptionDueToday(b)) {
+      return isSubscriptionDueToday(b) ? 1 : -1;
+    }
     if (a.isPaused !== b.isPaused) {
       return a.isPaused ? 1 : -1;
     }
@@ -205,6 +212,7 @@ export default function Page() {
     setSelectedSubscriptionIndex(index);
     setEditingSubscription(true);
     setFormData({
+      id: subscription.id,
       label: subscription.label,
       price: subscription.price,
       type: subscription.type,
@@ -216,6 +224,7 @@ export default function Page() {
   function cancelEdit(): void {
     setEditingSubscription(false);
     setFormData({
+      id: "",
       label: "",
       price: 0,
       type: "monthly",
@@ -242,37 +251,45 @@ export default function Page() {
     return days;
   }
 
-  function updateSubscriptionProperties(): void {
-    const subs = [...subscriptions];
-    subs.forEach((subscription) => {
-      if (subscription.isPaused === undefined) {
-        subscription.isPaused = false;
-      }
-    });
-    setSubscriptions(subs);
+  function isSubscriptionDueToday(subscription: Subscription): boolean {
+    const today = new Date();
+    const nextPaymentDate = new Date(subscription.nextPaymentDate);
+    return (
+      today.getDate() === nextPaymentDate.getDate() &&
+      today.getMonth() === nextPaymentDate.getMonth() &&
+      today.getFullYear() === nextPaymentDate.getFullYear()
+    );
   }
 
-  async function copyToClipboard(text: string): Promise<void> {
-    try {
-      await navigator.clipboard.writeText(text);
-    } catch (err) {}
-  }
-
-  const [locale, setLocale] = useLocalStorageState<string>(
-    "subscription_tracker_locale",
-    "en-UK",
-  );
-  const [currency, setCurrency] = useLocalStorageState<string>(
-    "subscription_tracker_currency",
-    "GBP",
-  );
+  // function updateSubscriptionProperties(): void {
+  //   const subs = [...subscriptions];
+  //   subs.forEach((subscription) => {
+  //     if (subscription.isPaused === undefined) {
+  //       subscription.isPaused = false;
+  //     }
+  //   });
+  //   setSubscriptions(subs);
+  // }
 
   function formatToCurrencyString(num: number): string {
     return formatCurrency(num, locale, currency);
   }
 
-  const [importing, setImporting] = useState<boolean>(false);
-  const [importJson, setImportJson] = useState<string>("");
+  async function backupSubscriptions(): Promise<void> {
+    const compressedData = compressJSON(subscriptions);
+    await copyToClipboard(compressedData);
+  }
+
+  function importSubscriptions(): void {
+    const data = decompressJSON(importCode) as Subscription[];
+    setSubscriptions(data);
+    closeImport();
+  }
+
+  function closeImport(): void {
+    setIsImporting(false);
+    setImportCode("");
+  }
 
   return (
     <>
@@ -324,37 +341,26 @@ export default function Page() {
               ))}
             </select>
             <button
-              onClick={() => copyToClipboard(JSON.stringify(subscriptions))}
-              className="flex flex-row items-center gap-2 rounded-md bg-white/20 px-4 py-2 text-white shadow-lg ring-1 ring-white/5 transition-colors hover:bg-white/40 disabled:bg-red-500/50 disabled:text-red-300/50"
+              onClick={backupSubscriptions}
+              className="flex flex-row items-center gap-2 rounded-md bg-white/20 px-4 py-2 text-white shadow-lg ring-1 ring-white/5 transition-colors hover:bg-white/40 active:bg-white/50 disabled:bg-red-500/50 disabled:text-red-300/50"
             >
               <MdBackup />
               Backup
             </button>
             <button
-              onClick={() => setImporting(true)}
-              className="flex flex-row items-center gap-2 rounded-md bg-white/20 px-4 py-2 text-white shadow-lg ring-1 ring-white/5 transition-colors hover:bg-white/40 disabled:bg-red-500/50 disabled:text-red-300/50"
+              onClick={() => setIsImporting(true)}
+              className="flex flex-row items-center gap-2 rounded-md bg-white/20 px-4 py-2 text-white shadow-lg ring-1 ring-white/5 transition-colors hover:bg-white/40 active:bg-white/50 disabled:bg-red-500/50 disabled:text-red-300/50"
             >
               <MdImportExport />
               Import
             </button>
             <button
               onClick={() => setSubscriptions([])}
-              className="flex flex-row items-center gap-2 rounded-md bg-white/20 px-4 py-2 text-white shadow-lg ring-1 ring-white/5 transition-colors hover:bg-white/40 disabled:bg-red-500/50 disabled:text-red-300/50"
+              className="flex flex-row items-center gap-2 rounded-md bg-white/20 px-4 py-2 text-white shadow-lg ring-1 ring-white/5 transition-colors hover:bg-white/40 active:bg-white/50 disabled:bg-red-500/50 disabled:text-red-300/50"
             >
               <MdDeleteForever />
               Delete All
             </button>
-            {/* <ProgressButton
-              speed={10}
-              progressFill="bg-red-500/50"
-              className="flex flex-row items-center gap-2 rounded-md bg-white/20 px-4 py-2 text-white shadow-lg ring-1 ring-white/5 transition-colors hover:bg-white/40 disabled:bg-red-500/50 disabled:text-red-300/50"
-              onComplete={() => setSubscriptions([])}
-            >
-              <div className="flex flex-row items-center gap-2">
-                <MdDeleteForever />
-                Delete All
-              </div>
-            </ProgressButton> */}
           </div>
         </div>
         <div className="flex flex-1 flex-row gap-4 overflow-hidden">
@@ -373,10 +379,16 @@ export default function Page() {
                     </h1>
                   ) : (
                     <h1 className="font-bold text-white/60">
-                      Due in {getSubscriptionDueDate(subscriptions[index])}{" "}
-                      {getSubscriptionDueDate(subscriptions[index]) <= 1
-                        ? "day"
-                        : "days"}
+                      {isSubscriptionDueToday(subscriptions[index]) ? (
+                        <p className="capitalize">Due today</p>
+                      ) : (
+                        <p className="capitalize">
+                          Due in {getSubscriptionDueDate(subscriptions[index])}{" "}
+                          {getSubscriptionDueDate(subscriptions[index]) <= 1
+                            ? "day"
+                            : "days"}
+                        </p>
+                      )}
                     </h1>
                   )}
                 </div>
@@ -497,45 +509,38 @@ export default function Page() {
           </div>
         </div>
       </main>
-      {importing && (
+      {isImporting && (
         <div className="absolute left-0 top-0 flex h-full w-full items-center justify-center bg-black/50 backdrop-blur-md">
           <div className="relative flex flex-col gap-2 rounded-md bg-white p-4 text-black">
             <h1 className="font-bold uppercase">Import Subscriptions</h1>
             <form
               className="flex flex-col gap-2"
               onSubmit={() => {
-                setSubscriptions(JSON.parse(importJson));
-                setImporting(false);
-                setImportJson("");
+                setSubscriptions(JSON.parse(importCode));
+                setIsImporting(false);
+                setImportCode("");
               }}
             >
-              <label htmlFor="import_json">Enter JSON String</label>
+              <label htmlFor="import_json">Enter Share Code</label>
               <input
                 type="text"
                 name="label"
-                placeholder="Enter JSON"
-                onChange={(e: any) => setImportJson(e.target.value)}
-                value={importJson}
+                placeholder="Enter Share Code"
+                onChange={(e: any) => setImportCode(e.target.value)}
+                value={importCode}
                 className="rounded-md bg-black/20 p-2 text-black placeholder-black/50 shadow-lg ring-1 ring-black/5"
               />
               <button
                 className="flex flex-row items-center justify-center gap-2 rounded-md bg-black p-2 text-white shadow-lg ring-1 ring-black/5 disabled:bg-red-500/50 disabled:text-red-900/50"
-                onClick={() => {
-                  setSubscriptions(JSON.parse(importJson));
-                  setImporting(false);
-                  setImportJson("");
-                }}
-                disabled={importJson === ""}
+                onClick={importSubscriptions}
+                disabled={importCode === ""}
               >
                 <MdFileUpload />
                 Submit
               </button>
               <button
                 className="flex flex-row items-center justify-center gap-2 rounded-md bg-black p-2 text-white shadow-lg ring-1 ring-black/5 disabled:bg-red-500/50 disabled:text-red-900/50"
-                onClick={() => {
-                  setImporting(false);
-                  setImportJson("");
-                }}
+                onClick={closeImport}
               >
                 <MdClose />
                 Close

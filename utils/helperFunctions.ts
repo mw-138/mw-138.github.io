@@ -1,3 +1,5 @@
+import pako from "pako";
+
 export function getRandomNumberInRange(min: number, max: number): number {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -9,16 +11,16 @@ export function getRandomEnumValue<T extends object>(enumObj: T): T[keyof T] {
 }
 
 export function poissonRandom(mean: number): number {
-  let L = Math.exp(-mean);
-  let k = 0;
-  let p = 1;
+  let probabilityOfZero = Math.exp(-mean);
+  let numberOfEvents = 0;
+  let probability = 1;
 
   do {
-    k++;
-    p *= Math.random();
-  } while (p > L);
+    numberOfEvents++;
+    probability *= Math.random();
+  } while (probability > probabilityOfZero);
 
-  return k - 1;
+  return numberOfEvents - 1;
 }
 
 export function shuffleArray<T>(array: T[]): T[] {
@@ -78,4 +80,49 @@ export function formatDateToYyyyMmDd(date: Date): string {
   const month = String(date.getMonth() + 1).padStart(2, "0");
   const day = String(date.getDate()).padStart(2, "0");
   return `${year}-${month}-${day}`;
+}
+
+export async function copyToClipboard(text: string): Promise<void> {
+  try {
+    await navigator.clipboard.writeText(text);
+  } catch (err) {}
+}
+
+export function uint8ArrayToBinaryString(uint8Array: Uint8Array): string {
+  return Array.from(uint8Array, (byte) => String.fromCharCode(byte)).join("");
+}
+
+export function binaryStringToUint8Array(binaryString: string): Uint8Array {
+  const len = binaryString.length;
+  const bytes = new Uint8Array(len);
+  for (let i = 0; i < len; i++) {
+    bytes[i] = binaryString.charCodeAt(i);
+  }
+  return bytes;
+}
+
+export function base64UrlEncode(str: string): string {
+  return btoa(str).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+}
+
+export function base64UrlDecode(base64: string): string {
+  const padding = "=".repeat((4 - (base64.length % 4)) % 4);
+  const base64Safe = base64.replace(/-/g, "+").replace(/_/g, "/") + padding;
+  return atob(base64Safe);
+}
+
+export function compressJSON(jsonObject: object): string {
+  const jsonString = JSON.stringify(jsonObject);
+  const compressedData = pako.deflate(jsonString);
+  const binaryString = uint8ArrayToBinaryString(compressedData);
+  const base64String = base64UrlEncode(binaryString);
+  return base64String;
+}
+
+export function decompressJSON(base64String: string): object {
+  const binaryString = base64UrlDecode(base64String);
+  const compressedData = binaryStringToUint8Array(binaryString);
+  const jsonString = pako.inflate(compressedData, { to: "string" });
+  const jsonObject = JSON.parse(jsonString);
+  return jsonObject;
 }
