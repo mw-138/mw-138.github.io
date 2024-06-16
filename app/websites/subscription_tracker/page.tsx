@@ -33,7 +33,6 @@ interface Subscription {
   price: number;
   type: SubscriptionType;
   firstPaymentDate: string;
-  isPaused: boolean;
 }
 
 const locales: string[] = [
@@ -93,7 +92,6 @@ export default function Page() {
     price: 0,
     type: "monthly",
     firstPaymentDate: formatDateToYyyyMmDd(new Date()),
-    isPaused: false,
   });
   const [editingSubscription, setEditingSubscription] =
     useState<boolean>(false);
@@ -110,9 +108,6 @@ export default function Page() {
   const sortedSubscriptions = subscriptions.sort((a, b) => {
     if (isSubscriptionDueToday(a) !== isSubscriptionDueToday(b)) {
       return isSubscriptionDueToday(b) ? 1 : -1;
-    }
-    if (a.isPaused !== b.isPaused) {
-      return a.isPaused ? 1 : -1;
     }
     return getSubscriptionDueDate(a) - getSubscriptionDueDate(b);
   });
@@ -138,8 +133,7 @@ export default function Page() {
 
   function calculateTotalPerMonth(): number {
     const monthlySubscriptions = subscriptions.filter(
-      (subscription) =>
-        subscription.type === "monthly" && !subscription.isPaused,
+      (subscription) => subscription.type === "monthly",
     );
     const total = monthlySubscriptions.reduce(
       (sum, subscription) => sum + Number(subscription.price),
@@ -151,8 +145,7 @@ export default function Page() {
   function calculateTotalPerYear(): number {
     const monthlyTotal = calculateTotalPerMonth() * 12;
     const yearlySubscriptions = subscriptions.filter(
-      (subscription) =>
-        subscription.type === "yearly" && !subscription.isPaused,
+      (subscription) => subscription.type === "yearly",
     );
     const total = yearlySubscriptions.reduce(
       (sum, subscription) => sum + Number(subscription.price),
@@ -171,7 +164,6 @@ export default function Page() {
         price: formData.price,
         type: formData.type,
         firstPaymentDate: formData.firstPaymentDate,
-        isPaused: formData.isPaused,
       };
       setSubscriptions(subscriptionsCopy);
     } else {
@@ -217,7 +209,6 @@ export default function Page() {
       price: subscription.price,
       type: subscription.type,
       firstPaymentDate: subscription.firstPaymentDate,
-      isPaused: subscription.isPaused,
     });
   }
 
@@ -229,7 +220,6 @@ export default function Page() {
       price: 0,
       type: "monthly",
       firstPaymentDate: formatDateToYyyyMmDd(new Date()),
-      isPaused: false,
     });
   }
 
@@ -371,33 +361,27 @@ export default function Page() {
           </div>
         </div>
         <div className="flex flex-1 flex-col-reverse overflow-hidden lg:flex-row">
-          <div className="minimal-scrollbar flex h-96 w-auto flex-col gap-4 overflow-auto p-4 backdrop-blur-md lg:h-auto lg:w-96">
+          <div className="minimal-scrollbar flex h-96 w-auto flex-col gap-4 overflow-auto bg-slate-800 p-4 backdrop-blur-md lg:h-auto lg:w-96">
             {sortedSubscriptions.map((subscription, index) => (
               <button
                 key={index}
-                className="flex flex-col gap-2 rounded-md bg-slate-700 p-4 text-white backdrop-blur-md transition-colors hover:bg-slate-800 active:bg-slate-600"
+                className="flex flex-col gap-2 rounded-md bg-slate-700 p-4 text-white backdrop-blur-md transition-colors hover:bg-slate-900 active:bg-slate-600"
                 onClick={() => editSubscription(index)}
               >
                 <div className="flex w-full flex-row items-center justify-between">
                   <h1 className="font-bold">{subscription.label}</h1>
-                  {subscriptions[index].isPaused ? (
-                    <h1 className="font-bold capitalize text-red-500">
-                      Paused
-                    </h1>
-                  ) : (
-                    <h1 className="font-bold text-white/60">
-                      {isSubscriptionDueToday(subscriptions[index]) ? (
-                        <p className="capitalize">Due today</p>
-                      ) : (
-                        <p className="capitalize">
-                          Due in {getSubscriptionDueDate(subscriptions[index])}{" "}
-                          {getSubscriptionDueDate(subscriptions[index]) <= 1
-                            ? "day"
-                            : "days"}
-                        </p>
-                      )}
-                    </h1>
-                  )}
+                  <h1 className="font-bold text-white/60">
+                    {isSubscriptionDueToday(subscriptions[index]) ? (
+                      <p className="capitalize">Due today</p>
+                    ) : (
+                      <p className="capitalize">
+                        Due in {getSubscriptionDueDate(subscriptions[index])}{" "}
+                        {getSubscriptionDueDate(subscriptions[index]) <= 1
+                          ? "day"
+                          : "days"}
+                      </p>
+                    )}
+                  </h1>
                 </div>
                 <div className="flex w-full flex-row items-center justify-between">
                   <h2 className="font-semibold text-white">
@@ -466,16 +450,6 @@ export default function Page() {
                   className="rounded-md bg-white/20 p-2 text-white placeholder-white/50"
                 />
               </div>
-              <div className="flex flex-row gap-2">
-                <label htmlFor="isPaused">Is Paused?</label>
-                <input
-                  type="checkbox"
-                  name="isPaused"
-                  onChange={handleFormChange}
-                  checked={formData.isPaused}
-                  className="rounded-md bg-white/20 p-2 text-white placeholder-white/50"
-                />
-              </div>
               {editingSubscription ? (
                 <div className="flex flex-col gap-4">
                   <div className="flex flex-row gap-4">
@@ -506,8 +480,8 @@ export default function Page() {
                   <div className="rounded-md bg-slate-700 p-2">
                     <h1 className="font-bold uppercase">Stats</h1>
                     <div
-                      className="tooltip"
-                      data-tip="Calculation uses current subscription cost. Changing costs will show an inaccurate total spend."
+                      className="tooltip cursor-help"
+                      data-tip="Calculation uses current subscription cost. Fluctuating costs or manually changing costs will show an inaccurate total spend."
                     >
                       <p>
                         Total Spend:{" "}
