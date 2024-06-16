@@ -261,6 +261,17 @@ export default function Page() {
     );
   }
 
+  function getSubscriptionTotalSpend(subscription: Subscription): number {
+    const today = new Date();
+    const nextPaymentDate = new Date(subscription.firstPaymentDate);
+    let totalSpend = 0;
+    while (nextPaymentDate <= today) {
+      nextPaymentDate.setMonth(nextPaymentDate.getMonth() + 1);
+      totalSpend += Number(subscription.price);
+    }
+    return totalSpend;
+  }
+
   function formatToCurrencyString(num: number): string {
     return formatCurrency(num, locale, currency);
   }
@@ -271,6 +282,7 @@ export default function Page() {
   }
 
   function importSubscriptions(): void {
+    if (importCode === "") return;
     const data = decompressJSON(importCode) as Subscription[];
     setSubscriptions(data);
     closeImport();
@@ -283,10 +295,12 @@ export default function Page() {
 
   return (
     <>
-      <main className="flex select-none flex-col gap-4 bg-[url('https://static.vecteezy.com/system/resources/previews/019/135/816/original/blue-dark-gradient-blur-abstract-background-free-vector.jpg')] bg-cover bg-center p-4 lg:h-screen">
-        <div className="flex flex-col items-center justify-between gap-4 rounded-md bg-white/10 p-4 text-white shadow-lg ring-1 ring-white/5 backdrop-blur-md lg:flex-row">
-          <h1 className="font-bold uppercase">Subscription Tracker</h1>
-          <div className="flex gap-4">
+      <main className="flex select-none flex-col bg-slate-900 lg:h-screen">
+        <div className="flex flex-col items-center justify-between gap-4 bg-slate-700 p-4 text-white lg:flex-row">
+          <h1 className="font-bold uppercase text-slate-200">
+            Subscription Tracker
+          </h1>
+          <div className="flex gap-4 text-slate-200">
             <span>
               {formatToCurrencyString(calculateTotalPerMonth())} per month /{" "}
               {formatToCurrencyString(calculateTotalPerYear())} per year
@@ -300,13 +314,13 @@ export default function Page() {
                 defaultValue="en-UK"
                 onChange={(e: any) => setLocale(e.target.value)}
                 value={locale}
-                className="rounded-md bg-white/20 p-2 text-xs text-white placeholder-white/50 shadow-lg ring-1 ring-white/5"
+                className="rounded-md bg-slate-500 p-2 text-xs text-slate-100 hover:bg-slate-300 hover:text-slate-800"
               >
                 {locales.map((locale, index) => (
                   <option
                     key={index}
                     value={locale}
-                    className="bg-zinc-500 text-white"
+                    className="bg-slate-500 text-slate-100"
                   >
                     {locale}
                   </option>
@@ -318,13 +332,13 @@ export default function Page() {
                 defaultValue="GBP"
                 onChange={(e: any) => setCurrency(e.target.value)}
                 value={currency}
-                className="rounded-md bg-white/20 p-2 text-xs text-white placeholder-white/50 shadow-lg ring-1 ring-white/5"
+                className="rounded-md bg-slate-500 p-2 text-xs text-slate-100 hover:bg-slate-300 hover:text-slate-800"
               >
                 {currencies.map((currency, index) => (
                   <option
                     key={index}
                     value={currency}
-                    className="bg-zinc-500 text-white"
+                    className="bg-slate-500 text-slate-100"
                   >
                     {currency}
                   </option>
@@ -334,21 +348,21 @@ export default function Page() {
             <div className="flex flex-row gap-4">
               <button
                 onClick={backupSubscriptions}
-                className="flex flex-row items-center gap-2 rounded-md bg-white/20 px-4 py-2 text-xs text-white shadow-lg ring-1 ring-white/5 transition-colors hover:bg-white/40 active:bg-white/50 disabled:bg-red-500/50 disabled:text-red-300/50"
+                className="flex flex-row items-center gap-2 rounded-md bg-slate-500 px-4 py-2 text-xs text-slate-100 transition-colors hover:bg-slate-300 hover:text-slate-800 active:bg-slate-200 disabled:bg-red-900 disabled:text-red-700"
               >
                 <MdBackup />
                 Backup
               </button>
               <button
                 onClick={() => setIsImporting(true)}
-                className="flex flex-row items-center gap-2 rounded-md bg-white/20 px-4 py-2 text-xs text-white shadow-lg ring-1 ring-white/5 transition-colors hover:bg-white/40 active:bg-white/50 disabled:bg-red-500/50 disabled:text-red-300/50"
+                className="flex flex-row items-center gap-2 rounded-md bg-slate-500 px-4 py-2 text-xs text-slate-100 transition-colors hover:bg-slate-300 hover:text-slate-800 active:bg-slate-200 disabled:bg-red-900 disabled:text-red-700"
               >
                 <FaFileImport />
                 Import
               </button>
               <button
                 onClick={() => setSubscriptions([])}
-                className="flex flex-row items-center gap-2 rounded-md bg-white/20 px-4 py-2 text-xs text-white shadow-lg ring-1 ring-white/5 transition-colors hover:bg-white/40 active:bg-white/50 disabled:bg-red-500/50 disabled:text-red-300/50"
+                className="flex flex-row items-center gap-2 rounded-md bg-slate-500 px-4 py-2 text-xs text-slate-100 transition-colors hover:bg-slate-300 hover:text-slate-800 active:bg-slate-200 disabled:bg-red-900 disabled:text-red-700"
               >
                 <MdDeleteForever />
                 Delete All
@@ -356,12 +370,12 @@ export default function Page() {
             </div>
           </div>
         </div>
-        <div className="flex flex-1 flex-col-reverse gap-4 overflow-hidden lg:flex-row">
-          <div className="minimal-scrollbar flex h-96 w-auto flex-col gap-4 overflow-auto rounded-md bg-white/10 p-4 shadow-lg ring-1 ring-white/5 backdrop-blur-md lg:h-auto lg:w-96">
+        <div className="flex flex-1 flex-col-reverse overflow-hidden lg:flex-row">
+          <div className="minimal-scrollbar flex h-96 w-auto flex-col gap-4 overflow-auto p-4 backdrop-blur-md lg:h-auto lg:w-96">
             {sortedSubscriptions.map((subscription, index) => (
               <button
                 key={index}
-                className="flex flex-col gap-2 rounded-md bg-white/0 p-2 text-white shadow-lg ring-1 ring-white/5 backdrop-blur-md transition-colors hover:bg-white/20"
+                className="flex flex-col gap-2 rounded-md bg-slate-700 p-4 text-white backdrop-blur-md transition-colors hover:bg-slate-800 active:bg-slate-600"
                 onClick={() => editSubscription(index)}
               >
                 <div className="flex w-full flex-row items-center justify-between">
@@ -396,7 +410,7 @@ export default function Page() {
               </button>
             ))}
           </div>
-          <div className="flex-1 rounded-md bg-white/10 p-4 text-white shadow-lg ring-1 ring-white/5 backdrop-blur-md">
+          <div className="flex-1 p-4 text-white backdrop-blur-md">
             <h1 className="pb-2 font-bold uppercase">
               {editingSubscription ? "Edit" : "Add"} Subscription
             </h1>
@@ -409,7 +423,7 @@ export default function Page() {
                   placeholder="Enter label"
                   onChange={handleFormChange}
                   value={formData.label}
-                  className="rounded-md bg-white/20 p-2 text-white placeholder-white/50 shadow-lg ring-1 ring-white/5"
+                  className="rounded-md bg-white/20 p-2 text-white placeholder-white/50"
                 />
               </div>
               <div className="flex flex-col gap-1">
@@ -420,7 +434,7 @@ export default function Page() {
                   placeholder="Enter price"
                   onChange={handleFormChange}
                   value={formData.price}
-                  className="rounded-md bg-white/20 p-2 text-white placeholder-white/50 shadow-lg ring-1 ring-white/5"
+                  className="rounded-md bg-white/20 p-2 text-white placeholder-white/50"
                 />
               </div>
               <div className="flex flex-col gap-1">
@@ -431,7 +445,7 @@ export default function Page() {
                   defaultValue="monthly"
                   onChange={handleFormChange}
                   value={formData.type}
-                  className="rounded-md bg-white/20 p-2 text-white placeholder-white/50 shadow-lg ring-1 ring-white/5"
+                  className="rounded-md bg-white/20 p-2 text-white placeholder-white/50"
                 >
                   <option value="monthly" className="bg-zinc-500 text-white">
                     Monthly
@@ -449,7 +463,7 @@ export default function Page() {
                   placeholder="Enter first payment date"
                   onChange={handleFormChange}
                   value={formData.firstPaymentDate}
-                  className="rounded-md bg-white/20 p-2 text-white placeholder-white/50 shadow-lg ring-1 ring-white/5"
+                  className="rounded-md bg-white/20 p-2 text-white placeholder-white/50"
                 />
               </div>
               <div className="flex flex-row gap-2">
@@ -459,38 +473,56 @@ export default function Page() {
                   name="isPaused"
                   onChange={handleFormChange}
                   checked={formData.isPaused}
-                  className="rounded-md bg-white/20 p-2 text-white placeholder-white/50 shadow-lg ring-1 ring-white/5"
+                  className="rounded-md bg-white/20 p-2 text-white placeholder-white/50"
                 />
               </div>
               {editingSubscription ? (
-                <div className="flex flex-row gap-4">
-                  <button
-                    className="flex flex-1 flex-row items-center justify-center gap-2 rounded-md bg-white p-2 text-black shadow-lg ring-1 ring-white/5 transition-colors hover:bg-green-500 hover:text-white disabled:bg-red-500/50 disabled:text-white"
-                    onClick={handleFormSubmit}
-                  >
-                    <MdSave />
-                    Save Changes
-                  </button>
-                  <button
-                    className="flex flex-1 flex-row items-center justify-center gap-2 rounded-md bg-white p-2 text-black shadow-lg ring-1 ring-white/5 transition-colors hover:bg-red-500 hover:text-white disabled:bg-red-500/50 disabled:text-white"
-                    onClick={() =>
-                      deleteSubscription(selectedSubscriptionIndex)
-                    }
-                  >
-                    <MdDelete />
-                    Delete
-                  </button>
-                  <button
-                    className="flex flex-1 flex-row items-center justify-center gap-2 rounded-md bg-white p-2 text-black shadow-lg ring-1 ring-white/5 transition-colors hover:bg-zinc-500 hover:text-white disabled:bg-red-500/50 disabled:text-white"
-                    onClick={cancelEdit}
-                  >
-                    <MdCancel />
-                    Cancel
-                  </button>
+                <div className="flex flex-col gap-4">
+                  <div className="flex flex-row gap-4">
+                    <button
+                      className="flex flex-1 flex-row items-center justify-center gap-2 rounded-md bg-white p-2 text-slate-700 transition-colors hover:bg-green-500 hover:text-white disabled:bg-red-500/50 disabled:text-white"
+                      onClick={handleFormSubmit}
+                    >
+                      <MdSave />
+                      Save
+                    </button>
+                    <button
+                      className="flex flex-1 flex-row items-center justify-center gap-2 rounded-md bg-white p-2 text-slate-700 transition-colors hover:bg-red-500 hover:text-white disabled:bg-red-500/50 disabled:text-white"
+                      onClick={() =>
+                        deleteSubscription(selectedSubscriptionIndex)
+                      }
+                    >
+                      <MdDelete />
+                      Delete
+                    </button>
+                    <button
+                      className="flex flex-1 flex-row items-center justify-center gap-2 rounded-md bg-white p-2 text-slate-700 transition-colors hover:bg-slate-500 hover:text-white disabled:bg-red-500/50 disabled:text-white"
+                      onClick={cancelEdit}
+                    >
+                      <MdCancel />
+                      Cancel
+                    </button>
+                  </div>
+                  <div className="rounded-md bg-slate-700 p-2">
+                    <h1 className="font-bold uppercase">Stats</h1>
+                    <div
+                      className="tooltip"
+                      data-tip="Calculation uses current subscription cost. Changing costs will show an inaccurate total spend."
+                    >
+                      <p>
+                        Total Spend:{" "}
+                        {formatCurrency(
+                          getSubscriptionTotalSpend(
+                            subscriptions[selectedSubscriptionIndex],
+                          ),
+                        )}
+                      </p>
+                    </div>
+                  </div>
                 </div>
               ) : (
                 <button
-                  className="flex flex-row items-center justify-center gap-2 rounded-md bg-white p-2 text-black shadow-lg ring-1 ring-white/5 disabled:bg-red-500/50 disabled:text-red-300/50"
+                  className="flex flex-row items-center justify-center gap-2 rounded-md bg-white p-2 text-black disabled:bg-red-900 disabled:text-red-700"
                   onClick={handleFormSubmit}
                   disabled={formData.label === ""}
                 >
@@ -503,28 +535,24 @@ export default function Page() {
         </div>
       </main>
       {isImporting && (
-        <div className="absolute left-0 top-0 flex h-full w-full items-center justify-center bg-black/50 backdrop-blur-md">
-          <div className="relative flex flex-col gap-2 rounded-md bg-white p-4 text-black">
+        <div className="absolute left-0 top-0 flex h-full w-full items-center justify-center bg-slate-900/50 backdrop-blur-md">
+          <div className="relative flex flex-col gap-2 rounded-md bg-slate-800 p-4 text-slate-200">
             <h1 className="font-bold uppercase">Import Subscriptions</h1>
             <form
               className="flex flex-col gap-2"
-              onSubmit={() => {
-                setSubscriptions(JSON.parse(importCode));
-                setIsImporting(false);
-                setImportCode("");
-              }}
+              onSubmit={importSubscriptions}
             >
-              <label htmlFor="import_json">Enter Share Code</label>
+              <label htmlFor="import_code">Enter Share Code</label>
               <input
                 type="text"
-                name="label"
+                name="import_code"
                 placeholder="Enter Share Code"
                 onChange={(e: any) => setImportCode(e.target.value)}
                 value={importCode}
-                className="rounded-md bg-black/20 p-2 text-black placeholder-black/50 shadow-lg ring-1 ring-black/5"
+                className="rounded-md bg-slate-200 p-2 text-slate-800 placeholder-slate-800"
               />
               <button
-                className="flex flex-row items-center justify-center gap-2 rounded-md bg-black p-2 text-white shadow-lg ring-1 ring-black/5 disabled:bg-red-500/50 disabled:text-red-900/50"
+                className="flex flex-row items-center justify-center gap-2 rounded-md bg-slate-500 p-2 text-slate-100 transition-colors hover:bg-slate-600 active:bg-slate-400 disabled:bg-red-900 disabled:text-red-700"
                 onClick={importSubscriptions}
                 disabled={importCode === ""}
               >
@@ -532,7 +560,7 @@ export default function Page() {
                 Submit
               </button>
               <button
-                className="flex flex-row items-center justify-center gap-2 rounded-md bg-black p-2 text-white shadow-lg ring-1 ring-black/5 disabled:bg-red-500/50 disabled:text-red-900/50"
+                className="flex flex-row items-center justify-center gap-2 rounded-md bg-slate-500 p-2 text-slate-100 transition-colors hover:bg-slate-600 active:bg-slate-400 disabled:bg-red-900 disabled:text-red-700"
                 onClick={closeImport}
               >
                 <MdClose />
