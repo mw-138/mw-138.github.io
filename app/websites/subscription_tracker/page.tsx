@@ -32,7 +32,7 @@ interface Subscription {
   label: string;
   price: number;
   type: SubscriptionType;
-  nextPaymentDate: string;
+  firstPaymentDate: string;
   isPaused: boolean;
 }
 
@@ -92,7 +92,7 @@ export default function Page() {
     label: "",
     price: 0,
     type: "monthly",
-    nextPaymentDate: formatDateToYyyyMmDd(new Date()),
+    firstPaymentDate: formatDateToYyyyMmDd(new Date()),
     isPaused: false,
   });
   const [editingSubscription, setEditingSubscription] =
@@ -130,7 +130,7 @@ export default function Page() {
         label: label,
         price: price,
         type: type,
-        nextPaymentDate: date,
+        firstPaymentDate: date,
         isPaused: false,
       },
     ]);
@@ -170,7 +170,7 @@ export default function Page() {
         label: formData.label,
         price: formData.price,
         type: formData.type,
-        nextPaymentDate: formData.nextPaymentDate,
+        firstPaymentDate: formData.firstPaymentDate,
         isPaused: formData.isPaused,
       };
       setSubscriptions(subscriptionsCopy);
@@ -179,7 +179,7 @@ export default function Page() {
         formData.label,
         formData.price,
         formData.type,
-        formData.nextPaymentDate,
+        formData.firstPaymentDate,
       );
     }
     cancelEdit();
@@ -216,7 +216,7 @@ export default function Page() {
       label: subscription.label,
       price: subscription.price,
       type: subscription.type,
-      nextPaymentDate: subscription.nextPaymentDate,
+      firstPaymentDate: subscription.firstPaymentDate,
       isPaused: subscription.isPaused,
     });
   }
@@ -228,7 +228,7 @@ export default function Page() {
       label: "",
       price: 0,
       type: "monthly",
-      nextPaymentDate: formatDateToYyyyMmDd(new Date()),
+      firstPaymentDate: formatDateToYyyyMmDd(new Date()),
       isPaused: false,
     });
   }
@@ -242,7 +242,7 @@ export default function Page() {
 
   function getSubscriptionDueDate(subscription: Subscription): number {
     const today = new Date();
-    const nextPaymentDate = new Date(subscription.nextPaymentDate);
+    const nextPaymentDate = new Date(subscription.firstPaymentDate);
     while (nextPaymentDate <= today) {
       nextPaymentDate.setMonth(nextPaymentDate.getMonth() + 1);
     }
@@ -253,23 +253,13 @@ export default function Page() {
 
   function isSubscriptionDueToday(subscription: Subscription): boolean {
     const today = new Date();
-    const nextPaymentDate = new Date(subscription.nextPaymentDate);
+    const paymentDate = new Date(subscription.firstPaymentDate);
     return (
-      today.getDate() === nextPaymentDate.getDate() &&
-      today.getMonth() === nextPaymentDate.getMonth() &&
-      today.getFullYear() === nextPaymentDate.getFullYear()
+      today.getDate() === paymentDate.getDate() &&
+      today.getMonth() === paymentDate.getMonth() &&
+      today.getFullYear() === paymentDate.getFullYear()
     );
   }
-
-  // function updateSubscriptionProperties(): void {
-  //   const subs = [...subscriptions];
-  //   subs.forEach((subscription) => {
-  //     if (subscription.isPaused === undefined) {
-  //       subscription.isPaused = false;
-  //     }
-  //   });
-  //   setSubscriptions(subs);
-  // }
 
   function formatToCurrencyString(num: number): string {
     return formatCurrency(num, locale, currency);
@@ -296,7 +286,6 @@ export default function Page() {
       <main className="flex h-screen select-none flex-col gap-4 bg-[url('https://static.vecteezy.com/system/resources/previews/019/135/816/original/blue-dark-gradient-blur-abstract-background-free-vector.jpg')] bg-cover bg-center p-4">
         <div className="flex h-16 items-center justify-between rounded-md bg-white/10 p-4 text-white shadow-lg ring-1 ring-white/5 backdrop-blur-md">
           <h1 className="font-bold uppercase">Subscription Tracker</h1>
-          {/* <button onClick={updateSubscriptionProperties}>Update JSON</button> */}
           <div className="flex gap-4">
             <span>
               {formatToCurrencyString(calculateTotalPerMonth())} per month /{" "}
@@ -449,13 +438,13 @@ export default function Page() {
                 </select>
               </div>
               <div className="flex flex-col gap-1">
-                <label htmlFor="nextPaymentDate">Next Payment Date</label>
+                <label htmlFor="firstPaymentDate">First Payment Date</label>
                 <input
                   type="date"
-                  name="nextPaymentDate"
-                  placeholder="Enter next payment date"
+                  name="firstPaymentDate"
+                  placeholder="Enter first payment date"
                   onChange={handleFormChange}
-                  value={formData.nextPaymentDate}
+                  value={formData.firstPaymentDate}
                   className="rounded-md bg-white/20 p-2 text-white placeholder-white/50 shadow-lg ring-1 ring-white/5"
                 />
               </div>
