@@ -11,9 +11,11 @@ const page = () => {
     const projects = [
       "coin_catcher",
       "netflix_redesign",
-      "portfolio",
+      // "portfolio",
       // "pixel_platformer",
       "miyoo_mini_theme_preview",
+      // "life_simulator",
+      "subscription_tracker",
     ];
     return projects.includes(project.id);
   })
