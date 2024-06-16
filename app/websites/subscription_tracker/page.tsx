@@ -10,6 +10,16 @@ import {
   generateUUID,
   isIndexOutOfRange,
 } from "@/utils/helperFunctions";
+import {
+  MdAdd,
+  MdBackup,
+  MdCancel,
+  MdClear,
+  MdDelete,
+  MdDeleteForever,
+  MdImportExport,
+  MdSave,
+} from "react-icons/md";
 
 type SubscriptionType = "monthly" | "yearly";
 
@@ -271,7 +281,7 @@ export default function page() {
               defaultValue="en-UK"
               onChange={(e: any) => setLocale(e.target.value)}
               value={locale}
-              className="rounded-md bg-white/20 p-2 text-white placeholder-white/50"
+              className="rounded-md bg-white/20 p-2 text-white placeholder-white/50 shadow-lg ring-1 ring-white/5"
             >
               {locales.map((locale, index) => (
                 <option
@@ -289,7 +299,7 @@ export default function page() {
               defaultValue="GBP"
               onChange={(e: any) => setCurrency(e.target.value)}
               value={currency}
-              className="rounded-md bg-white/20 p-2 text-white placeholder-white/50"
+              className="rounded-md bg-white/20 p-2 text-white placeholder-white/50 shadow-lg ring-1 ring-white/5"
             >
               {currencies.map((currency, index) => (
                 <option
@@ -301,6 +311,18 @@ export default function page() {
                 </option>
               ))}
             </select>
+            {/* <button className="flex flex-row items-center gap-2 rounded-md bg-white/20 px-4 py-2 text-white shadow-lg ring-1 ring-white/5 disabled:bg-red-500/50 disabled:text-red-300/50">
+              <MdBackup />
+              Backup
+            </button>
+            <button className="flex flex-row items-center gap-2 rounded-md bg-white/20 px-4 py-2 text-white shadow-lg ring-1 ring-white/5 disabled:bg-red-500/50 disabled:text-red-300/50">
+              <MdImportExport />
+              Import
+            </button>
+            <button className="flex flex-row items-center gap-2 rounded-md bg-white/20 px-4 py-2 text-white shadow-lg ring-1 ring-white/5 disabled:bg-red-500/50 disabled:text-red-300/50">
+              <MdDeleteForever />
+              Delete All
+            </button> */}
           </div>
         </div>
         <div className="flex flex-1 flex-row gap-4 overflow-hidden">
@@ -350,7 +372,7 @@ export default function page() {
                   placeholder="Enter label"
                   onChange={handleFormChange}
                   value={formData.label}
-                  className="rounded-md bg-white/20 p-2 text-white placeholder-white/50"
+                  className="rounded-md bg-white/20 p-2 text-white placeholder-white/50 shadow-lg ring-1 ring-white/5"
                 />
               </div>
               <div className="flex flex-col gap-1">
@@ -361,7 +383,7 @@ export default function page() {
                   placeholder="Enter price"
                   onChange={handleFormChange}
                   value={formData.price}
-                  className="rounded-md bg-white/20 p-2 text-white placeholder-white/50"
+                  className="rounded-md bg-white/20 p-2 text-white placeholder-white/50 shadow-lg ring-1 ring-white/5"
                 />
               </div>
               <div className="flex flex-col gap-1">
@@ -372,7 +394,7 @@ export default function page() {
                   defaultValue="monthly"
                   onChange={handleFormChange}
                   value={formData.type}
-                  className="rounded-md bg-white/20 p-2 text-white placeholder-white/50"
+                  className="rounded-md bg-white/20 p-2 text-white placeholder-white/50 shadow-lg ring-1 ring-white/5"
                 >
                   <option value="monthly" className="bg-zinc-500 text-white">
                     Monthly
@@ -390,7 +412,7 @@ export default function page() {
                   placeholder="Enter next payment date"
                   onChange={handleFormChange}
                   value={formData.nextPaymentDate}
-                  className="rounded-md bg-white/20 p-2 text-white placeholder-white/50"
+                  className="rounded-md bg-white/20 p-2 text-white placeholder-white/50 shadow-lg ring-1 ring-white/5"
                 />
               </div>
               <div className="flex flex-row gap-2">
@@ -400,38 +422,42 @@ export default function page() {
                   name="isPaused"
                   onChange={handleFormChange}
                   checked={formData.isPaused}
-                  className="rounded-md bg-white/20 p-2 text-white placeholder-white/50"
+                  className="rounded-md bg-white/20 p-2 text-white placeholder-white/50 shadow-lg ring-1 ring-white/5"
                 />
               </div>
               {editingSubscription ? (
                 <div className="flex flex-row gap-4">
                   <button
-                    className="flex-1 rounded-md bg-white p-2 text-black shadow-lg ring-1 ring-white/5 transition-colors hover:bg-green-500 hover:text-white disabled:bg-red-500/50 disabled:text-white"
+                    className="flex flex-1 flex-row items-center justify-center gap-2 rounded-md bg-white p-2 text-black shadow-lg ring-1 ring-white/5 transition-colors hover:bg-green-500 hover:text-white disabled:bg-red-500/50 disabled:text-white"
                     onClick={handleFormSubmit}
                   >
+                    <MdSave />
                     Save Changes
                   </button>
                   <button
-                    className="flex-1 rounded-md bg-white p-2 text-black shadow-lg ring-1 ring-white/5 transition-colors hover:bg-red-500 hover:text-white disabled:bg-red-500/50 disabled:text-white"
+                    className="flex flex-1 flex-row items-center justify-center gap-2 rounded-md bg-white p-2 text-black shadow-lg ring-1 ring-white/5 transition-colors hover:bg-red-500 hover:text-white disabled:bg-red-500/50 disabled:text-white"
                     onClick={() =>
                       deleteSubscription(selectedSubscriptionIndex)
                     }
                   >
+                    <MdDelete />
                     Delete
                   </button>
                   <button
-                    className="flex-1 rounded-md bg-white p-2 text-black shadow-lg ring-1 ring-white/5 transition-colors hover:bg-zinc-500 hover:text-white disabled:bg-red-500/50 disabled:text-white"
+                    className="flex flex-1 flex-row items-center justify-center gap-2 rounded-md bg-white p-2 text-black shadow-lg ring-1 ring-white/5 transition-colors hover:bg-zinc-500 hover:text-white disabled:bg-red-500/50 disabled:text-white"
                     onClick={cancelEdit}
                   >
+                    <MdCancel />
                     Cancel
                   </button>
                 </div>
               ) : (
                 <button
-                  className="rounded-md bg-white p-2 text-black shadow-lg ring-1 ring-white/5 disabled:bg-red-500/50 disabled:text-red-300/50"
+                  className="flex flex-row items-center justify-center gap-2 rounded-md bg-white p-2 text-black shadow-lg ring-1 ring-white/5 disabled:bg-red-500/50 disabled:text-red-300/50"
                   onClick={handleFormSubmit}
                   disabled={formData.label === ""}
                 >
+                  <MdAdd />
                   Add Subscription
                 </button>
               )}
@@ -439,8 +465,8 @@ export default function page() {
           </div>
         </div>
       </main>
-      {/* <WebsiteNavigation />
-      <Footer /> */}
+      <WebsiteNavigation />
+      <Footer />
     </>
   );
 }
