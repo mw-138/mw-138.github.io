@@ -348,21 +348,21 @@ export default function Page() {
             <div className="flex flex-row gap-4">
               <button
                 onClick={backupSubscriptions}
-                className="flex flex-row items-center gap-2 rounded-md bg-slate-500 px-4 py-2 text-xs text-slate-100 transition-colors hover:bg-slate-300 hover:text-slate-800 active:bg-slate-200 disabled:bg-red-900 disabled:text-red-700"
+                className="flex flex-row items-center gap-2 rounded-md bg-slate-500 px-4 py-2 text-xs text-slate-100 transition-colors hover:bg-slate-300 hover:text-slate-800 active:bg-slate-200 disabled:bg-red-900 disabled:text-red-600"
               >
                 <MdBackup />
                 Backup
               </button>
               <button
                 onClick={() => setIsImporting(true)}
-                className="flex flex-row items-center gap-2 rounded-md bg-slate-500 px-4 py-2 text-xs text-slate-100 transition-colors hover:bg-slate-300 hover:text-slate-800 active:bg-slate-200 disabled:bg-red-900 disabled:text-red-700"
+                className="flex flex-row items-center gap-2 rounded-md bg-slate-500 px-4 py-2 text-xs text-slate-100 transition-colors hover:bg-slate-300 hover:text-slate-800 active:bg-slate-200 disabled:bg-red-900 disabled:text-red-600"
               >
                 <FaFileImport />
                 Import
               </button>
               <button
                 onClick={() => setSubscriptions([])}
-                className="flex flex-row items-center gap-2 rounded-md bg-slate-500 px-4 py-2 text-xs text-slate-100 transition-colors hover:bg-slate-300 hover:text-slate-800 active:bg-slate-200 disabled:bg-red-900 disabled:text-red-700"
+                className="flex flex-row items-center gap-2 rounded-md bg-slate-500 px-4 py-2 text-xs text-slate-100 transition-colors hover:bg-slate-300 hover:text-slate-800 active:bg-slate-200 disabled:bg-red-900 disabled:text-red-600"
               >
                 <MdDeleteForever />
                 Delete All
@@ -480,14 +480,14 @@ export default function Page() {
                 <div className="flex flex-col gap-4">
                   <div className="flex flex-row gap-4">
                     <button
-                      className="flex flex-1 flex-row items-center justify-center gap-2 rounded-md bg-white p-2 text-slate-700 transition-colors hover:bg-green-500 hover:text-white disabled:bg-red-500/50 disabled:text-white"
+                      className="flex flex-1 flex-row items-center justify-center gap-2 rounded-md bg-white p-2 text-slate-700 transition-colors hover:bg-green-500 hover:text-white active:bg-green-600 disabled:bg-red-900 disabled:text-red-600"
                       onClick={handleFormSubmit}
                     >
                       <MdSave />
                       Save
                     </button>
                     <button
-                      className="flex flex-1 flex-row items-center justify-center gap-2 rounded-md bg-white p-2 text-slate-700 transition-colors hover:bg-red-500 hover:text-white disabled:bg-red-500/50 disabled:text-white"
+                      className="flex flex-1 flex-row items-center justify-center gap-2 rounded-md bg-white p-2 text-slate-700 transition-colors hover:bg-red-500 hover:text-white active:bg-red-600 disabled:bg-red-900 disabled:text-red-600"
                       onClick={() =>
                         deleteSubscription(selectedSubscriptionIndex)
                       }
@@ -496,7 +496,7 @@ export default function Page() {
                       Delete
                     </button>
                     <button
-                      className="flex flex-1 flex-row items-center justify-center gap-2 rounded-md bg-white p-2 text-slate-700 transition-colors hover:bg-slate-500 hover:text-white disabled:bg-red-500/50 disabled:text-white"
+                      className="flex flex-1 flex-row items-center justify-center gap-2 rounded-md bg-white p-2 text-slate-700 transition-colors hover:bg-slate-500 hover:text-white active:bg-slate-600 disabled:bg-red-900 disabled:text-red-600"
                       onClick={cancelEdit}
                     >
                       <MdCancel />
@@ -522,7 +522,7 @@ export default function Page() {
                 </div>
               ) : (
                 <button
-                  className="flex flex-row items-center justify-center gap-2 rounded-md bg-white p-2 text-black disabled:bg-red-900 disabled:text-red-700"
+                  className="flex flex-1 flex-row items-center justify-center gap-2 rounded-md bg-white p-2 text-slate-700 transition-colors hover:bg-slate-500 hover:text-white active:bg-slate-600 disabled:bg-red-900 disabled:text-red-600"
                   onClick={handleFormSubmit}
                   disabled={formData.label === ""}
                 >
@@ -552,7 +552,7 @@ export default function Page() {
                 className="rounded-md bg-slate-200 p-2 text-slate-800 placeholder-slate-800"
               />
               <button
-                className="flex flex-row items-center justify-center gap-2 rounded-md bg-green-500 p-2 text-slate-100 transition-colors hover:bg-green-600 active:bg-green-400 disabled:bg-red-900 disabled:text-red-700"
+                className="flex flex-row items-center justify-center gap-2 rounded-md bg-green-500 p-2 text-slate-100 transition-colors hover:bg-green-600 active:bg-green-400 disabled:bg-red-900 disabled:text-red-600"
                 onClick={importSubscriptions}
                 disabled={importCode === ""}
               >
@@ -560,7 +560,7 @@ export default function Page() {
                 Submit
               </button>
               <button
-                className="flex flex-row items-center justify-center gap-2 rounded-md bg-slate-500 p-2 text-slate-100 transition-colors hover:bg-slate-600 active:bg-slate-400 disabled:bg-red-900 disabled:text-red-700"
+                className="flex flex-row items-center justify-center gap-2 rounded-md bg-slate-500 p-2 text-slate-100 transition-colors hover:bg-slate-600 active:bg-slate-400 disabled:bg-red-900 disabled:text-red-600"
                 onClick={closeImport}
               >
                 <MdClose />
