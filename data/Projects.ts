@@ -56,6 +56,10 @@ import MinimalPortfolio01_Screenshot01 from "@/public/projects/minimal_portfolio
 
 import PremierLeagueReDesign_Screenshot01 from "@/public/projects/premier_league_redesign/screenshot_01.png";
 
+import SubscriptionTracker_Screenshot01 from "@/public/projects/subscription_tracker/screenshot_01.png";
+
+import LifeSimulator_Screenshot01 from "@/public/projects/life_simulator/screenshot_01.png";
+
 export const Projects: Project[] = [
   new Project(
     new Date("03/21/2024"),
@@ -292,5 +296,33 @@ export const Projects: Project[] = [
     [PremierLeagueReDesign_Screenshot01],
     [],
     [Tag.Website],
+  ),
+  new Project(
+    new Date("06/16/2024"),
+    true,
+    "subscription_tracker",
+    "Subscription Tracker",
+    "A subscription tracker tool that helps keeps track of subscriptions and provides costs per month and per year.",
+    [Tool.VsCode, Tool.NextJs, Tool.React, Tool.TailwindCSS],
+    [Language.TypeScript, Language.HTML, Language.CSS],
+    SubscriptionTracker_Screenshot01,
+    "/websites/subscription_tracker",
+    [SubscriptionTracker_Screenshot01],
+    [],
+    [Tag.Website],
+  ),
+  new Project(
+    new Date("06/15/2024"),
+    true,
+    "life_simulator",
+    "Life Simulator",
+    "A WIP life simulation game.",
+    [Tool.VsCode, Tool.NextJs, Tool.React, Tool.TailwindCSS],
+    [Language.TypeScript, Language.HTML, Language.CSS],
+    LifeSimulator_Screenshot01,
+    "/websites/life_simulator",
+    [LifeSimulator_Screenshot01],
+    [],
+    [Tag.Website, Tag.Game],
   ),
 ];
