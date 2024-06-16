@@ -32,6 +32,11 @@
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
   }
+
+  .minimal-scrollbar {
+    scrollbar-color: white transparent;
+    scrollbar-width: thin;
+  }
 }
 
 @keyframes scroll-left {
