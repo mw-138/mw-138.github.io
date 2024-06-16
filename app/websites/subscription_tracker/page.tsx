@@ -85,7 +85,7 @@ const currencies: string[] = [
   "BRL", // Brazilian Real
 ];
 
-export default function page() {
+export default function Page() {
   const [subscriptions, setSubscriptions] = useLocalStorageState<
     Subscription[]
   >("subscriptions_tracker", []);

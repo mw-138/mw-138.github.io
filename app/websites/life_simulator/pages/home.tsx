@@ -5,7 +5,7 @@ import { LifeSimulatorContext } from "../context/LifeSimulatorContext";
 
 // Provide general overview of multiple areas.
 
-export default function home() {
+export default function Home() {
   const context = useContext(LifeSimulatorContext);
   return (
     <>

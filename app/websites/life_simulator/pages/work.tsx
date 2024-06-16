@@ -5,7 +5,7 @@ import { LifeSimulatorContext } from "../context/LifeSimulatorContext";
 
 // Show a list of available jobs, as well as current job progression.
 
-export default function work() {
+export default function Work() {
   const context = useContext(LifeSimulatorContext);
   return (
     <>

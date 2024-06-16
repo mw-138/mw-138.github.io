@@ -5,7 +5,7 @@ import { LifeSimulatorContext } from "../context/LifeSimulatorContext";
 
 // Show character information. (Backstory, statistics (Money made over time etc.), and character options (Force actions))
 
-export default function character() {
+export default function Character() {
   const context = useContext(LifeSimulatorContext);
   return (
     <>
