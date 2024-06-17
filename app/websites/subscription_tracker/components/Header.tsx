@@ -26,7 +26,6 @@ export default function Header() {
           <select
             name="type"
             id="locale"
-            defaultValue="en-UK"
             onChange={(e: any) => context.setLocale(e.target.value)}
             value={context.locale}
             className="rounded-md bg-slate-500 p-2 text-xs text-slate-100 hover:bg-slate-300 hover:text-slate-800"
@@ -44,7 +43,6 @@ export default function Header() {
           <select
             name="type"
             id="currency"
-            defaultValue="GBP"
             onChange={(e: any) => context.setCurrency(e.target.value)}
             value={context.currency}
             className="rounded-md bg-slate-500 p-2 text-xs text-slate-100 hover:bg-slate-300 hover:text-slate-800"

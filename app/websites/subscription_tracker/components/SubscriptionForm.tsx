@@ -77,7 +77,6 @@ export default function SubscriptionForm() {
           <select
             name="type"
             id="type"
-            defaultValue="monthly"
             onChange={handleFormChange}
             value={formData.type}
             className="rounded-md bg-white/20 p-2 text-white placeholder-white/50"

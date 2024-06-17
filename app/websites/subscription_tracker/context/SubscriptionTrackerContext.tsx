@@ -147,7 +147,7 @@ export function SubscriptionTrackerProvider({
     useState<boolean>(false);
   const [locale, setLocale] = useLocalStorageState<string>(
     "subscription_tracker_locale",
-    "en-UK",
+    "en-GB",
   );
   const [currency, setCurrency] = useLocalStorageState<string>(
     "subscription_tracker_currency",

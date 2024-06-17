@@ -240,7 +240,7 @@ export const LifeSimulatorProvider = ({
       }
     }, 1000);
     return () => clearInterval(interval);
-  }, []);
+  });
 
   function handleSubmit(e: FormEvent): void {
     e.preventDefault();
