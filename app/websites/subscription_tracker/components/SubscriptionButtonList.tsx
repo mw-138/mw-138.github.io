@@ -1,13 +1,37 @@
 "use client";
 
-import React from "react";
 import { useSubscriptionTrackerContext } from "../context/SubscriptionTrackerContext";
-import SubscriptionButton from "./Subscription";
+import SubscriptionButton from "./SubscriptionButton";
 
 export default function SubscriptionButtonList() {
-  const { sortedSubscriptions } = useSubscriptionTrackerContext();
+  const {
+    sortedSubscriptions,
+    multiselectedSubscriptionsIds,
+    deleteMultiselectedSubscriptions,
+    toggleAllSubscriptions,
+  } = useSubscriptionTrackerContext();
   return (
-    <div className="minimal-scrollbar flex h-96 w-auto flex-col gap-4 overflow-auto bg-slate-800 p-4 backdrop-blur-md lg:h-auto lg:w-96">
+    <div className="minimal-scrollbar flex h-96 w-auto flex-col gap-4 overflow-auto bg-slate-800 p-4 lg:h-auto lg:w-96">
+      <div className="flex items-center justify-between">
+        <div className="flex h-10 items-center gap-4">
+          <input
+            type="checkbox"
+            name="select_all"
+            placeholder="Enter label"
+            className="rounded-md bg-white/20 p-2 text-white placeholder-white/50"
+            onChange={(e) => toggleAllSubscriptions(e.target.checked)}
+          />
+          <label htmlFor="select_all">Select All</label>
+        </div>
+        {multiselectedSubscriptionsIds.length > 0 && (
+          <button
+            className="rounded-md bg-red-500 px-4 py-2 text-white transition-colors hover:bg-red-600 active:bg-red-400"
+            onClick={deleteMultiselectedSubscriptions}
+          >
+            Delete {multiselectedSubscriptionsIds.length} Selected
+          </button>
+        )}
+      </div>
       {sortedSubscriptions.map((subscription, index) => (
         <SubscriptionButton
           key={index}

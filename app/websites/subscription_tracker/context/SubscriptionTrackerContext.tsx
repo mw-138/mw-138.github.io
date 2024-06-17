@@ -73,6 +73,11 @@ type Context = {
   closeImport: () => void;
   startImport: () => void;
   deleteAllSubscriptions: () => void;
+  toggleMultiselectedSubscription: (id: string) => void;
+  deleteMultiselectedSubscriptions: () => void;
+  multiselectedSubscriptionsIds: string[];
+  setMultisectedSubscriptionsIds: Dispatch<SetStateAction<string[]>>;
+  toggleAllSubscriptions: (toggled: boolean) => void;
 };
 
 const SubscriptionTrackerContext = createContext<Context>({
@@ -93,12 +98,7 @@ const SubscriptionTrackerContext = createContext<Context>({
   importCode: "",
   setImportCode: () => {},
   sortedSubscriptions: [],
-  addSubscription: (
-    label: string,
-    price: number,
-    type: SubscriptionType,
-    date: string,
-  ) => {},
+  addSubscription: () => {},
   calculateTotalPerMonth: () => 0,
   calculateTotalPerYear: () => 0,
   handleFormSubmit: (e: FormEvent) => {},
@@ -119,6 +119,11 @@ const SubscriptionTrackerContext = createContext<Context>({
   closeImport: () => {},
   startImport: () => {},
   deleteAllSubscriptions: () => {},
+  toggleMultiselectedSubscription: () => {},
+  deleteMultiselectedSubscriptions: () => {},
+  multiselectedSubscriptionsIds: [],
+  setMultisectedSubscriptionsIds: () => {},
+  toggleAllSubscriptions: () => {},
 });
 
 export function SubscriptionTrackerProvider({
@@ -144,6 +149,8 @@ export function SubscriptionTrackerProvider({
   );
   const [isImporting, setIsImporting] = useState<boolean>(false);
   const [importCode, setImportCode] = useState<string>("");
+  const [multiselectedSubscriptionsIds, setMultisectedSubscriptionsIds] =
+    useState<string[]>([]);
 
   const sortedSubscriptions = subscriptions.sort((a, b) => {
     if (isSubscriptionDueToday(a) !== isSubscriptionDueToday(b)) {
@@ -324,6 +331,31 @@ export function SubscriptionTrackerProvider({
     cancelEdit();
   }
 
+  function toggleMultiselectedSubscription(id: string): void {
+    if (multiselectedSubscriptionsIds.includes(id)) {
+      const updatedSubscriptions = multiselectedSubscriptionsIds.filter(
+        (value) => value !== id,
+      );
+      setMultisectedSubscriptionsIds(updatedSubscriptions);
+    } else {
+      setMultisectedSubscriptionsIds((prev) => [...prev, id]);
+    }
+  }
+
+  function deleteMultiselectedSubscriptions(): void {
+    if (multiselectedSubscriptionsIds.length === 0) return;
+    const updatedSubscriptions = subscriptions.filter(
+      (sub) => !multiselectedSubscriptionsIds.includes(sub.id),
+    );
+    setSubscriptions(updatedSubscriptions);
+    setMultisectedSubscriptionsIds([]);
+  }
+
+  function toggleAllSubscriptions(toggled: boolean): void {
+    const ids = toggled ? subscriptions.map((sub) => sub.id) : [];
+    setMultisectedSubscriptionsIds(ids);
+  }
+
   return (
     <SubscriptionTrackerContext.Provider
       value={{
@@ -361,6 +393,11 @@ export function SubscriptionTrackerProvider({
         closeImport,
         startImport,
         deleteAllSubscriptions,
+        toggleMultiselectedSubscription,
+        deleteMultiselectedSubscriptions,
+        multiselectedSubscriptionsIds,
+        setMultisectedSubscriptionsIds,
+        toggleAllSubscriptions,
       }}
     >
       {children}
