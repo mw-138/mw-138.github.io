@@ -126,7 +126,6 @@ export default function Page() {
         price: price,
         type: type,
         firstPaymentDate: date,
-        isPaused: false,
       },
     ]);
   }
@@ -262,7 +261,12 @@ export default function Page() {
   }
 
   function getSubscriptionTotalSpend(subscription: Subscription): number {
+    if (subscription === undefined) return 0;
+
     const today = new Date();
+
+    if (subscription.firstPaymentDate === undefined) return 0;
+
     const nextPaymentDate = new Date(subscription.firstPaymentDate);
     let totalSpend = 0;
     while (nextPaymentDate <= today) {
@@ -361,7 +365,10 @@ export default function Page() {
                 Import
               </button>
               <button
-                onClick={() => setSubscriptions([])}
+                onClick={() => {
+                  setSubscriptions([]);
+                  cancelEdit();
+                }}
                 className="flex flex-row items-center gap-2 rounded-md bg-slate-500 px-4 py-2 text-xs text-slate-100 transition-colors hover:bg-slate-300 hover:text-slate-800 active:bg-slate-200 disabled:bg-red-900 disabled:text-red-600"
               >
                 <MdDeleteForever />
