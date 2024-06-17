@@ -126,3 +126,17 @@ export function decompressJSON(base64String: string): object {
   const jsonObject = JSON.parse(jsonString);
   return jsonObject;
 }
+
+export function getMonthDifference(startDate: Date, endDate: Date): number {
+  const start = new Date(startDate.getFullYear(), startDate.getMonth(), 1);
+  const end = new Date(endDate.getFullYear(), endDate.getMonth(), 1);
+  const yearsDifference = end.getFullYear() - start.getFullYear();
+  const monthsDifference = end.getMonth() - start.getMonth();
+  return yearsDifference * 12 + monthsDifference;
+}
+
+export function getYearDifference(startDate: Date, endDate: Date): number {
+  // return endDate.getFullYear() - startDate.getFullYear();
+  const months = getMonthDifference(startDate, endDate);
+  return Math.floor(months / 12);
+}
