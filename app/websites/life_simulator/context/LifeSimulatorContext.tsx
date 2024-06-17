@@ -11,6 +11,7 @@ import {
 import useLocalStorageState from "../../../../utils/useLocalStorageState";
 import { clamp, formatCurrency } from "@/utils/helperFunctions";
 import Job from "../classes/Job";
+import useClampedState from "@/utils/useClampedState";
 
 type LifeSimulatorContextValue = {
   isPaused: boolean;
@@ -77,31 +78,6 @@ export const LifeSimulatorContext = createContext<LifeSimulatorContextValue>({
   setCurrentJob: (newValue: string | ((prevValue: string) => string)) => {},
   jobs: [],
 });
-
-const useClampedState = (
-  key: string,
-  initialValue: number,
-  min: number,
-  max: number,
-) => {
-  const [value, setValue] = useLocalStorageState(
-    key,
-    clamp(initialValue, min, max),
-  );
-
-  const setClampedValue = useCallback(
-    (newValue: number | ((prevValue: number) => number)) => {
-      setValue((prevValue) => {
-        const nextValue =
-          typeof newValue === "function" ? newValue(prevValue) : newValue;
-        return clamp(nextValue, min, max);
-      });
-    },
-    [min, max],
-  );
-
-  return [value, setClampedValue] as const;
-};
 
 interface FormData {
   name: string;
