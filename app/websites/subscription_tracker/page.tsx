@@ -24,61 +24,9 @@ import {
   MdSave,
 } from "react-icons/md";
 import { FaFileImport } from "react-icons/fa";
-
-type SubscriptionType = "monthly" | "yearly";
-
-interface Subscription {
-  id: string;
-  label: string;
-  price: number;
-  type: SubscriptionType;
-  firstPaymentDate: string;
-}
-
-const locales: string[] = [
-  "en-US", // English (United States)
-  "en-GB", // English (United Kingdom)
-  "en-CA", // English (Canada)
-  "en-AU", // English (Australia)
-  "fr-FR", // French (France)
-  "fr-CA", // French (Canada)
-  "es-ES", // Spanish (Spain)
-  "es-MX", // Spanish (Mexico)
-  "de-DE", // German (Germany)
-  "it-IT", // Italian (Italy)
-  "pt-BR", // Portuguese (Brazil)
-  "pt-PT", // Portuguese (Portugal)
-  "nl-NL", // Dutch (Netherlands)
-  "sv-SE", // Swedish (Sweden)
-  "da-DK", // Danish (Denmark)
-  "fi-FI", // Finnish (Finland)
-  "nb-NO", // Norwegian Bokmål (Norway)
-  "tr-TR", // Turkish (Turkey)
-  "ru-RU", // Russian (Russia)
-  "zh-CN", // Chinese (Simplified, China)
-  "ja-JP", // Japanese (Japan)
-  "ko-KR", // Korean (South Korea)
-  "ar-SA", // Arabic (Saudi Arabia)
-];
-
-const currencies: string[] = [
-  "USD", // US Dollar
-  "GBP", // British Pound Sterling
-  "CAD", // Canadian Dollar
-  "AUD", // Australian Dollar
-  "EUR", // Euro
-  "MXN", // Mexican Peso
-  "SEK", // Swedish Krona
-  "DKK", // Danish Krone
-  "NOK", // Norwegian Krone
-  "TRY", // Turkish Lira
-  "RUB", // Russian Ruble
-  "CNY", // Chinese Yuan
-  "JPY", // Japanese Yen
-  "KRW", // South Korean Won
-  "SAR", // Saudi Riyal
-  "BRL", // Brazilian Real
-];
+import { locales, currencies } from "./locales";
+import Subscription from "./interfaces/Subscription";
+import SubscriptionType from "./types/SubscriptionType";
 
 export default function Page() {
   const [subscriptions, setSubscriptions] = useLocalStorageState<
@@ -131,40 +79,53 @@ export default function Page() {
   }
 
   function calculateTotalPerMonth(): number {
-    const monthlySubscriptions = subscriptions.filter(
-      (subscription) => subscription.type === "monthly",
-    );
-    const total = monthlySubscriptions.reduce(
-      (sum, subscription) => sum + Number(subscription.price),
-      0,
-    );
-    return total;
+    // const monthlySubscriptions = subscriptions.filter(
+    //   (subscription) => subscription.type === "monthly",
+    // );
+    // const total = monthlySubscriptions.reduce(
+    //   (sum, subscription) => sum + Number(subscription.price),
+    //   0,
+    // );
+    // return total;
+    return subscriptions
+      .filter((sub) => sub.type === "monthly")
+      .reduce((total, sub) => total + Number(sub.price), 0);
   }
 
   function calculateTotalPerYear(): number {
     const monthlyTotal = calculateTotalPerMonth() * 12;
-    const yearlySubscriptions = subscriptions.filter(
-      (subscription) => subscription.type === "yearly",
+    // const yearlySubscriptions = subscriptions.filter(
+    //   (subscription) => subscription.type === "yearly",
+    // );
+    // const total = yearlySubscriptions.reduce(
+    //   (sum, subscription) => sum + Number(subscription.price),
+    //   0,
+    // );
+    // return total + monthlyTotal;
+    return (
+      monthlyTotal +
+      subscriptions
+        .filter((sub) => sub.type === "yearly")
+        .reduce((total, sub) => total + Number(sub.price), 0)
     );
-    const total = yearlySubscriptions.reduce(
-      (sum, subscription) => sum + Number(subscription.price),
-      0,
-    );
-    return total + monthlyTotal;
   }
 
   function handleFormSubmit(e: FormEvent): void {
     e.preventDefault();
     if (editingSubscription) {
-      const subscriptionsCopy = [...subscriptions];
-      subscriptionsCopy[selectedSubscriptionIndex] = {
-        ...subscriptionsCopy[selectedSubscriptionIndex],
-        label: formData.label,
-        price: formData.price,
-        type: formData.type,
-        firstPaymentDate: formData.firstPaymentDate,
-      };
-      setSubscriptions(subscriptionsCopy);
+      // const subscriptionsCopy = [...subscriptions];
+      // subscriptionsCopy[selectedSubscriptionIndex] = {
+      //   ...subscriptionsCopy[selectedSubscriptionIndex],
+      //   label: formData.label,
+      //   price: formData.price,
+      //   type: formData.type,
+      //   firstPaymentDate: formData.firstPaymentDate,
+      // };
+      // setSubscriptions(subscriptionsCopy);
+      const updatedSubscriptions = subscriptions.map((sub, index) =>
+        index === selectedSubscriptionIndex ? formData : sub,
+      );
+      setSubscriptions(updatedSubscriptions);
     } else {
       addSubscription(
         formData.label,
@@ -224,18 +185,18 @@ export default function Page() {
 
   function deleteSubscription(index: number): void {
     if (isIndexOutOfRange(subscriptions, index)) return;
-    const newArray = subscriptions.filter((_, i) => i !== index);
-    setSubscriptions(newArray);
+    const updatedSubscriptions = subscriptions.filter((_, i) => i !== index);
+    setSubscriptions(updatedSubscriptions);
     cancelEdit();
   }
 
   function getSubscriptionDueDate(subscription: Subscription): number {
-    if (subscription === undefined) return 0;
-
+    if (
+      subscription === undefined ||
+      subscription.firstPaymentDate === undefined
+    )
+      return 0;
     const today = new Date();
-
-    if (subscription.firstPaymentDate === undefined) return 0;
-
     const nextPaymentDate = new Date(subscription.firstPaymentDate);
     while (nextPaymentDate <= today) {
       nextPaymentDate.setMonth(nextPaymentDate.getMonth() + 1);
@@ -246,27 +207,23 @@ export default function Page() {
   }
 
   function isSubscriptionDueToday(subscription: Subscription): boolean {
-    if (subscription === undefined) return false;
-
-    const today = new Date();
-
-    if (subscription.firstPaymentDate === undefined) return false;
-
-    const paymentDate = new Date(subscription.firstPaymentDate);
-    return (
-      today.getDate() === paymentDate.getDate() &&
-      today.getMonth() === paymentDate.getMonth() &&
-      today.getFullYear() === paymentDate.getFullYear()
-    );
+    if (
+      subscription === undefined ||
+      subscription.firstPaymentDate === undefined
+    )
+      return false;
+    const nextPaymentDate = new Date(subscription.firstPaymentDate);
+    const currentDate = new Date();
+    return nextPaymentDate.toDateString() === currentDate.toDateString();
   }
 
   function getSubscriptionTotalSpend(subscription: Subscription): number {
-    if (subscription === undefined) return 0;
-
+    if (
+      subscription === undefined ||
+      subscription.firstPaymentDate === undefined
+    )
+      return 0;
     const today = new Date();
-
-    if (subscription.firstPaymentDate === undefined) return 0;
-
     const nextPaymentDate = new Date(subscription.firstPaymentDate);
     let totalSpend = 0;
     while (nextPaymentDate <= today) {
