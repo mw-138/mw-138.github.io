@@ -78,6 +78,8 @@ type Context = {
   multiselectedSubscriptionsIds: string[];
   setMultisectedSubscriptionsIds: Dispatch<SetStateAction<string[]>>;
   toggleAllSubscriptions: (toggled: boolean) => void;
+  isMultiselecting: boolean;
+  setIsMultiselecting: (value: boolean) => void;
 };
 
 const SubscriptionTrackerContext = createContext<Context>({
@@ -124,6 +126,8 @@ const SubscriptionTrackerContext = createContext<Context>({
   multiselectedSubscriptionsIds: [],
   setMultisectedSubscriptionsIds: () => {},
   toggleAllSubscriptions: () => {},
+  isMultiselecting: false,
+  setIsMultiselecting: () => {},
 });
 
 export function SubscriptionTrackerProvider({
@@ -151,6 +155,7 @@ export function SubscriptionTrackerProvider({
   const [importCode, setImportCode] = useState<string>("");
   const [multiselectedSubscriptionsIds, setMultisectedSubscriptionsIds] =
     useState<string[]>([]);
+  const [isMultiselecting, setIsMultiselecting] = useState<boolean>(false);
 
   const sortedSubscriptions = subscriptions.sort((a, b) => {
     if (isSubscriptionDueToday(a) !== isSubscriptionDueToday(b)) {
@@ -261,16 +266,23 @@ export function SubscriptionTrackerProvider({
   function getSubscriptionDueDate(subscription: Subscription): number {
     if (
       subscription === undefined ||
-      subscription.firstPaymentDate === undefined
+      subscription.firstPaymentDate === undefined ||
+      subscription.type === undefined
     )
       return 0;
-    const today = new Date();
-    const nextPaymentDate = new Date(subscription.firstPaymentDate);
-    while (nextPaymentDate <= today) {
-      nextPaymentDate.setMonth(nextPaymentDate.getMonth() + 1);
+    const currentDate = new Date();
+    const nextDate = new Date(subscription.firstPaymentDate);
+
+    while (nextDate < currentDate) {
+      if (subscription.type === "monthly") {
+        nextDate.setMonth(nextDate.getMonth() + 1);
+      } else if (subscription.type === "yearly") {
+        nextDate.setFullYear(nextDate.getFullYear() + 1);
+      }
     }
-    const timeDiff = nextPaymentDate.getTime() - today.getTime();
-    const days = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+
+    const timeDiff = nextDate.getTime() - currentDate.getTime();
+    const days = Math.ceil(timeDiff / (1000 * 3600 * 24));
     return days;
   }
 
@@ -327,6 +339,8 @@ export function SubscriptionTrackerProvider({
   }
 
   function deleteAllSubscriptions(): void {
+    setMultisectedSubscriptionsIds([]);
+    setIsMultiselecting(false);
     setSubscriptions([]);
     cancelEdit();
   }
@@ -398,6 +412,8 @@ export function SubscriptionTrackerProvider({
         multiselectedSubscriptionsIds,
         setMultisectedSubscriptionsIds,
         toggleAllSubscriptions,
+        isMultiselecting,
+        setIsMultiselecting,
       }}
     >
       {children}

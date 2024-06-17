@@ -9,17 +9,23 @@ export default function SubscriptionButtonList() {
     multiselectedSubscriptionsIds,
     deleteMultiselectedSubscriptions,
     toggleAllSubscriptions,
+    setIsMultiselecting,
+    isMultiselecting,
   } = useSubscriptionTrackerContext();
   return (
     <div className="minimal-scrollbar flex h-96 w-auto flex-col gap-4 overflow-auto bg-slate-800 p-4 lg:h-auto lg:w-96">
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between border-b border-slate-700 pb-2">
         <div className="flex h-10 items-center gap-4">
           <input
             type="checkbox"
             name="select_all"
             placeholder="Enter label"
             className="rounded-md bg-white/20 p-2 text-white placeholder-white/50"
-            onChange={(e) => toggleAllSubscriptions(e.target.checked)}
+            onChange={(e) => {
+              toggleAllSubscriptions(e.target.checked);
+              setIsMultiselecting(e.target.checked);
+            }}
+            checked={isMultiselecting}
           />
           <label htmlFor="select_all">Select All</label>
         </div>
