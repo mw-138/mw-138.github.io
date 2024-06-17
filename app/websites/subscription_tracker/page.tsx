@@ -231,7 +231,12 @@ export default function Page() {
   }
 
   function getSubscriptionDueDate(subscription: Subscription): number {
+    if (subscription === undefined) return 0;
+
     const today = new Date();
+
+    if (subscription.firstPaymentDate === undefined) return 0;
+
     const nextPaymentDate = new Date(subscription.firstPaymentDate);
     while (nextPaymentDate <= today) {
       nextPaymentDate.setMonth(nextPaymentDate.getMonth() + 1);
@@ -242,7 +247,12 @@ export default function Page() {
   }
 
   function isSubscriptionDueToday(subscription: Subscription): boolean {
+    if (subscription === undefined) return false;
+
     const today = new Date();
+
+    if (subscription.firstPaymentDate === undefined) return false;
+
     const paymentDate = new Date(subscription.firstPaymentDate);
     return (
       today.getDate() === paymentDate.getDate() &&
