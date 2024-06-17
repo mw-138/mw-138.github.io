@@ -8,10 +8,10 @@ import {
   useCallback,
   FormEvent,
 } from "react";
-import useLocalStorageState from "../../../../utils/useLocalStorageState";
-import { clamp, formatCurrency } from "@/utils/helperFunctions";
+import { formatCurrency } from "@/utils/helperFunctions";
 import Job from "../classes/Job";
-import useClampedState from "@/utils/useClampedState";
+import { useClampedLocalStorageState } from "@/utils/useClampedState";
+import useLocalStorageState from "@/utils/useLocalStorageState";
 
 type LifeSimulatorContextValue = {
   isPaused: boolean;
@@ -109,22 +109,42 @@ export const LifeSimulatorProvider = ({
     true,
   );
   const [name, setName] = useLocalStorageState<string>("name", "");
-  const [cash, setCash] = useClampedState(
+  const [cash, setCash] = useClampedLocalStorageState(
     "cash",
     0,
     Number.MIN_SAFE_INTEGER,
     Number.MAX_SAFE_INTEGER,
   );
-  const [bank, setBank] = useClampedState(
+  const [bank, setBank] = useClampedLocalStorageState(
     "bank",
     1000,
     Number.MIN_SAFE_INTEGER,
     Number.MAX_SAFE_INTEGER,
   );
-  const [health, setHealth] = useClampedState("health", 100, 0, 100);
-  const [hunger, setHunger] = useClampedState("hunger", 100, 0, 100);
-  const [thirst, setThirst] = useClampedState("thirst", 100, 0, 100);
-  const [energy, setEnergy] = useClampedState("energy", 100, 0, 100);
+  const [health, setHealth] = useClampedLocalStorageState(
+    "health",
+    100,
+    0,
+    100,
+  );
+  const [hunger, setHunger] = useClampedLocalStorageState(
+    "hunger",
+    100,
+    0,
+    100,
+  );
+  const [thirst, setThirst] = useClampedLocalStorageState(
+    "thirst",
+    100,
+    0,
+    100,
+  );
+  const [energy, setEnergy] = useClampedLocalStorageState(
+    "energy",
+    100,
+    0,
+    100,
+  );
   const [inDebt, setInDebt] = useLocalStorageState<boolean>("in_debt", false);
   const [storyEntries, setStoryEntries] = useLocalStorageState<StoryEntry[]>(
     "story_entries",
