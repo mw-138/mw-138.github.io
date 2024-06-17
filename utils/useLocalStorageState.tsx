@@ -1,36 +1,33 @@
-import { useState, useEffect, Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 
-function useLocalStorageState<T>(
+export default function useLocalStorageState<T>(
   key: string,
-  initialValue: T,
+  defaultValue: T,
 ): [T, Dispatch<SetStateAction<T>>] {
-  // Get the initial state from localStorage or use the initial value
-  const getInitialState = (): T => {
-    const storedValue = localStorage.getItem(key);
-    if (storedValue) {
-      try {
-        return JSON.parse(storedValue) as T;
-      } catch (error) {
-        console.warn(
-          `Error parsing localStorage value for key "${key}":`,
-          error,
-        );
-      }
-    }
-    return initialValue;
-  };
-
-  const [state, setState] = useState<T>(getInitialState);
+  const isMounted = useRef(false);
+  const [value, setValue] = useState<T>(defaultValue);
 
   useEffect(() => {
     try {
-      localStorage.setItem(key, JSON.stringify(state));
-    } catch (error) {
-      console.warn(`Error setting localStorage value for key "${key}":`, error);
+      const item = window.localStorage.getItem(key);
+      if (item) {
+        setValue(JSON.parse(item));
+      }
+    } catch (e) {
+      console.log(e);
     }
-  }, [key, state]);
+    return () => {
+      isMounted.current = false;
+    };
+  }, [key]);
 
-  return [state, setState];
+  useEffect(() => {
+    if (isMounted.current) {
+      window.localStorage.setItem(key, JSON.stringify(value));
+    } else {
+      isMounted.current = true;
+    }
+  }, [key, value]);
+
+  return [value, setValue];
 }
-
-export default useLocalStorageState;
