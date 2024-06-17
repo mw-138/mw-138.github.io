@@ -284,7 +284,8 @@ export function SubscriptionTrackerProvider({
     }
 
     const timeDiff = nextDate.getTime() - currentDate.getTime();
-    return Math.ceil(timeDiff / (1000 * 3600 * 24));
+    const days = Math.ceil(timeDiff / (1000 * 3600 * 24));
+    return days;
   }
 
   function isSubscriptionDueToday(subscription: Subscription): boolean {
@@ -315,6 +316,10 @@ export function SubscriptionTrackerProvider({
     } else if (subscription.type === "yearly") {
       const years = Math.floor(getYearDifference(startDate, currentDate));
       totalSpend += years * subscription.price;
+    }
+
+    if (totalSpend < 0) {
+      totalSpend = 0;
     }
 
     return totalSpend;
