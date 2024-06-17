@@ -16,6 +16,8 @@ import {
   formatCurrency,
   formatDateToYyyyMmDd,
   generateUUID,
+  getMonthDifference,
+  getYearDifference,
   isIndexOutOfRange,
 } from "@/utils/helperFunctions";
 import SubscriptionType from "../types/SubscriptionType";
@@ -282,8 +284,7 @@ export function SubscriptionTrackerProvider({
     }
 
     const timeDiff = nextDate.getTime() - currentDate.getTime();
-    const days = Math.ceil(timeDiff / (1000 * 3600 * 24));
-    return days;
+    return Math.ceil(timeDiff / (1000 * 3600 * 24));
   }
 
   function isSubscriptionDueToday(subscription: Subscription): boolean {
@@ -303,13 +304,19 @@ export function SubscriptionTrackerProvider({
       subscription.firstPaymentDate === undefined
     )
       return 0;
-    const today = new Date();
-    const nextPaymentDate = new Date(subscription.firstPaymentDate);
+    const currentDate = new Date();
+    const startDate = new Date(subscription.firstPaymentDate);
+
     let totalSpend = 0;
-    while (nextPaymentDate <= today) {
-      nextPaymentDate.setMonth(nextPaymentDate.getMonth() + 1);
-      totalSpend += Number(subscription.price);
+
+    if (subscription.type === "monthly") {
+      const months = getMonthDifference(startDate, currentDate);
+      totalSpend += months * subscription.price;
+    } else if (subscription.type === "yearly") {
+      const years = Math.floor(getYearDifference(startDate, currentDate));
+      totalSpend += years * subscription.price;
     }
+
     return totalSpend;
   }
 
