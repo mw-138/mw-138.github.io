@@ -82,6 +82,7 @@ type Context = {
   toggleAllSubscriptions: (toggled: boolean) => void;
   isMultiselecting: boolean;
   setIsMultiselecting: (value: boolean) => void;
+  getNextPaymentDate: (subscription: Subscription) => string;
 };
 
 const SubscriptionTrackerContext = createContext<Context>({
@@ -130,6 +131,7 @@ const SubscriptionTrackerContext = createContext<Context>({
   toggleAllSubscriptions: () => {},
   isMultiselecting: false,
   setIsMultiselecting: () => {},
+  getNextPaymentDate: () => "",
 });
 
 export function SubscriptionTrackerProvider({
@@ -265,13 +267,12 @@ export function SubscriptionTrackerProvider({
     cancelEdit();
   }
 
-  function getSubscriptionDueDate(subscription: Subscription): number {
+  function getNextPaymentDate(subscription: Subscription): string {
     if (
       subscription === undefined ||
-      subscription.firstPaymentDate === undefined ||
-      subscription.type === undefined
+      subscription.firstPaymentDate === undefined
     )
-      return 0;
+      return "";
     const currentDate = new Date();
     const nextDate = new Date(subscription.firstPaymentDate);
 
@@ -283,6 +284,13 @@ export function SubscriptionTrackerProvider({
       }
     }
 
+    return formatDateToYyyyMmDd(nextDate);
+  }
+
+  function getSubscriptionDueDate(subscription: Subscription): number {
+    if (subscription === undefined) return 0;
+    const currentDate = new Date();
+    const nextDate = new Date(getNextPaymentDate(subscription));
     const timeDiff = nextDate.getTime() - currentDate.getTime();
     const days = Math.ceil(timeDiff / (1000 * 3600 * 24));
     return days;
@@ -427,6 +435,7 @@ export function SubscriptionTrackerProvider({
         toggleAllSubscriptions,
         isMultiselecting,
         setIsMultiselecting,
+        getNextPaymentDate,
       }}
     >
       {children}
