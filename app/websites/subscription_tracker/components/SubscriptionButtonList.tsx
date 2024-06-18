@@ -38,7 +38,7 @@ export default function SubscriptionButtonList() {
           </button>
         )}
       </div>
-      <div className="minimal-scrollbar flex flex-col gap-4 overflow-auto pr-4">
+      <div className="minimal-scrollbar flex flex-col gap-4 overflow-auto pr-4 pt-4">
         {sortedSubscriptions.map((subscription, index) => (
           <SubscriptionButton
             key={index}
