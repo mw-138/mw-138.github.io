@@ -69,9 +69,10 @@ const AboutPage = () => {
       <Navbar />
       <Section title="About Me">
         <p>
-          I am a programmer from the United Kingdom with 7+ years of self-taught
-          and College tuition using Unity and C#. I am also self-taught in many
-          other languages and development frameworks featured below.
+          I am a Junior programmer from the United Kingdom with 7+ years of
+          self-taught and College tuition using Unity and C#. I am also
+          self-taught in many other languages and development frameworks
+          featured below.
         </p>
         <br />
         <p>
