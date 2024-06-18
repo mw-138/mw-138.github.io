@@ -1,4 +1,3 @@
-import React from "react";
 import Footer from "@/app/components/Footer";
 import WebsiteNavigation from "@/app/components/WebsiteNavigation";
 import Header from "./components/Header";
