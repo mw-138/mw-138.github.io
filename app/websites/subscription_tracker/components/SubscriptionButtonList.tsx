@@ -13,14 +13,14 @@ export default function SubscriptionButtonList() {
     isMultiselecting,
   } = useSubscriptionTrackerContext();
   return (
-    <div className="flex h-96 w-auto flex-col gap-4 bg-slate-800 p-4 lg:h-auto lg:w-96">
-      <div className="flex items-center justify-between border-b border-slate-700 pb-2">
+    <div className="flex h-96 w-auto flex-col gap-4 p-4 lg:h-auto lg:w-96">
+      <div className="border-subscription-tracker-background-800 flex items-center justify-between border-b pb-2">
         <div className="flex h-10 items-center gap-4">
           <input
             type="checkbox"
             name="select_all"
             placeholder="Enter label"
-            className="rounded-md bg-white/20 p-2 text-white placeholder-white/50"
+            className="rounded-md p-2"
             onChange={(e) => {
               toggleAllSubscriptions(e.target.checked);
               setIsMultiselecting(e.target.checked);
@@ -38,7 +38,7 @@ export default function SubscriptionButtonList() {
           </button>
         )}
       </div>
-      <div className="minimal-scrollbar flex flex-col gap-4 overflow-auto pr-4 pt-4">
+      <div className="minimal-scrollbar flex h-full flex-col gap-4 overflow-auto pr-2 pt-2">
         {sortedSubscriptions.map((subscription, index) => (
           <SubscriptionButton
             key={index}

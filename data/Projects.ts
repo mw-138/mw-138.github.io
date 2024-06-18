@@ -57,6 +57,8 @@ import MinimalPortfolio01_Screenshot01 from "@/public/projects/minimal_portfolio
 import PremierLeagueReDesign_Screenshot01 from "@/public/projects/premier_league_redesign/screenshot_01.png";
 
 import SubscriptionTracker_Screenshot01 from "@/public/projects/subscription_tracker/screenshot_01.png";
+import SubscriptionTracker_Screenshot02 from "@/public/projects/subscription_tracker/screenshot_02.png";
+import SubscriptionTracker_Screenshot03 from "@/public/projects/subscription_tracker/screenshot_03.png";
 
 import LifeSimulator_Screenshot01 from "@/public/projects/life_simulator/screenshot_01.png";
 
@@ -307,7 +309,11 @@ export const Projects: Project[] = [
     [Language.TypeScript, Language.HTML, Language.CSS],
     SubscriptionTracker_Screenshot01,
     "/websites/subscription_tracker",
-    [SubscriptionTracker_Screenshot01],
+    [
+      SubscriptionTracker_Screenshot01,
+      SubscriptionTracker_Screenshot02,
+      SubscriptionTracker_Screenshot03,
+    ],
     [],
     [Tag.Website],
   ),

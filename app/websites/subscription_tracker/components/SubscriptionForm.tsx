@@ -1,6 +1,13 @@
 "use client";
 
-import { MdAdd, MdCancel, MdDelete, MdSave } from "react-icons/md";
+import {
+  MdAdd,
+  MdArrowLeft,
+  MdCancel,
+  MdChevronLeft,
+  MdDelete,
+  MdSave,
+} from "react-icons/md";
 import { useSubscriptionTrackerContext } from "../context/SubscriptionTrackerContext";
 
 export default function SubscriptionForm() {
@@ -16,35 +23,52 @@ export default function SubscriptionForm() {
     getSubscriptionTotalSpend,
     cancelEdit,
   } = useSubscriptionTrackerContext();
+
+  function ActionButton({
+    label,
+    icon,
+    onClick,
+  }: {
+    label: string;
+    icon: React.ReactNode;
+    onClick: (e: any) => void;
+  }): React.ReactNode {
+    return (
+      <button
+        className="bg-subscription-tracker-primary-300 text-subscription-tracker-text-700 hover:bg-subscription-tracker-primary-500 hover:text-subscription-tracker-text-100 active:bg-subscription-tracker-primary-600 flex flex-1 flex-row items-center justify-center gap-2 rounded-md px-4 py-2 transition-colors disabled:bg-red-900 disabled:text-red-600"
+        onClick={onClick}
+      >
+        {icon}
+        {label}
+      </button>
+    );
+  }
+
   return (
-    <div className="flex-1 p-4 text-white backdrop-blur-md">
+    <div className="flex-1 p-4 backdrop-blur-md">
       <div className="mb-2 flex h-10 items-center justify-between py-2">
-        <h1 className="font-bold uppercase">
+        <h1 className="flex items-center gap-4 font-bold uppercase">
+          {editingSubscription && (
+            <MdChevronLeft
+              className="hover:bg-subscription-tracker-primary-500 hover:text-subscription-tracker-text-900 active:bg-subscription-tracker-primary-600 aspect-square rounded-md p-2 transition-colors"
+              onClick={cancelEdit}
+              size={32}
+            />
+          )}
           {editingSubscription ? "Edit" : "Add"} Subscription
         </h1>
         {editingSubscription && (
           <div className="flex flex-row gap-4">
-            <button
-              className="flex flex-1 flex-row items-center justify-center gap-2 rounded-md bg-white p-2 px-4 py-2 text-slate-700 transition-colors hover:bg-green-500 hover:text-white active:bg-green-600 disabled:bg-red-900 disabled:text-red-600"
+            <ActionButton
+              label="Save"
+              icon={<MdSave />}
               onClick={handleFormSubmit}
-            >
-              <MdSave />
-              Save
-            </button>
-            <button
-              className="flex flex-1 flex-row items-center justify-center gap-2 rounded-md bg-white p-2 px-4 py-2 text-slate-700 transition-colors hover:bg-red-500 hover:text-white active:bg-red-600 disabled:bg-red-900 disabled:text-red-600"
+            />
+            <ActionButton
+              label="Delete"
+              icon={<MdDelete />}
               onClick={() => deleteSubscription(selectedSubscriptionIndex)}
-            >
-              <MdDelete />
-              Delete
-            </button>
-            <button
-              className="flex flex-1 flex-row items-center justify-center gap-2 rounded-md bg-white p-2 px-4 py-2 text-slate-700 transition-colors hover:bg-slate-500 hover:text-white active:bg-slate-600 disabled:bg-red-900 disabled:text-red-600"
-              onClick={cancelEdit}
-            >
-              <MdCancel />
-              Cancel
-            </button>
+            />
           </div>
         )}
       </div>
@@ -57,7 +81,7 @@ export default function SubscriptionForm() {
             placeholder="Enter label"
             onChange={handleFormChange}
             value={formData.label}
-            className="rounded-md bg-white/20 p-2 text-white placeholder-white/50"
+            className="bg-subscription-tracker-background-800 placeholder-subscription-tracker-text-100 rounded-md p-2"
           />
         </div>
         <div className="flex flex-col gap-1">
@@ -68,7 +92,7 @@ export default function SubscriptionForm() {
             placeholder="Enter price"
             onChange={handleFormChange}
             value={formData.price}
-            className="rounded-md bg-white/20 p-2 text-white placeholder-white/50"
+            className="bg-subscription-tracker-background-800 placeholder-subscription-tracker-text-100 rounded-md p-2"
           />
         </div>
         <div className="flex flex-col gap-1">
@@ -78,12 +102,18 @@ export default function SubscriptionForm() {
             id="type"
             onChange={handleFormChange}
             value={formData.type}
-            className="rounded-md bg-white/20 p-2 text-white placeholder-white/50"
+            className="bg-subscription-tracker-background-800 placeholder-subscription-tracker-text-100 rounded-md p-2"
           >
-            <option value="monthly" className="bg-zinc-500 text-white">
+            <option
+              value="monthly"
+              className="bg-subscription-tracker-background-800"
+            >
               Monthly
             </option>
-            <option value="yearly" className="bg-zinc-500 text-white">
+            <option
+              value="yearly"
+              className="bg-subscription-tracker-background-800"
+            >
               Yearly
             </option>
           </select>
@@ -96,12 +126,12 @@ export default function SubscriptionForm() {
             placeholder="Enter first payment date"
             onChange={handleFormChange}
             value={formData.firstPaymentDate}
-            className="rounded-md bg-white/20 p-2 text-white placeholder-white/50"
+            className="bg-subscription-tracker-background-800 placeholder-subscription-tracker-text-100 rounded-md p-2"
           />
         </div>
         {editingSubscription ? (
           <div className="flex flex-col gap-4">
-            <div className="rounded-md bg-white/20 p-2">
+            <div className="bg-subscription-tracker-background-800 rounded-md p-2">
               <h1 className="font-bold uppercase">Stats</h1>
               <div
                 className="tooltip cursor-help"
@@ -120,7 +150,7 @@ export default function SubscriptionForm() {
           </div>
         ) : (
           <button
-            className="flex flex-1 flex-row items-center justify-center gap-2 rounded-md bg-white p-2 text-slate-700 transition-colors hover:bg-slate-500 hover:text-white active:bg-slate-600 disabled:bg-red-900 disabled:text-red-600"
+            className="bg-subscription-tracker-primary-500 hover:bg-subscription-tracker-primary-600 active:bg-subscription-tracker-primary-400 flex flex-row items-center justify-center gap-2 rounded-md p-2 transition-colors disabled:bg-red-900 disabled:text-red-600"
             onClick={handleFormSubmit}
             disabled={formData.label === ""}
           >

@@ -10,7 +10,7 @@ export default function Page() {
   return (
     <>
       <SubscriptionTrackerProvider>
-        <main className="flex select-none flex-col bg-slate-900 font-['Fira_Sans'] lg:h-screen">
+        <main className="bg-subscription-tracker-background-900 text-subscription-tracker-text-100 flex select-none flex-col font-['Fira_Sans'] lg:h-screen">
           <Header />
           <div className="flex flex-1 flex-col-reverse overflow-hidden lg:flex-row">
             <SubscriptionButtonList />
