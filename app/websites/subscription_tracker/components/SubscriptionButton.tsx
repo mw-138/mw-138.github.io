@@ -30,11 +30,11 @@ export default function SubscriptionButton({
         name="select_all"
         placeholder="Enter label"
         onChange={() => toggleMultiselectedSubscription(subscription.id)}
-        className="rounded-md bg-white/20 p-2 text-white placeholder-white/50"
+        className="rounded-md p-2"
         checked={isMultiselected}
       />
       <button
-        className={`flex flex-1 flex-col gap-2 rounded-md bg-slate-700 ${isMultiselected && "ring-2 ring-red-500"} p-4 text-white transition-colors hover:bg-slate-900 active:bg-slate-600 disabled:bg-red-900`}
+        className={`bg-subscription-tracker-primary-800 flex flex-1 flex-col gap-2 rounded-md ${isMultiselected && "ring-2 ring-red-500"} hover:bg-subscription-tracker-primary-700 active:bg-subscription-tracker-primary-600 p-4 transition-colors disabled:bg-red-900`}
         onClick={() => editSubscription(index)}
         disabled={isMultiselected}
       >
@@ -51,13 +51,11 @@ export default function SubscriptionButton({
             )}
           </h1>
         </div>
-        <div className="flex w-full flex-row items-center justify-between">
+        <div className="text-subscription-tracker-text-300 flex w-full flex-row items-center justify-between">
           <h2 className="font-semibold">
             {formatToCurrencyString(subscription.price)}
           </h2>
-          <h2 className="font-semibold capitalize text-white/30">
-            {subscription.type}
-          </h2>
+          <h2 className="font-semibold capitalize">{subscription.type}</h2>
         </div>
       </button>
     </div>

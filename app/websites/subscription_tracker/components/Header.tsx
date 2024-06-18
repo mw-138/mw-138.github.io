@@ -19,11 +19,9 @@ export default function Header() {
     deleteAllSubscriptions,
   } = useSubscriptionTrackerContext();
   return (
-    <div className="flex flex-col items-center justify-between gap-4 bg-slate-700 p-4 text-white lg:flex-row">
-      <h1 className="font-bold uppercase text-slate-200">
-        Subscription Tracker
-      </h1>
-      <div className="flex gap-4 text-slate-200">
+    <div className="border-subscription-tracker-background-800 flex flex-col items-center justify-between gap-4 border-b p-4 lg:flex-row">
+      <h1 className="font-bold uppercase">Subscription Tracker</h1>
+      <div className="flex gap-4">
         <span>
           {formatToCurrencyString(calculateTotalPerMonth())} per month /{" "}
           {formatToCurrencyString(calculateTotalPerYear())} per year
@@ -36,13 +34,13 @@ export default function Header() {
             id="locale"
             onChange={(e: any) => setLocale(e.target.value)}
             value={locale}
-            className="rounded-md bg-slate-500 p-2 text-xs text-slate-100 hover:bg-slate-300 hover:text-slate-800"
+            className="bg-subscription-tracker-background-800 hover:bg-subscription-tracker-background-300 hover:text-subscription-tracker-text-800 rounded-md p-2 text-xs transition-colors"
           >
             {locales.map((locale, index) => (
               <option
                 key={index}
                 value={locale}
-                className="bg-slate-500 text-slate-100"
+                className="bg-subscription-tracker-background-500"
               >
                 {locale}
               </option>
@@ -53,13 +51,13 @@ export default function Header() {
             id="currency"
             onChange={(e: any) => setCurrency(e.target.value)}
             value={currency}
-            className="rounded-md bg-slate-500 p-2 text-xs text-slate-100 hover:bg-slate-300 hover:text-slate-800"
+            className="bg-subscription-tracker-background-800 hover:bg-subscription-tracker-background-300 hover:text-subscription-tracker-text-800 rounded-md p-2 text-xs transition-colors"
           >
             {currencies.map((currency, index) => (
               <option
                 key={index}
                 value={currency}
-                className="bg-slate-500 text-slate-100"
+                className="bg-subscription-tracker-background-500"
               >
                 {currency}
               </option>
@@ -69,21 +67,21 @@ export default function Header() {
         <div className="flex flex-row gap-4">
           <button
             onClick={backupSubscriptions}
-            className="flex flex-row items-center gap-2 rounded-md bg-slate-500 px-4 py-2 text-xs text-slate-100 transition-colors hover:bg-slate-300 hover:text-slate-800 active:bg-slate-200 disabled:bg-red-900 disabled:text-red-600"
+            className="bg-subscription-tracker-background-800 hover:bg-subscription-tracker-background-300 hover:text-subscription-tracker-text-800 active:bg-subscription-tracker-background-200 flex flex-row items-center gap-2 rounded-md px-4 py-2 text-xs transition-colors disabled:bg-red-900 disabled:text-red-600"
           >
             <MdBackup />
             Backup
           </button>
           <button
             onClick={startImport}
-            className="flex flex-row items-center gap-2 rounded-md bg-slate-500 px-4 py-2 text-xs text-slate-100 transition-colors hover:bg-slate-300 hover:text-slate-800 active:bg-slate-200 disabled:bg-red-900 disabled:text-red-600"
+            className="bg-subscription-tracker-background-800 hover:bg-subscription-tracker-background-300 hover:text-subscription-tracker-text-800 active:bg-subscription-tracker-background-200 flex flex-row items-center gap-2 rounded-md px-4 py-2 text-xs transition-colors disabled:bg-red-900 disabled:text-red-600"
           >
             <FaFileImport />
             Import
           </button>
           <button
             onClick={deleteAllSubscriptions}
-            className="flex flex-row items-center gap-2 rounded-md bg-slate-500 px-4 py-2 text-xs text-slate-100 transition-colors hover:bg-slate-300 hover:text-slate-800 active:bg-slate-200 disabled:bg-red-900 disabled:text-red-600"
+            className="bg-subscription-tracker-background-800 hover:bg-subscription-tracker-background-300 hover:text-subscription-tracker-text-800 active:bg-subscription-tracker-background-200 flex flex-row items-center gap-2 rounded-md px-4 py-2 text-xs transition-colors disabled:bg-red-900 disabled:text-red-600"
           >
             <MdDeleteForever />
             Delete All

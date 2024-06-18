@@ -13,8 +13,8 @@ export default function ImportForm() {
   } = useSubscriptionTrackerContext();
   return (
     isImporting && (
-      <div className="absolute left-0 top-0 flex h-full w-full items-center justify-center bg-slate-900/50 backdrop-blur-md">
-        <div className="relative flex flex-col gap-2 rounded-md bg-slate-800 p-4 text-slate-200">
+      <div className="bg-subscription-tracker-background-900/50 absolute left-0 top-0 flex h-full w-full items-center justify-center backdrop-blur-md">
+        <div className="bg-subscription-tracker-background-800 relative flex flex-col gap-2 rounded-md p-4">
           <h1 className="font-bold uppercase">Import Subscriptions</h1>
           <form className="flex flex-col gap-2" onSubmit={importSubscriptions}>
             <label htmlFor="import_code">Enter Share Code</label>
@@ -24,10 +24,10 @@ export default function ImportForm() {
               placeholder="Enter Share Code"
               onChange={(e: any) => setImportCode(e.target.value)}
               value={importCode}
-              className="rounded-md bg-slate-200 p-2 text-slate-800 placeholder-slate-800"
+              className="bg-subscription-tracker-background-700 placeholder-subscription-tracker-text-100 rounded-md p-2"
             />
             <button
-              className="flex flex-row items-center justify-center gap-2 rounded-md bg-green-500 p-2 text-slate-100 transition-colors hover:bg-green-600 active:bg-green-400 disabled:bg-red-900 disabled:text-red-600"
+              className="bg-subscription-tracker-primary-500 hover:bg-subscription-tracker-primary-600 active:bg-subscription-tracker-primary-400 flex flex-row items-center justify-center gap-2 rounded-md p-2 transition-colors disabled:bg-red-900 disabled:text-red-600"
               onClick={importSubscriptions}
               disabled={importCode === ""}
             >
@@ -35,7 +35,7 @@ export default function ImportForm() {
               Submit
             </button>
             <button
-              className="flex flex-row items-center justify-center gap-2 rounded-md bg-slate-500 p-2 text-slate-100 transition-colors hover:bg-slate-600 active:bg-slate-400 disabled:bg-red-900 disabled:text-red-600"
+              className="bg-subscription-tracker-secondary-900 hover:bg-subscription-tracker-secondary-800 active:bg-subscription-tracker-secondary-600 flex flex-row items-center justify-center gap-2 rounded-md p-2 transition-colors disabled:bg-red-900 disabled:text-red-600"
               onClick={closeImport}
             >
               <MdClose />
