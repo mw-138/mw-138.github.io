@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import { MdFileUpload, MdClose } from "react-icons/md";
 import { useSubscriptionTrackerContext } from "../context/SubscriptionTrackerContext";
 

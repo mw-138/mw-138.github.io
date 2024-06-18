@@ -302,7 +302,8 @@ export function SubscriptionTrackerProvider({
   function getSubscriptionTotalSpend(subscription: Subscription): number {
     if (
       subscription === undefined ||
-      subscription.firstPaymentDate === undefined
+      subscription.firstPaymentDate === undefined ||
+      subscription.type === undefined
     )
       return 0;
     const currentDate = new Date();
