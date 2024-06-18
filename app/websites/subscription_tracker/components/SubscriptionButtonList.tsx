@@ -14,7 +14,7 @@ export default function SubscriptionButtonList() {
   } = useSubscriptionTrackerContext();
   return (
     <div className="flex h-96 w-auto flex-col gap-4 p-4 lg:h-auto lg:w-96">
-      <div className="flex items-center justify-between">
+      <div className="border-subscription-tracker-background-800 flex items-center justify-between border-b pb-2">
         <div className="flex h-10 items-center gap-4">
           <input
             type="checkbox"
@@ -38,7 +38,7 @@ export default function SubscriptionButtonList() {
           </button>
         )}
       </div>
-      <div className="minimal-scrollbar flex flex-col gap-4 overflow-auto pr-4">
+      <div className="minimal-scrollbar flex flex-col gap-4 overflow-auto pr-2 pt-2">
         {sortedSubscriptions.map((subscription, index) => (
           <SubscriptionButton
             key={index}
