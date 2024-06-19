@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { LifeSimulatorContext } from "../context/LifeSimulatorContext";
 
 // Show a list of available jobs, as well as current job progression.
