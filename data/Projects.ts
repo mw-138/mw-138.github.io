@@ -62,6 +62,8 @@ import SubscriptionTracker_Screenshot03 from "@/public/projects/subscription_tra
 
 import LifeSimulator_Screenshot01 from "@/public/projects/life_simulator/screenshot_01.png";
 
+import TicTacToe_Screenshot01 from "@/public/projects/tic_tac_toe/screenshot_01.png";
+
 export const Projects: Project[] = [
   new Project(
     new Date("03/21/2024"),
@@ -328,6 +330,20 @@ export const Projects: Project[] = [
     LifeSimulator_Screenshot01,
     "/websites/life_simulator",
     [LifeSimulator_Screenshot01],
+    [],
+    [Tag.Website, Tag.Game],
+  ),
+  new Project(
+    new Date("06/19/2024"),
+    true,
+    "tic_tac_toe",
+    "Tic Tac Toe",
+    "A tic tac toe game.",
+    [Tool.VsCode, Tool.NextJs, Tool.React, Tool.TailwindCSS],
+    [Language.TypeScript, Language.HTML, Language.CSS],
+    TicTacToe_Screenshot01,
+    "/websites/tic_tac_toe",
+    [TicTacToe_Screenshot01],
     [],
     [Tag.Website, Tag.Game],
   ),
