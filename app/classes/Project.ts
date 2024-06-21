@@ -25,6 +25,7 @@ export enum Tag {
   Game = "Game",
   Software = "Software",
   Website = "Website",
+  WorkInProgress = "Work In Progress",
 }
 
 export default class Project {

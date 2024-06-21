@@ -11,6 +11,7 @@ enum SortByTag {
   Game = "Game",
   Software = "Software",
   Website = "Website",
+  WorkInProgress = "Work In Progress",
 }
 
 enum SortByDescriptor {
@@ -79,6 +80,8 @@ export const ProjectsView = () => {
       filter = project.tags.includes(Tag.Software);
     } else if (sortByTag === SortByTag.Website) {
       filter = project.tags.includes(Tag.Website);
+    } else if (sortByTag === SortByTag.WorkInProgress) {
+      filter = project.tags.includes(Tag.WorkInProgress);
     }
 
     if (searchFilter !== "") {

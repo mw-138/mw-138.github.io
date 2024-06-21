@@ -1,6 +1,5 @@
 import Footer from "@/app/components/Footer";
 import WebsiteNavigation from "@/app/components/WebsiteNavigation";
-import React from "react";
 import Navbar from "./components/Navbar";
 import ProjectWipBanner from "@/app/components/ProjectWipBanner";
 import { AlphabeticalTeams, FixtureSim, GameWeeks } from "./teams";

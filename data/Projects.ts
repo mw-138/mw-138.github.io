@@ -271,7 +271,7 @@ export const Projects: Project[] = [
     "/websites/netflix",
     [NetflixReDesign_Screenshot01, NetflixReDesign_Screenshot02],
     [],
-    [Tag.Website],
+    [Tag.Website, Tag.WorkInProgress],
   ),
   new Project(
     new Date("05/26/2024"),
@@ -299,7 +299,7 @@ export const Projects: Project[] = [
     "/websites/premier_league_redesign",
     [PremierLeagueReDesign_Screenshot01],
     [],
-    [Tag.Website],
+    [Tag.Website, Tag.WorkInProgress],
   ),
   new Project(
     new Date("06/16/2024"),
@@ -331,7 +331,7 @@ export const Projects: Project[] = [
     "/websites/life_simulator",
     [LifeSimulator_Screenshot01],
     [],
-    [Tag.Website, Tag.Game],
+    [Tag.Website, Tag.Game, Tag.WorkInProgress],
   ),
   new Project(
     new Date("06/19/2024"),
