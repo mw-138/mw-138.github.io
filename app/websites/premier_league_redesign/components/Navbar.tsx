@@ -44,7 +44,7 @@ const MediumNavbar = ({ teams }: NavbarProps) => {
 
 const LargeNavbar = ({ teams }: NavbarProps) => {
   return (
-    <div className="hidden flex-row border-y-8 border-white bg-white md:flex lg:border-t-0">
+    <div className="hidden flex-row border-y-8 border-white bg-white pr-4 md:flex lg:border-t-0">
       <div className="flex items-center justify-center p-2">
         <Image
           src="/premier-league.png"
@@ -67,7 +67,7 @@ const LargeNavbar = ({ teams }: NavbarProps) => {
             />
           ))}
         </div>
-        <nav className="flex items-center rounded-tl-lg bg-premier-league-purple p-2">
+        <nav className="flex items-center rounded-t-lg bg-premier-league-purple p-2">
           <ul className="flex flex-row gap-2">
             {[
               "Premier League",
@@ -86,7 +86,7 @@ const LargeNavbar = ({ teams }: NavbarProps) => {
             ))}
           </ul>
         </nav>
-        <div className="flex flex-row items-center overflow-hidden rounded-bl-lg bg-premier-league-purple">
+        <div className="flex flex-row items-center overflow-hidden rounded-b-lg bg-premier-league-purple">
           {[
             "Home",
             "Fixtures",
