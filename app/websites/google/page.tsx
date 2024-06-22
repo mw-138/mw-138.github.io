@@ -70,14 +70,14 @@ export default function Page() {
             <Logo />
             <input
               type="search"
-              className="w-full rounded-full bg-transparent px-4 py-2 ring-2 ring-zinc-300 hover:bg-zinc-300 dark:ring-zinc-700 dark:hover:bg-zinc-700 md:w-[600px]"
+              className="w-full rounded-full bg-transparent px-4 py-2 ring-2 ring-zinc-300 hover:bg-zinc-300 md:w-[600px] dark:ring-zinc-700 dark:hover:bg-zinc-700"
             />
             <div className="flex flex-row gap-6">
               <button className="rounded-md bg-zinc-300 px-4 py-2 outline-1 outline-zinc-500 hover:outline dark:bg-zinc-700">
                 Google Search
               </button>
               <button className="rounded-md bg-zinc-300 px-4 py-2 outline-1 outline-zinc-500 hover:outline dark:bg-zinc-700">
-                I'm Feeling Lucky
+                I&apos;m Feeling Lucky
               </button>
             </div>
           </div>
