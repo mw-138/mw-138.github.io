@@ -347,4 +347,18 @@ export const Projects: Project[] = [
     [],
     [Tag.Website, Tag.Game],
   ),
+  new Project(
+    new Date("06/21/2024"),
+    true,
+    "google",
+    "Google",
+    "A Google homepage clone.",
+    [Tool.VsCode, Tool.NextJs, Tool.React, Tool.TailwindCSS],
+    [Language.TypeScript, Language.HTML, Language.CSS],
+    TicTacToe_Screenshot01,
+    "/websites/google",
+    [TicTacToe_Screenshot01],
+    [],
+    [Tag.Website],
+  ),
 ];
