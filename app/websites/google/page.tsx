@@ -1,5 +1,5 @@
-import Footer from "@/app/components/Footer";
-import WebsiteNavigation from "@/app/components/WebsiteNavigation";
+import Footer from "@/components/Footer";
+import WebsiteNavigation from "@/components/WebsiteNavigation";
 import Link from "next/link";
 import { BsFillGrid3X3GapFill } from "react-icons/bs";
 
@@ -77,7 +77,7 @@ export default function Page() {
                 Google Search
               </button>
               <button className="rounded-md bg-zinc-300 px-4 py-2 outline-1 outline-zinc-500 hover:outline dark:bg-zinc-700">
-                I'm Feeling Lucky
+                I&apos;m Feeling Lucky
               </button>
             </div>
           </div>
@@ -119,7 +119,6 @@ export default function Page() {
         </div>
       </main>
       <WebsiteNavigation />
-      <Footer />
     </>
   );
 }

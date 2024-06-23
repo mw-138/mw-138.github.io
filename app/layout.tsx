@@ -1,8 +1,9 @@
+import { ThemeProvider } from "@/components/ThemeProvider";
+import { Toaster } from "@/components/ui/sonner";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Footer from "../components/Footer";
 import "./globals.css";
-import { ThemeProvider } from "./context/ThemeContext";
-import ClientThemeWrapper from "./context/ClientThemeWrapper";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,8 +20,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ThemeProvider>
-          <ClientThemeWrapper>{children}</ClientThemeWrapper>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+          <Footer />
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>

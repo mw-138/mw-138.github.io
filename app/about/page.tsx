@@ -1,122 +1,125 @@
-import React from "react";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
+import MaxWidthWrapper from "@/components/MaxWidthWrapper";
+import Navbar from "@/components/Navbar";
+import { Separator } from "@/components/ui/separator";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 
-interface AboutPageProps {
-  title: string;
-  children?: any;
-}
+type SkillLevel = "Beginner" | "Intermediate" | "Advanced" | "Expert";
 
-interface SkillLevelRatingProps {
-  rating: number;
-}
+const skillLevelOrder: { [key in SkillLevel]: number } = {
+  Beginner: 1,
+  Intermediate: 2,
+  Advanced: 3,
+  Expert: 4,
+};
 
 class Skill {
   title: string;
-  rating: number;
+  level: SkillLevel;
 
-  constructor(title: string, rating: number) {
+  constructor(title: string, level: SkillLevel) {
     this.title = title;
-    this.rating = rating;
+    this.level = level;
   }
 }
 
 const AboutPage = () => {
   const skills: Skill[] = [
-    new Skill("C#", 3),
-    new Skill("C++", 2),
-    new Skill("Unity", 3),
-    new Skill("Unreal Engine", 1.5),
-    new Skill("HTML", 1.5),
-    new Skill("CSS", 1.5),
-    new Skill("React", 1.5),
-    new Skill("Python", 1.5),
-  ].sort((a, b) => b.rating - a.rating);
-
-  const Section = (props: AboutPageProps) => {
-    return (
-      <section className="bg-base-200 p-5">
-        <h1 className="text-2xl font-bold">{props.title}</h1>
-        <div className="divider" />
-        <div>{props.children}</div>
-      </section>
-    );
-  };
-
-  const SkillLevelRating = (props: SkillLevelRatingProps) => {
-    return (
-      <>
-        <input
-          type="range"
-          min={1}
-          max="4"
-          value={props.rating}
-          className="range cursor-default"
-          step="0.5"
-        />
-        <div className="hidden w-full justify-between px-2 text-xs md:flex">
-          <span>Beginner</span>
-          <span>Intermediate</span>
-          <span>Advanced</span>
-          <span>Expert</span>
-        </div>
-      </>
-    );
-  };
+    new Skill("C#", "Advanced"),
+    new Skill("C++", "Intermediate"),
+    new Skill("Unity", "Advanced"),
+    new Skill("Unreal Engine", "Beginner"),
+    new Skill("HTML", "Intermediate"),
+    new Skill("CSS", "Intermediate"),
+    new Skill("React", "Intermediate"),
+    new Skill("Python", "Beginner"),
+  ].sort((a, b) => skillLevelOrder[b.level] - skillLevelOrder[a.level]);
 
   return (
     <>
       <Navbar />
-      <Section title="About Me">
-        <p>
-          I am a Junior programmer from the United Kingdom with 7+ years of
-          self-taught and College tuition using Unity and C#. I am also
-          self-taught in many other languages and development frameworks
-          featured below.
-        </p>
-        <br />
-        <p>
-          I spent 5 years at Newcastle College learning the core fundamentals of
-          game development and the understanding of the game development
-          process.
-        </p>
-        <br />
-        <p>These included the following:</p>
-        <ul className="ml-5 list-disc">
-          <li>Programming</li>
-          <li>3D Modelling</li>
-          <li>Storyboarding</li>
-        </ul>
-        <br />
-        <p>Projects I have worked on are visible in my portfolio pages.</p>
-      </Section>
-      <Section title="Education">
-        <ul className="ml-5 list-disc">
-          <li>BSc (Hons 2:1) Computer Science Degree</li>
-          <li>C++ Diploma</li>
-        </ul>
-      </Section>
-      <Section title="Technical Skills">
-        <table className="table-bordered table">
-          <thead>
-            <tr>
-              <th>Skill</th>
-              <th>Experience Level</th>
-            </tr>
-          </thead>
-          <tbody>
-            {skills.map((skill, index) => (
-              <tr key={index}>
-                <td>{skill.title}</td>
-                <td>
-                  <SkillLevelRating rating={skill.rating} />
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </Section>
-      <Footer />
+      <MaxWidthWrapper>
+        <MaxWidthWrapper className="mt-6 rounded-xl border border-muted bg-cover bg-bottom bg-blend-overlay">
+          <div
+            id="about_me"
+            className="mx-auto flex max-w-3xl flex-col items-center py-20 text-center"
+          >
+            <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-6xl">
+              About Me
+            </h1>
+            <Separator className="my-4" />
+            <p>
+              I am a Junior programmer from the United Kingdom with 7+ years of
+              self-taught and College tuition using Unity and C#. I am also
+              self-taught in many other languages and development frameworks
+              featured below.
+            </p>
+            <br />
+            <p>
+              I spent 5 years at Newcastle College learning the core
+              fundamentals of game development and the understanding of the game
+              development process.
+            </p>
+            <br />
+            <p>These included the following:</p>
+            <ul className="ml-5 list-none">
+              <li>Programming</li>
+              <li>3D Modelling</li>
+              <li>Storyboarding</li>
+            </ul>
+            <br />
+            <p>Projects I have worked on are visible in my portfolio pages.</p>
+          </div>
+        </MaxWidthWrapper>
+        <MaxWidthWrapper className="mt-6 rounded-xl border border-muted bg-cover bg-bottom bg-blend-overlay">
+          <div
+            id="education"
+            className="mx-auto flex max-w-3xl flex-col items-center py-20 text-center"
+          >
+            <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-6xl">
+              Education
+            </h1>
+            <Separator className="my-4" />
+            <ul className="ml-5 list-none">
+              <li>BSc (Hons 2:1) Computer Science Degree</li>
+              <li>C++ Diploma</li>
+            </ul>
+          </div>
+        </MaxWidthWrapper>
+        <MaxWidthWrapper className="mt-6 rounded-xl border border-muted bg-cover bg-bottom bg-blend-overlay">
+          <div
+            id="technical_skills"
+            className="mx-auto flex max-w-3xl flex-col items-center py-20 text-center"
+          >
+            <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-6xl">
+              Technical Skills
+            </h1>
+            <Separator className="my-4" />
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead className="text-left">Skill</TableHead>
+                  <TableHead className="text-right">Experience</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {skills.map((skill, index) => (
+                  <TableRow key={index}>
+                    <TableCell className="text-left">{skill.title}</TableCell>
+                    <TableCell className="text-right">{skill.level}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
+        </MaxWidthWrapper>
+      </MaxWidthWrapper>
     </>
   );
 };

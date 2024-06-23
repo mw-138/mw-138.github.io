@@ -1,7 +1,18 @@
 "use client";
 
-import Subscription from "../interfaces/Subscription";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Edit } from "lucide-react";
 import { useSubscriptionTrackerContext } from "../context/SubscriptionTrackerContext";
+import Subscription from "../interfaces/Subscription";
+import { SubscriptionDialog } from "./SubscriptionDialog";
 
 type SubscriptionButtonProps = {
   index: number;
@@ -19,28 +30,25 @@ export default function SubscriptionButton({
     formatToCurrencyString,
     toggleMultiselectedSubscription,
     multiselectedSubscriptionsIds,
+    deleteSubscription,
   } = useSubscriptionTrackerContext();
   const isMultiselected = multiselectedSubscriptionsIds.includes(
     subscription.id,
   );
   return (
-    <div className="flex gap-4">
-      <input
-        type="checkbox"
-        name="select_all"
-        placeholder="Enter label"
-        onChange={() => toggleMultiselectedSubscription(subscription.id)}
-        className="rounded-md p-2"
+    <div className="flex items-center gap-4">
+      <Checkbox
+        id="select_all"
+        onCheckedChange={() => toggleMultiselectedSubscription(subscription.id)}
         checked={isMultiselected}
       />
-      <button
-        className={`bg-subscription-tracker-primary-800 flex flex-1 flex-col gap-2 rounded-md ${isMultiselected && "ring-2 ring-red-500"} hover:bg-subscription-tracker-primary-700 active:bg-subscription-tracker-primary-600 p-4 transition-colors disabled:bg-red-900`}
-        onClick={() => editSubscription(index)}
-        disabled={isMultiselected}
-      >
-        <div className="flex w-full flex-row items-center justify-between">
-          <h1 className="font-bold">{subscription.label}</h1>
-          <h1 className="font-bold">
+      <Card className="w-full">
+        <CardHeader>
+          <CardTitle className="flex items-center justify-between">
+            {subscription.label}
+            <span>{formatToCurrencyString(subscription.price)}</span>
+          </CardTitle>
+          <CardDescription>
             {isSubscriptionDueToday(subscription) ? (
               <p className="capitalize">Due today</p>
             ) : (
@@ -49,15 +57,25 @@ export default function SubscriptionButton({
                 {getSubscriptionDueDate(subscription) <= 1 ? "day" : "days"}
               </p>
             )}
-          </h1>
-        </div>
-        <div className="text-subscription-tracker-text-300 flex w-full flex-row items-center justify-between">
-          <h2 className="font-semibold">
-            {formatToCurrencyString(subscription.price)}
-          </h2>
-          <h2 className="font-semibold capitalize">{subscription.type}</h2>
-        </div>
-      </button>
+          </CardDescription>
+        </CardHeader>
+        <CardFooter className="flex justify-between">
+          <Button
+            variant="outline"
+            disabled={isMultiselected}
+            onClick={() => deleteSubscription(index)}
+          >
+            Delete
+          </Button>
+          <SubscriptionDialog
+            buttonLabel="Edit"
+            isEditing
+            subscriptionIndex={index}
+            buttonDisabled={isMultiselected}
+            buttonIcon={Edit}
+          />
+        </CardFooter>
+      </Card>
     </div>
   );
 }

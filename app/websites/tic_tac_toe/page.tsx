@@ -1,7 +1,7 @@
-import WebsiteNavigation from "@/app/components/WebsiteNavigation";
+import WebsiteNavigation from "@/components/WebsiteNavigation";
 import Board from "./components/Board";
 import { TicTacToeProvider } from "./context/TicTacToeContext";
-import Footer from "@/app/components/Footer";
+import Footer from "@/components/Footer";
 
 export default function Page() {
   return (
@@ -12,7 +12,6 @@ export default function Page() {
         </main>
       </TicTacToeProvider>
       <WebsiteNavigation />
-      <Footer />
     </>
   );
 }
