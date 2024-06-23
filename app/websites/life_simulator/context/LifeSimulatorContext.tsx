@@ -9,8 +9,8 @@ import {
 } from "react";
 import { formatCurrency } from "@/utils/helperFunctions";
 import Job from "../classes/Job";
-import { useClampedLocalStorageState } from "@/utils/useClampedState";
-import useLocalStorageState from "@/utils/useLocalStorageState";
+import useLocalStorageState from "@/hooks/useLocalStorageState";
+import { useClampedLocalStorageState } from "@/hooks/useClampedState";
 
 type LifeSimulatorContextValue = {
   isPaused: boolean;
@@ -267,7 +267,7 @@ export const LifeSimulatorProvider = ({
   }
 
   return isNewGame ? (
-    <div className="flex h-screen flex-col gap-4 bg-base-100 p-4">
+    <div className="bg-base-100 flex h-screen flex-col gap-4 p-4">
       <h1 className="text-lg font-bold uppercase">New Game</h1>
       <form className="flex flex-col gap-2" onSubmit={handleSubmit}>
         <label htmlFor="name" className="font-bold">

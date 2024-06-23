@@ -1,5 +1,5 @@
-import Footer from "@/app/components/Footer";
-import WebsiteNavigation from "@/app/components/WebsiteNavigation";
+import Footer from "@/components/Footer";
+import WebsiteNavigation from "@/components/WebsiteNavigation";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -68,7 +68,6 @@ const page = () => {
         </section>
       </main>
       <WebsiteNavigation />
-      <Footer />
     </>
   );
 };

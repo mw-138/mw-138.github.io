@@ -1,14 +1,12 @@
-import Footer from "@/app/components/Footer";
-import WebsiteNavigation from "@/app/components/WebsiteNavigation";
-import React from "react";
+import WebsiteNavigation from "@/components/WebsiteNavigation";
 import Hero from "./components/Hero";
+import MovieRow from "./components/MovieRow";
 import Nav from "./components/Nav";
 import Requests, {
   getRandomMovie,
   getUpcomingMovies,
   performMovieQuery,
 } from "./dataFetching";
-import MovieRow from "./components/MovieRow";
 
 const page = async () => {
   const popular = await performMovieQuery(Requests.Popular);
@@ -55,7 +53,6 @@ const page = async () => {
         />
       ))}
       <WebsiteNavigation />
-      <Footer />
     </div>
   );
 };

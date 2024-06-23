@@ -1,7 +1,7 @@
 import React from "react";
 import { RpgClickerGameProvider } from "./context/RpgClickerGameContext";
-import WebsiteNavigation from "@/app/components/WebsiteNavigation";
-import Footer from "@/app/components/Footer";
+import WebsiteNavigation from "@/components/WebsiteNavigation";
+import Footer from "@/components/Footer";
 import InventoryList from "./components/InventoryList";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
@@ -19,7 +19,6 @@ export default function Page() {
         </main>
       </RpgClickerGameProvider>
       <WebsiteNavigation />
-      <Footer />
     </>
   );
 }

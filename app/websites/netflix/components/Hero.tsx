@@ -1,6 +1,5 @@
 "use client";
 
-import React, { useState } from "react";
 import { Movie, getMoviePosterUrl } from "../dataFetching";
 
 type HeroProps = {
@@ -16,7 +15,7 @@ const Hero = ({ movie }: HeroProps) => {
       }}
     >
       <div className="absolute bottom-0 left-0 h-full w-full bg-gradient-to-b from-transparent to-black" />
-      <div className="card absolute bottom-0 left-0 right-0 flex max-h-64 gap-4 bg-black/20 p-5 text-white backdrop-blur-md lg:bottom-40 lg:left-40 lg:right-40 lg:w-96">
+      <div className="absolute bottom-0 left-0 right-0 flex max-h-64 flex-col gap-4 rounded-md bg-black/20 p-5 text-white backdrop-blur-md lg:bottom-40 lg:left-40 lg:right-40 lg:w-96">
         <h1 className="text-xl font-bold">{movie.title}</h1>
         <p className="text-md line-clamp-3 sm:line-clamp-6">{movie.overview}</p>
         <div className="flex gap-4">

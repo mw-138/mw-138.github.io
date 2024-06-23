@@ -1,15 +1,6 @@
 "use client";
 
 import {
-  Dispatch,
-  FormEvent,
-  SetStateAction,
-  createContext,
-  useContext,
-  useState,
-} from "react";
-import Subscription from "../interfaces/Subscription";
-import {
   compressJSON,
   copyToClipboard,
   decompressJSON,
@@ -20,8 +11,18 @@ import {
   getYearDifference,
   isIndexOutOfRange,
 } from "@/utils/helperFunctions";
+import useLocalStorageState from "@/hooks/useLocalStorageState";
+import {
+  Dispatch,
+  FormEvent,
+  SetStateAction,
+  createContext,
+  useContext,
+  useState,
+} from "react";
+import Subscription from "../interfaces/Subscription";
 import SubscriptionType from "../types/SubscriptionType";
-import useLocalStorageState from "@/utils/useLocalStorageState";
+import { toast } from "sonner";
 
 const DefaultFormData: Subscription = {
   id: "",
@@ -83,6 +84,15 @@ type Context = {
   isMultiselecting: boolean;
   setIsMultiselecting: (value: boolean) => void;
   getNextPaymentDate: (subscription: Subscription) => string;
+  formDataDialogActive: boolean;
+  setFormDataDialogActive: Dispatch<SetStateAction<boolean>>;
+  importDialogActive: boolean;
+  setImportDialogActive: Dispatch<SetStateAction<boolean>>;
+  handleImportCodeChange: (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
+  ) => void;
 };
 
 const SubscriptionTrackerContext = createContext<Context>({
@@ -132,6 +142,15 @@ const SubscriptionTrackerContext = createContext<Context>({
   isMultiselecting: false,
   setIsMultiselecting: () => {},
   getNextPaymentDate: () => "",
+  formDataDialogActive: false,
+  setFormDataDialogActive: () => {},
+  importDialogActive: false,
+  setImportDialogActive: () => {},
+  handleImportCodeChange: (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
+  ) => {},
 });
 
 export function SubscriptionTrackerProvider({
@@ -145,6 +164,9 @@ export function SubscriptionTrackerProvider({
   const [selectedSubscriptionIndex, setSelectedSubscriptionIndex] =
     useState<number>(-1);
   const [formData, setFormData] = useState<Subscription>(DefaultFormData);
+  const [formDataDialogActive, setFormDataDialogActive] =
+    useState<boolean>(false);
+  const [importDialogActive, setImportDialogActive] = useState<boolean>(false);
   const [editingSubscription, setEditingSubscription] =
     useState<boolean>(false);
   const [locale, setLocale] = useLocalStorageState<string>(
@@ -209,6 +231,7 @@ export function SubscriptionTrackerProvider({
         index === selectedSubscriptionIndex ? formData : sub,
       );
       setSubscriptions(updatedSubscriptions);
+      cancelEdit();
     } else {
       addSubscription(
         formData.label,
@@ -217,7 +240,6 @@ export function SubscriptionTrackerProvider({
         formData.firstPaymentDate,
       );
     }
-    cancelEdit();
   }
 
   function handleFormChange(
@@ -226,7 +248,6 @@ export function SubscriptionTrackerProvider({
     >,
   ): void {
     const { name, type, value } = e.target;
-
     if (type === "checkbox") {
       const target = e.target as HTMLInputElement;
       setFormData((prev) => ({
@@ -241,11 +262,21 @@ export function SubscriptionTrackerProvider({
     }
   }
 
+  function handleImportCodeChange(
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
+  ): void {
+    const { value } = e.target;
+    setImportCode(value);
+  }
+
   function editSubscription(index: number): void {
     if (isIndexOutOfRange(subscriptions, index)) return;
     const subscription = subscriptions[index];
     setSelectedSubscriptionIndex(index);
     setEditingSubscription(true);
+    setFormDataDialogActive(true);
     setFormData({
       id: subscription.id,
       label: subscription.label,
@@ -256,8 +287,10 @@ export function SubscriptionTrackerProvider({
   }
 
   function cancelEdit(): void {
+    setFormDataDialogActive(false);
     setEditingSubscription(false);
     setFormData(DefaultFormData);
+    console.log("cancelling edit", editingSubscription, formDataDialogActive);
   }
 
   function deleteSubscription(index: number): void {
@@ -341,6 +374,9 @@ export function SubscriptionTrackerProvider({
   async function backupSubscriptions(): Promise<void> {
     const compressedData = compressJSON(subscriptions);
     await copyToClipboard(compressedData);
+    toast("Backup code copied to clipboard.", {
+      description: compressedData,
+    });
   }
 
   function importSubscriptions(): void {
@@ -351,6 +387,7 @@ export function SubscriptionTrackerProvider({
   }
 
   function closeImport(): void {
+    setImportDialogActive(false);
     setIsImporting(false);
     setImportCode("");
   }
@@ -390,6 +427,10 @@ export function SubscriptionTrackerProvider({
     const ids = toggled ? subscriptions.map((sub) => sub.id) : [];
     setMultisectedSubscriptionsIds(ids);
   }
+
+  function showFormDataDialog(): void {}
+
+  function closeFormDataDialog(): void {}
 
   return (
     <SubscriptionTrackerContext.Provider
@@ -436,6 +477,11 @@ export function SubscriptionTrackerProvider({
         isMultiselecting,
         setIsMultiselecting,
         getNextPaymentDate,
+        formDataDialogActive,
+        setFormDataDialogActive,
+        importDialogActive,
+        setImportDialogActive,
+        handleImportCodeChange,
       }}
     >
       {children}
