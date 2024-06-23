@@ -1,9 +1,21 @@
 "use client";
 
-import { FaFileImport } from "react-icons/fa";
+import { Button } from "@/components/ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Plus } from "lucide-react";
 import { MdBackup, MdDeleteForever } from "react-icons/md";
-import { locales, currencies } from "../locales";
 import { useSubscriptionTrackerContext } from "../context/SubscriptionTrackerContext";
+import { currencies, locales } from "../locales";
+import ImportDialog from "./ImportDialog";
+import { SubscriptionDialog } from "./SubscriptionDialog";
 
 export default function Header() {
   const {
@@ -11,15 +23,15 @@ export default function Header() {
     calculateTotalPerMonth,
     calculateTotalPerYear,
     setLocale,
-    locale,
+    locale: currentLocale,
     setCurrency,
-    currency,
+    currency: currentCurrency,
     backupSubscriptions,
-    startImport,
     deleteAllSubscriptions,
   } = useSubscriptionTrackerContext();
+
   return (
-    <div className="border-subscription-tracker-background-800 flex flex-col items-center justify-between gap-4 border-b p-4 lg:flex-row">
+    <div className="flex flex-col items-center justify-between gap-4 border-b border-muted p-4 lg:flex-row">
       <h1 className="font-bold uppercase">Subscription Tracker</h1>
       <div className="flex gap-4">
         <span>
@@ -29,63 +41,62 @@ export default function Header() {
       </div>
       <div className="flex flex-col items-center justify-center gap-4 lg:flex-row">
         <div className="flex flex-row gap-4">
-          <select
-            name="type"
-            id="locale"
-            onChange={(e: any) => setLocale(e.target.value)}
-            value={locale}
-            className="bg-subscription-tracker-background-800 hover:bg-subscription-tracker-background-300 hover:text-subscription-tracker-text-800 rounded-md p-2 text-xs transition-colors"
-          >
-            {locales.map((locale, index) => (
-              <option
-                key={index}
-                value={locale}
-                className="bg-subscription-tracker-background-500"
-              >
-                {locale}
-              </option>
-            ))}
-          </select>
-          <select
-            name="type"
-            id="currency"
-            onChange={(e: any) => setCurrency(e.target.value)}
-            value={currency}
-            className="bg-subscription-tracker-background-800 hover:bg-subscription-tracker-background-300 hover:text-subscription-tracker-text-800 rounded-md p-2 text-xs transition-colors"
-          >
-            {currencies.map((currency, index) => (
-              <option
-                key={index}
-                value={currency}
-                className="bg-subscription-tracker-background-500"
-              >
-                {currency}
-              </option>
-            ))}
-          </select>
+          <Select onValueChange={(e: any) => setLocale(e)}>
+            <SelectTrigger className="w-[100px]">
+              <SelectValue
+                placeholder={currentLocale}
+                defaultValue={currentLocale}
+              />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                <SelectLabel>Locale</SelectLabel>
+                {locales.map((locale, index) => (
+                  <SelectItem key={index} value={locale}>
+                    {locale}
+                  </SelectItem>
+                ))}
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+          <Select onValueChange={(e: any) => setCurrency(e)}>
+            <SelectTrigger className="w-[100px]">
+              <SelectValue
+                placeholder={currentCurrency}
+                defaultValue={currentCurrency}
+              />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                <SelectLabel>Locale</SelectLabel>
+                {currencies.map((currency, index) => (
+                  <SelectItem key={index} value={currency}>
+                    {currency}
+                  </SelectItem>
+                ))}
+              </SelectGroup>
+            </SelectContent>
+          </Select>
         </div>
         <div className="flex flex-row gap-4">
-          <button
+          <Button
+            variant="outline"
             onClick={backupSubscriptions}
-            className="bg-subscription-tracker-background-800 hover:bg-subscription-tracker-background-300 hover:text-subscription-tracker-text-800 active:bg-subscription-tracker-background-200 flex flex-row items-center gap-2 rounded-md px-4 py-2 text-xs transition-colors disabled:bg-red-900 disabled:text-red-600"
+            className="flex flex-row items-center gap-2"
           >
             <MdBackup />
             Backup
-          </button>
-          <button
-            onClick={startImport}
-            className="bg-subscription-tracker-background-800 hover:bg-subscription-tracker-background-300 hover:text-subscription-tracker-text-800 active:bg-subscription-tracker-background-200 flex flex-row items-center gap-2 rounded-md px-4 py-2 text-xs transition-colors disabled:bg-red-900 disabled:text-red-600"
-          >
-            <FaFileImport />
-            Import
-          </button>
-          <button
+          </Button>
+          <ImportDialog />
+          <Button
+            variant="outline"
             onClick={deleteAllSubscriptions}
-            className="bg-subscription-tracker-background-800 hover:bg-subscription-tracker-background-300 hover:text-subscription-tracker-text-800 active:bg-subscription-tracker-background-200 flex flex-row items-center gap-2 rounded-md px-4 py-2 text-xs transition-colors disabled:bg-red-900 disabled:text-red-600"
+            className="flex flex-row items-center gap-2"
           >
             <MdDeleteForever />
             Delete All
-          </button>
+          </Button>
+          <SubscriptionDialog buttonLabel="Add New" buttonIcon={Plus} />
         </div>
       </div>
     </div>

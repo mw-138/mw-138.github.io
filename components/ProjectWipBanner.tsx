@@ -1,9 +1,12 @@
-import React from "react";
+import { cn } from "@/lib/utils";
 
 const ProjectWipBanner = ({ className }: { className?: string }) => {
   return (
     <div
-      className={`overflow-hidden whitespace-nowrap bg-base-100 text-base-content ${className}`}
+      className={cn(
+        "overflow-hidden whitespace-nowrap border-b border-muted bg-background text-foreground",
+        className,
+      )}
     >
       <div className="scrolling-text w-full px-4 py-2 text-lg font-bold">
         This project is a work-in-progress!

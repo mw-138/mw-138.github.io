@@ -1,111 +1,90 @@
-import Link from "next/link";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
-import ProjectCard from "./components/ProjectCard";
+import MaxWidthWrapper from "@/components/MaxWidthWrapper";
+import Navbar from "@/components/Navbar";
+import ProjectCard from "@/components/ProjectCard";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
 import { Projects } from "@/data/Projects";
-
-import React from "react";
+import Link from "next/link";
 
 const page = () => {
   const highlightedProjects = Projects.filter((project) => {
     const projects = [
       "coin_catcher",
       "netflix_redesign",
-      // "portfolio",
-      // "pixel_platformer",
-      "miyoo_mini_theme_preview",
-      // "life_simulator",
       "subscription_tracker",
     ];
     return projects.includes(project.id);
   })
     .sort((a, b) => b.publishDate.getTime() - new Date().getTime())
     .filter((project) => project.visible)
-    .slice(0, 4);
+    .slice(0, 3);
 
   const recentProjects = Projects.sort(
     (a, b) => b.publishDate.getTime() - new Date().getTime(),
   )
     .filter((project) => project.visible)
-    .slice(0, 4);
+    .slice(0, 3);
 
   const heroProject = Projects.find((project) => project.id === "coin_catcher");
 
   return (
-    <main>
+    <>
       <Navbar />
-      <section
-        className="hero min-h-screen bg-base-200 bg-blend-overlay"
-        style={{
-          backgroundImage:
-            heroProject && heroProject.screenshots.length > 0
-              ? `url('${heroProject.screenshots[0].src}')`
-              : "",
-        }}
-      >
-        <div className="hero-content text-center">
-          <div className="max-w-sm md:max-w-xl">
-            <h1 className="text-2xl font-bold md:text-5xl">
-              Hi, I&apos;m Matthew Watson
+      <MaxWidthWrapper>
+        <MaxWidthWrapper
+          className="mt-6 rounded-xl border border-muted bg-muted bg-cover bg-bottom bg-blend-overlay"
+          style={{
+            backgroundImage:
+              heroProject && heroProject.screenshots.length > 0
+                ? `url('${heroProject.screenshots[0].src}')`
+                : "",
+          }}
+        >
+          <div className="mx-auto flex max-w-3xl flex-col items-center py-20 text-center">
+            <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
+              I&apos;m <span className="text-primary">Matthew Watson</span>.
             </h1>
-            <p className="py-6 text-sm md:text-lg">
-              I am a Junior Programmer from the United Kingdom with 7+ years of
-              experience using Unity and C#.
+            <p className="mt-6 max-w-prose text-lg text-muted-foreground sm:text-sm">
+              A Junior Programmer from the United Kingdom with experience in
+              Game Development, Software Development and Web Development.
             </p>
-            <div className="flex flex-col items-center justify-center gap-5 md:flex-row">
-              <Link className="btn btn-primary" href="/about">
-                About Me
-              </Link>
-              <Link
-                className="btn btn-primary"
-                href={heroProject ? heroProject.GetSiteUrl() : ""}
-              >
-                Visit Highlighted Project
-              </Link>
+            <div className="mt-6 flex flex-col gap-4 sm:flex-row">
+              {heroProject && (
+                <Link
+                  href={heroProject.GetSiteUrl()}
+                  className={buttonVariants()}
+                >
+                  Visit Showcased Project
+                </Link>
+              )}
+              <Button variant="ghost">About Me &rarr;</Button>
             </div>
           </div>
-        </div>
-      </section>
-      {[
-        // {
-        //   title: "Recent Projects",
-        //   projects: recentProjects,
-        // },
-        {
-          title: "Highlighted Projects",
-          projects: highlightedProjects,
-        },
-      ].map((item, index) => (
-        <section key={index} className="flex flex-col bg-base-300 p-20">
-          <h1 className="text-3xl font-bold">{item.title}</h1>
-          <div className="divider" />
-          <div className="flex flex-1 flex-col justify-between gap-4 md:flex-row">
-            {item.projects.map((project, index) => (
+        </MaxWidthWrapper>
+        <MaxWidthWrapper className="mt-6 rounded-xl border border-muted bg-cover bg-bottom p-10 bg-blend-overlay">
+          <h1 className="text-xl font-bold tracking-tight text-foreground">
+            Recent Projects
+          </h1>
+          <Separator className="my-4" />
+          <div className="grid grid-cols-1 gap-3 lg:grid-cols-3">
+            {recentProjects.map((project, index) => (
               <ProjectCard key={index} project={project} />
             ))}
           </div>
-        </section>
-      ))}
-      {/* <section className="flex flex-col bg-base-300 p-20">
-        <h1 className="text-3xl font-bold">Recent Projects</h1>
-        <div className="divider" />
-        <div className="flex flex-1 flex-col justify-between gap-4 md:flex-row">
-          {recentProjects.map((project, index) => (
-            <ProjectCard key={index} project={project} />
-          ))}
-        </div>
-      </section> */}
-      {/* <section className="flex flex-col bg-base-300 p-20">
-        <h1 className="text-3xl font-bold">Highlighted Projects</h1>
-        <div className="divider" />
-        <div className="flex flex-1 flex-col justify-between gap-4 md:flex-row">
-          {highlightedProjects.map((project, index) => (
-            <ProjectCard key={index} project={project} />
-          ))}
-        </div>
-      </section> */}
-      <Footer />
-    </main>
+        </MaxWidthWrapper>
+        <MaxWidthWrapper className="mt-6 rounded-xl border border-muted bg-cover bg-bottom p-10 bg-blend-overlay">
+          <h1 className="text-xl font-bold tracking-tight text-foreground">
+            Highlighted Projects
+          </h1>
+          <Separator className="my-4" />
+          <div className="grid grid-cols-1 gap-3 lg:grid-cols-3">
+            {highlightedProjects.map((project, index) => (
+              <ProjectCard key={index} project={project} />
+            ))}
+          </div>
+        </MaxWidthWrapper>
+      </MaxWidthWrapper>
+    </>
   );
 };
 

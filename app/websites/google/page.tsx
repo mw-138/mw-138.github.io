@@ -1,5 +1,5 @@
-import Footer from "@/app/components/Footer";
-import WebsiteNavigation from "@/app/components/WebsiteNavigation";
+import Footer from "@/components/Footer";
+import WebsiteNavigation from "@/components/WebsiteNavigation";
 import Link from "next/link";
 import { BsFillGrid3X3GapFill } from "react-icons/bs";
 
@@ -119,7 +119,6 @@ export default function Page() {
         </div>
       </main>
       <WebsiteNavigation />
-      <Footer />
     </>
   );
 }

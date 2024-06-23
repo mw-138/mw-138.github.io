@@ -1,26 +1,23 @@
-import Footer from "@/app/components/Footer";
-import WebsiteNavigation from "@/app/components/WebsiteNavigation";
+import WebsiteNavigation from "@/components/WebsiteNavigation";
 import Header from "./components/Header";
 import ImportForm from "./components/ImportForm";
-import SubscriptionForm from "./components/SubscriptionForm";
-import { SubscriptionTrackerProvider } from "./context/SubscriptionTrackerContext";
 import SubscriptionButtonList from "./components/SubscriptionButtonList";
+import { SubscriptionTrackerProvider } from "./context/SubscriptionTrackerContext";
+import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 
 export default function Page() {
   return (
     <>
       <SubscriptionTrackerProvider>
-        <main className="bg-subscription-tracker-background-900 text-subscription-tracker-text-100 flex select-none flex-col font-['Fira_Sans'] lg:h-screen">
-          <Header />
-          <div className="flex flex-1 flex-col-reverse overflow-hidden lg:flex-row">
+        <MaxWidthWrapper>
+          <main className="flex h-screen select-none flex-col font-['Fira_Sans']">
+            <Header />
             <SubscriptionButtonList />
-            <SubscriptionForm />
-          </div>
-        </main>
+          </main>
+        </MaxWidthWrapper>
         <ImportForm />
       </SubscriptionTrackerProvider>
       <WebsiteNavigation />
-      <Footer />
     </>
   );
 }

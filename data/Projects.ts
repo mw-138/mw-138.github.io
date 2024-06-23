@@ -1,4 +1,4 @@
-import Project, { Language, Tag, Tool } from "@/app/classes/Project";
+import Project, { Language, Tag, Tool } from "@/data/classes/Project";
 
 import PixelPlatformer_Screenshot01 from "@/public/projects/pixel_platformer/screenshot_01.png";
 
@@ -59,10 +59,13 @@ import PremierLeagueReDesign_Screenshot01 from "@/public/projects/premier_league
 import SubscriptionTracker_Screenshot01 from "@/public/projects/subscription_tracker/screenshot_01.png";
 import SubscriptionTracker_Screenshot02 from "@/public/projects/subscription_tracker/screenshot_02.png";
 import SubscriptionTracker_Screenshot03 from "@/public/projects/subscription_tracker/screenshot_03.png";
+import SubscriptionTracker_Screenshot04 from "@/public/projects/subscription_tracker/screenshot_04.png";
 
 import LifeSimulator_Screenshot01 from "@/public/projects/life_simulator/screenshot_01.png";
 
 import TicTacToe_Screenshot01 from "@/public/projects/tic_tac_toe/screenshot_01.png";
+
+import Google_Screenshot01 from "@/public/projects/google/screenshot_01.png";
 
 export const Projects: Project[] = [
   new Project(
@@ -315,6 +318,7 @@ export const Projects: Project[] = [
       SubscriptionTracker_Screenshot01,
       SubscriptionTracker_Screenshot02,
       SubscriptionTracker_Screenshot03,
+      SubscriptionTracker_Screenshot04,
     ],
     [],
     [Tag.Website],
@@ -355,9 +359,9 @@ export const Projects: Project[] = [
     "A Google homepage clone.",
     [Tool.VsCode, Tool.NextJs, Tool.React, Tool.TailwindCSS],
     [Language.TypeScript, Language.HTML, Language.CSS],
-    TicTacToe_Screenshot01,
+    Google_Screenshot01,
     "/websites/google",
-    [TicTacToe_Screenshot01],
+    [Google_Screenshot01],
     [],
     [Tag.Website],
   ),

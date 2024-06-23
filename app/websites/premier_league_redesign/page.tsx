@@ -1,7 +1,7 @@
-import Footer from "@/app/components/Footer";
-import WebsiteNavigation from "@/app/components/WebsiteNavigation";
+import Footer from "@/components/Footer";
+import WebsiteNavigation from "@/components/WebsiteNavigation";
 import Navbar from "./components/Navbar";
-import ProjectWipBanner from "@/app/components/ProjectWipBanner";
+import ProjectWipBanner from "@/components/ProjectWipBanner";
 import { AlphabeticalTeams, FixtureSim, GameWeeks } from "./teams";
 import LeagueTable, { LeagueTableStyle } from "./components/LeagueTable";
 import Image from "next/image";
@@ -76,7 +76,6 @@ const page = () => {
         </div>
       </main>
       <WebsiteNavigation />
-      <Footer />
     </>
   );
 };
