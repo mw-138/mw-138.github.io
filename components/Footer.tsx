@@ -17,6 +17,7 @@ const Footer = () => {
     "/websites/netflix",
     "/websites/tic_tac_toe",
     "/websites/premier_league_redesign",
+    "/websites/rpg_adventure_game",
   ];
   const showFooterActions = actionAllowedPages.includes(pathname);
   return (
