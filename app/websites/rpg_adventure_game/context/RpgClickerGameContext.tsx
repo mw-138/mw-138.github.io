@@ -23,7 +23,7 @@ export function RpgClickerGameProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const [inventory, setInventory] = useState<Item[]>([]);
+  const [inventory, setInventory] = useState<Item[]>([new Item("Sword")]);
 
   function addItem(item: Item): void {
     setInventory((prev) => [...prev, item]);

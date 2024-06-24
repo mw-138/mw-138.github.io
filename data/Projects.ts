@@ -52,8 +52,6 @@ import Portfolio_Screenshot02 from "@/public/projects/portfolio/screenshot_02.pn
 import NetflixReDesign_Screenshot01 from "@/public/projects/netflix_redesign/screenshot_01.png";
 import NetflixReDesign_Screenshot02 from "@/public/projects/netflix_redesign/screenshot_02.png";
 
-import MinimalPortfolio01_Screenshot01 from "@/public/projects/minimal_portfolio_01/screenshot_01.png";
-
 import PremierLeagueReDesign_Screenshot01 from "@/public/projects/premier_league_redesign/screenshot_01.png";
 
 import SubscriptionTracker_Screenshot01 from "@/public/projects/subscription_tracker/screenshot_01.png";
@@ -277,20 +275,6 @@ export const Projects: Project[] = [
     [Tag.Website, Tag.WorkInProgress],
   ),
   new Project(
-    new Date("05/26/2024"),
-    true,
-    "minimal_portfolio_01",
-    "Minimal Portfolio 01",
-    "A minimal portfolio design.",
-    [Tool.VsCode, Tool.NextJs, Tool.React, Tool.TailwindCSS],
-    [Language.TypeScript, Language.HTML, Language.CSS],
-    MinimalPortfolio01_Screenshot01,
-    "/websites/minimal_portfolio_01",
-    [MinimalPortfolio01_Screenshot01],
-    [],
-    [Tag.Website],
-  ),
-  new Project(
     new Date("05/29/2024"),
     true,
     "premier_league_redesign",
@@ -364,5 +348,19 @@ export const Projects: Project[] = [
     [Google_Screenshot01],
     [],
     [Tag.Website],
+  ),
+  new Project(
+    new Date("06/20/2024"),
+    true,
+    "rpg_adventure_game",
+    "RPG Adventure Game",
+    "An RPG adventure game.",
+    [Tool.VsCode, Tool.NextJs, Tool.React, Tool.TailwindCSS],
+    [Language.TypeScript, Language.HTML, Language.CSS],
+    Google_Screenshot01,
+    "/websites/rpg_adventure_game",
+    [Google_Screenshot01],
+    [],
+    [Tag.Website, Tag.Game, Tag.WorkInProgress],
   ),
 ];

@@ -2,7 +2,7 @@
 
 import { useRpgClickerGameContext } from "../context/RpgClickerGameContext";
 
-export default function Sidebar() {
+export default function Header() {
   const context = useRpgClickerGameContext();
-  return <div className="flex w-52 bg-blue-500"></div>;
+  return <div className="flex h-16 border-b border-muted"></div>;
 }

@@ -10,11 +10,13 @@ export default function Page() {
   return (
     <>
       <RpgClickerGameProvider>
-        <main className="flex h-screen flex-col bg-red-500">
+        <main className="flex h-screen flex-col">
           <Header />
-          <div className="flex h-full flex-row bg-purple-500">
+          <div className="flex h-full flex-row">
             <Sidebar />
-            {/* <InventoryList /> */}
+            <div className="flex-1 px-4">
+              <InventoryList />
+            </div>
           </div>
         </main>
       </RpgClickerGameProvider>
