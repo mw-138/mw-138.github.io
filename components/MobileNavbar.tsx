@@ -20,7 +20,7 @@ interface NavLink {
 const links: NavLink[] = [
   { id: "about", label: "About", href: "/about" },
   { id: "projects", label: "Projects", href: "/projects" },
-  { id: "contact", label: "Contact", href: "/contact" },
+  { id: "contact", label: "Contact", href: "/" },
 ];
 
 export default function MobileNavbar() {
@@ -28,38 +28,22 @@ export default function MobileNavbar() {
 
   const pathname = usePathname();
 
-  // whenever we click an item in the menu and navigate away, we want to close the menu
   useEffect(() => {
     setIsOpen(false);
   }, [pathname]);
 
-  // when we click the path we are currently on, we still want the mobile menu to close,
-  // however we cant rely on the pathname for it because that won't change (we're already there)
   const closeOnCurrent = (href: string) => {
     if (pathname === href) {
       setIsOpen(false);
     }
   };
 
-  // remove second scrollbar when mobile menu is open
   useEffect(() => {
     if (isOpen) document.body.classList.add("overflow-hidden");
     else document.body.classList.remove("overflow-hidden");
   }, [isOpen]);
 
-  if (!isOpen)
-    return (
-      <Button
-        type="button"
-        variant="outline"
-        onClick={() => setIsOpen(true)}
-        className="relative -m-2 inline-flex items-center justify-center rounded-md p-2 text-gray-400 lg:hidden"
-      >
-        <Menu className="h-6 w-6" aria-hidden="true" />
-      </Button>
-    );
-
-  return (
+  return isOpen ? (
     <div className="absolute left-0 top-0 h-screen w-screen bg-background/80 backdrop-blur-md">
       <div className="fixed inset-0 z-40 flex overflow-y-scroll overscroll-y-none">
         <div className="w-full">
@@ -70,7 +54,7 @@ export default function MobileNavbar() {
                 onClick={() => setIsOpen(false)}
                 className="relative inline-flex items-center justify-center p-2"
               >
-                <X className="h-6 w-6" aria-hidden="true" />
+                <X className="h-6 w-6" aria-hidden />
               </Button>
               <Icons.siteLogo className="h-12 w-12 fill-foreground" />
             </div>
@@ -105,5 +89,14 @@ export default function MobileNavbar() {
         </div>
       </div>
     </div>
+  ) : (
+    <Button
+      type="button"
+      variant="outline"
+      onClick={() => setIsOpen(true)}
+      className="relative -m-2 inline-flex items-center justify-center rounded-md p-2 text-gray-400 lg:hidden"
+    >
+      <Menu className="h-6 w-6" aria-hidden />
+    </Button>
   );
 }
