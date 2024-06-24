@@ -1,5 +1,6 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import { useTicTacToeContext } from "../context/TicTacToeContext";
 
 export default function Board() {
@@ -24,27 +25,25 @@ export default function Board() {
         {board.map((row, rowIndex) => (
           <div key={rowIndex} className="grid grid-rows-3 gap-4">
             {row.map((cell, colIndex) => (
-              <button
+              <Button
                 key={colIndex}
-                className="flex h-20 w-20 items-center justify-center rounded-lg border border-zinc-400 bg-zinc-300 text-3xl transition-colors hover:bg-zinc-200"
+                variant="outline"
+                className="flex h-20 w-20 items-center justify-center rounded-lg border text-3xl transition-colors"
                 onClick={() =>
                   setRowTilePlayer(rowIndex, colIndex, currentPlayer)
                 }
                 disabled={winnerFound || board[rowIndex][colIndex] !== null}
               >
                 {cell}
-              </button>
+              </Button>
             ))}
           </div>
         ))}
       </div>
       {(winnerFound || isDraw) && (
-        <button
-          className="rounded-lg bg-orange-500 p-2 text-white transition-colors hover:bg-orange-400"
-          onClick={resetBoard}
-        >
+        <Button variant="outline" onClick={resetBoard}>
           Reset Board
-        </button>
+        </Button>
       )}
     </>
   );
