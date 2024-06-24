@@ -1,9 +1,8 @@
+import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import WebsiteNavigation from "@/components/WebsiteNavigation";
 import Header from "./components/Header";
-import ImportForm from "./components/ImportForm";
 import SubscriptionButtonList from "./components/SubscriptionButtonList";
 import { SubscriptionTrackerProvider } from "./context/SubscriptionTrackerContext";
-import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 
 export default function Page() {
   return (
@@ -15,7 +14,6 @@ export default function Page() {
             <SubscriptionButtonList />
           </main>
         </MaxWidthWrapper>
-        <ImportForm />
       </SubscriptionTrackerProvider>
       <WebsiteNavigation />
     </>
