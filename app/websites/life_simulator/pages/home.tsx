@@ -9,7 +9,9 @@ export default function Home() {
   const context = useContext(LifeSimulatorContext);
   return (
     <>
-      <h1 className="p-4 text-lg font-bold uppercase">Home</h1>
+      <h1 className="border-b border-muted p-2 text-lg font-bold uppercase">
+        Home
+      </h1>
     </>
   );
 }
