@@ -2,6 +2,7 @@
 
 import { useContext } from "react";
 import { LifeSimulatorContext } from "../context/LifeSimulatorContext";
+import { Button } from "@/components/ui/button";
 
 // Show a list of available jobs, as well as current job progression.
 
@@ -9,15 +10,17 @@ export default function Work() {
   const context = useContext(LifeSimulatorContext);
   return (
     <>
-      <h1 className="p-4 text-lg font-bold uppercase">Work</h1>
+      <h1 className="border-b border-muted p-2 text-lg font-bold uppercase">
+        Work
+      </h1>
       {context.jobs.map((job, index) => (
-        <button
+        <Button
           key={index}
-          className="bg-blue-500 px-2 py-1 hover:bg-blue-600"
+          variant="outline"
           onClick={() => context.setCurrentJob(job.id)}
         >
           {job.label}
-        </button>
+        </Button>
       ))}
     </>
   );

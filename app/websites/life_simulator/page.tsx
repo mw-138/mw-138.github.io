@@ -1,7 +1,6 @@
-import Footer from "@/components/Footer";
 import WebsiteNavigation from "@/components/WebsiteNavigation";
-import { LifeSimulatorProvider } from "./context/LifeSimulatorContext";
 import Game from "./components/Game";
+import { LifeSimulatorProvider } from "./context/LifeSimulatorContext";
 
 export default function page() {
   return (
