@@ -382,6 +382,20 @@ export const Projects: Project[] = [
     [],
     [Tag.Software, Tag.Game],
   ),
+  new Project(
+    new Date("06/25/2024"),
+    true,
+    "desktop_simulator",
+    "Desktop Simulator",
+    "A desktop simulation project.",
+    [Tool.VsCode, Tool.NextJs, Tool.React, Tool.TailwindCSS],
+    [Language.TypeScript, Language.HTML, Language.CSS],
+    Google_Screenshot01,
+    "/websites/desktop_simulator",
+    [],
+    [],
+    [Tag.Website],
+  ),
 ];
 
 export const RecentProjects: Project[] = Projects.filter(
