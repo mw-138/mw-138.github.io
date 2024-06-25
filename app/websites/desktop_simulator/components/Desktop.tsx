@@ -33,7 +33,7 @@ export default function Desktop() {
             {apps.map((app, index) => (
               <ContextMenu key={index}>
                 <ContextMenuTrigger>
-                  <SimpleTooltip key={index} message={app.title}>
+                  <SimpleTooltip message={app.title}>
                     <Button
                       variant="outline"
                       className="h-16 w-16 bg-background/50 backdrop-blur-md"
