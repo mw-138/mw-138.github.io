@@ -3,23 +3,12 @@
 import { Icons } from "@/components/Icons";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { CommandPanel } from "./CommandPanel";
 import { DarkModeToggle } from "./DarkModeToggle";
-import { usePathname } from "next/navigation";
 
 const Footer = () => {
-  const pathname = usePathname();
-  const actionAllowedPages: string[] = [
-    "/websites/subscription_tracker",
-    "/websites/google",
-    "/websites/life_simulator",
-    "/websites/minimal_portfolio_01",
-    "/websites/netflix",
-    "/websites/tic_tac_toe",
-    "/websites/premier_league_redesign",
-    "/websites/rpg_adventure_game",
-  ];
-  const showFooterActions = actionAllowedPages.includes(pathname);
+  const showFooterActions = usePathname().includes("/websites");
   return (
     <div className="inset-x-0 h-16 bg-background">
       <footer className="relative bg-background">
