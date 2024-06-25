@@ -10,7 +10,6 @@ import {
   useState,
 } from "react";
 import App from "./interfaces/App";
-import FootballPlayerCard from "@/components/FootballPlayerCard";
 
 type DesktopSimulatorContextValue = {
   backgroundUrl: string;
@@ -46,7 +45,7 @@ export default function DesktopSimulatorProvider({
       id: "internet",
       title: "Internet",
       icon: Globe,
-      content: <FootballPlayerCard />,
+      content: <></>,
       isOpen: false,
       isMinimized: false,
       isFullscreen: false,
