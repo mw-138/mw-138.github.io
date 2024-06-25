@@ -48,6 +48,7 @@ import MiyooMiniThemePreview_Screenshot03 from "@/public/projects/miyoo_mini_the
 
 import Portfolio_Screenshot01 from "@/public/projects/portfolio/screenshot_01.png";
 import Portfolio_Screenshot02 from "@/public/projects/portfolio/screenshot_02.png";
+import Portfolio_Screenshot03 from "@/public/projects/portfolio/screenshot_03.png";
 
 import NetflixReDesign_Screenshot01 from "@/public/projects/netflix_redesign/screenshot_01.png";
 import NetflixReDesign_Screenshot02 from "@/public/projects/netflix_redesign/screenshot_02.png";
@@ -256,7 +257,7 @@ export const Projects: Project[] = [
     [Language.TypeScript, Language.HTML, Language.CSS],
     Portfolio_Screenshot01,
     "",
-    [Portfolio_Screenshot01, Portfolio_Screenshot02],
+    [Portfolio_Screenshot01, Portfolio_Screenshot02, Portfolio_Screenshot03],
     [],
     [Tag.Website],
   ),
