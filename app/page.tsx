@@ -3,30 +3,14 @@ import Navbar from "@/components/Navbar";
 import ProjectCard from "@/components/ProjectCard";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { Projects } from "@/data/Projects";
+import {
+  HeroProject,
+  HighlightedProjects,
+  RecentProjects,
+} from "@/data/Projects";
 import Link from "next/link";
 
 const page = () => {
-  const highlightedProjects = Projects.filter((project) => {
-    const projects = [
-      "coin_catcher",
-      "netflix_redesign",
-      "subscription_tracker",
-    ];
-    return projects.includes(project.id);
-  })
-    .sort((a, b) => b.publishDate.getTime() - new Date().getTime())
-    .filter((project) => project.visible)
-    .slice(0, 3);
-
-  const recentProjects = Projects.sort(
-    (a, b) => b.publishDate.getTime() - new Date().getTime(),
-  )
-    .filter((project) => project.visible)
-    .slice(0, 3);
-
-  const heroProject = Projects.find((project) => project.id === "coin_catcher");
-
   return (
     <>
       <Navbar />
@@ -35,8 +19,8 @@ const page = () => {
           className="mt-6 rounded-xl border border-muted bg-muted bg-cover bg-bottom bg-blend-overlay"
           style={{
             backgroundImage:
-              heroProject && heroProject.screenshots.length > 0
-                ? `url('${heroProject.screenshots[0].src}')`
+              HeroProject && HeroProject.screenshots.length > 0
+                ? `url('${HeroProject.screenshots[0].src}')`
                 : "",
           }}
         >
@@ -49,9 +33,9 @@ const page = () => {
               Game Development, Software Development and Web Development.
             </p>
             <div className="mt-6 flex flex-col gap-4 sm:flex-row">
-              {heroProject && (
+              {HeroProject && (
                 <Link
-                  href={heroProject.GetSiteUrl()}
+                  href={HeroProject.GetSiteUrl()}
                   className={buttonVariants()}
                 >
                   Visit Showcased Project
@@ -67,7 +51,7 @@ const page = () => {
           </h1>
           <Separator className="my-4" />
           <div className="grid grid-cols-1 gap-3 lg:grid-cols-3">
-            {recentProjects.map((project, index) => (
+            {RecentProjects.map((project, index) => (
               <ProjectCard key={index} project={project} />
             ))}
           </div>
@@ -78,7 +62,7 @@ const page = () => {
           </h1>
           <Separator className="my-4" />
           <div className="grid grid-cols-1 gap-3 lg:grid-cols-3">
-            {highlightedProjects.map((project, index) => (
+            {HighlightedProjects.map((project, index) => (
               <ProjectCard key={index} project={project} />
             ))}
           </div>

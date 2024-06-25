@@ -1,5 +1,8 @@
 import Project from "@/data/classes/Project";
-import { Button, buttonVariants } from "./ui/button";
+import { cn } from "@/lib/utils";
+import Link from "next/link";
+import { Badge } from "./ui/badge";
+import { buttonVariants } from "./ui/button";
 import {
   Card,
   CardContent,
@@ -7,28 +10,19 @@ import {
   CardHeader,
   CardTitle,
 } from "./ui/card";
-import { Badge, badgeVariants } from "./ui/badge";
-import Link from "next/link";
-import { cn } from "@/lib/utils";
 
 interface ProjectCardProps {
   project: Project;
 }
 
 export default function ProjectCard({ project }: ProjectCardProps) {
-  const { title, screenshots, tags, id } = project;
-  const thumbnail = screenshots.length > 0 ? screenshots[0] : null;
-  const hasThumbnail = thumbnail !== null;
+  const { title, tags, id, thumbnail } = project;
   return (
     <Card
       className="flex flex-col bg-muted/50 bg-cover bg-center bg-blend-overlay dark:bg-muted"
-      style={
-        hasThumbnail
-          ? {
-              backgroundImage: `url(${thumbnail.src})`,
-            }
-          : {}
-      }
+      style={{
+        backgroundImage: `url(${thumbnail.src})`,
+      }}
     >
       <CardHeader>
         <CardTitle>{title}</CardTitle>

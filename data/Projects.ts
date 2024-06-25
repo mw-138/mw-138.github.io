@@ -1,5 +1,7 @@
 import Project, { Language, Tag, Tool } from "@/data/classes/Project";
 
+import TemporaryThumbnail from "@/public/temporary_thumbnail.jpg";
+
 import PixelPlatformer_Screenshot01 from "@/public/projects/pixel_platformer/screenshot_01.png";
 
 import RpgBoardGame_Screenshot01 from "@/public/projects/rpg_board_game/screenshot_01.png";
@@ -65,6 +67,8 @@ import LifeSimulator_Screenshot01 from "@/public/projects/life_simulator/screens
 import TicTacToe_Screenshot01 from "@/public/projects/tic_tac_toe/screenshot_01.png";
 
 import Google_Screenshot01 from "@/public/projects/google/screenshot_01.png";
+
+import Borderlands3ModdingLibrary_Screenshot01 from "@/public/projects/borderlands_3_modding_library/screenshot_01.jpg";
 
 export const Projects: Project[] = [
   new Project(
@@ -358,10 +362,42 @@ export const Projects: Project[] = [
     "An RPG adventure game.",
     [Tool.VsCode, Tool.NextJs, Tool.React, Tool.TailwindCSS],
     [Language.TypeScript, Language.HTML, Language.CSS],
-    Google_Screenshot01,
+    TemporaryThumbnail,
     "/websites/rpg_adventure_game",
-    [Google_Screenshot01],
+    [],
     [],
     [Tag.Website, Tag.Game, Tag.WorkInProgress],
   ),
+  new Project(
+    new Date("03/04/2024"),
+    true,
+    "borderlands_3_modding_library",
+    "Borderlands 3 Modding Library",
+    "A Borderlands 3 modding library tool that helps creating mods for Borderlands 3 using hotfixes. There are other tools out there to create mods using lua, but I wanted to do it my own way and created this tool. It works by adding the mod library .dll file to an empty C# .NET project and creating a new Mod object in the main C# file. The mod class will then convert the code and export it into a text file that can be read by compatible Borderlands 3 mod loaders. It also automatically comments hotfixes in the exported file to make it easy to understand what changes have been made. There is an code example in the GitHub repository.",
+    [Tool.VisualStudio],
+    [Language.CSharp],
+    Borderlands3ModdingLibrary_Screenshot01,
+    "https://github.com/mw-138/borderlands-3-modding-library",
+    [],
+    [],
+    [Tag.Software, Tag.Game],
+  ),
 ];
+
+export const RecentProjects: Project[] = Projects.filter(
+  (project) => project.visible,
+)
+  .sort((a, b) => b.publishDate.getTime() - a.publishDate.getTime())
+  .slice(0, 3);
+
+export const HighlightedProjects = Projects.filter((project) => {
+  const projects = ["coin_catcher", "netflix_redesign", "subscription_tracker"];
+  return projects.includes(project.id);
+})
+  .filter((project) => project.visible)
+  .sort((a, b) => b.publishDate.getTime() - a.publishDate.getTime())
+  .slice(0, 3);
+
+export const HeroProject: Project | undefined = Projects.find(
+  (project) => project.id === "coin_catcher",
+);
