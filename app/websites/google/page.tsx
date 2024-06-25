@@ -1,5 +1,5 @@
-import Footer from "@/components/Footer";
-import WebsiteNavigation from "@/components/WebsiteNavigation";
+import PageTemplate from "@/components/PageTemplate";
+import WebProjectNavigation from "@/components/WebProjectNavigation";
 import Link from "next/link";
 import { BsFillGrid3X3GapFill } from "react-icons/bs";
 
@@ -41,7 +41,7 @@ function Logo(): React.ReactNode {
 
 export default function Page() {
   return (
-    <>
+    <PageTemplate hideNavbar>
       <main className="flex h-screen flex-col bg-white text-xs text-zinc-800 dark:bg-zinc-800 dark:text-white">
         <div className="flex h-16 items-center justify-between">
           <div className="flex flex-row items-center gap-4 pl-4">
@@ -70,7 +70,7 @@ export default function Page() {
             <Logo />
             <input
               type="search"
-              className="w-full rounded-full bg-transparent px-4 py-2 ring-2 ring-zinc-300 hover:bg-zinc-300 md:w-[600px] dark:ring-zinc-700 dark:hover:bg-zinc-700"
+              className="w-full rounded-full bg-transparent px-4 py-2 ring-2 ring-zinc-300 hover:bg-zinc-300 dark:ring-zinc-700 dark:hover:bg-zinc-700 md:w-[600px]"
             />
             <div className="flex flex-row gap-6">
               <button className="rounded-md bg-zinc-300 px-4 py-2 outline-1 outline-zinc-500 hover:outline dark:bg-zinc-700">
@@ -118,7 +118,7 @@ export default function Page() {
           </div>
         </div>
       </main>
-      <WebsiteNavigation />
-    </>
+      <WebProjectNavigation />
+    </PageTemplate>
   );
 }
