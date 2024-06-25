@@ -1,6 +1,6 @@
 import Breadcrumbs from "@/components/Breadcrumbs";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
-import Navbar from "@/components/Navbar";
+import PageTemplate from "@/components/PageTemplate";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -41,8 +41,7 @@ const ProjectPage = async ({ params: { id } }: { params: { id: string } }) => {
     notFound();
   }
   return (
-    <>
-      <Navbar />
+    <PageTemplate>
       <MaxWidthWrapper>
         <div className="bg-base-200 text-base-content p-5">
           <Breadcrumbs
@@ -261,7 +260,7 @@ const ProjectPage = async ({ params: { id } }: { params: { id: string } }) => {
           </div> */}
         </div>
       </MaxWidthWrapper>
-    </>
+    </PageTemplate>
   );
 };
 

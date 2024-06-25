@@ -1,15 +1,14 @@
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
-import Navbar from "@/components/Navbar";
+import PageTemplate from "@/components/PageTemplate";
 import { ProjectsView } from "@/components/ProjectsView";
 
 const ProjectsPage = () => {
   return (
-    <>
-      <Navbar />
+    <PageTemplate>
       <MaxWidthWrapper>
         <ProjectsView />
       </MaxWidthWrapper>
-    </>
+    </PageTemplate>
   );
 };
 

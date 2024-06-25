@@ -5,9 +5,9 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { MdChevronLeft } from "react-icons/md";
 
-const WebsiteNavigation = () => {
+const WebProjectNavigation = () => {
   return (
-    <div className="bg-background pt-2">
+    <div className="bg-background py-2">
       <MaxWidthWrapper className="flex items-center justify-between bg-background">
         <Link
           href="/projects"
@@ -30,4 +30,4 @@ const WebsiteNavigation = () => {
   );
 };
 
-export default WebsiteNavigation;
+export default WebProjectNavigation;
