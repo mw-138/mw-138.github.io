@@ -9,6 +9,7 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
+  navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import { cn } from "@/lib/utils";
 import { Icons } from "./Icons";
@@ -78,7 +79,7 @@ export function NavbarLinks() {
             </ul>
           </NavigationMenuContent>
         </NavigationMenuItem>
-        <NavigationMenuItem>
+        {/* <NavigationMenuItem>
           <NavigationMenuTrigger>
             <NavigationMenuLink href="/projects" className="cursor-pointer">
               Projects
@@ -97,6 +98,14 @@ export function NavbarLinks() {
               ))}
             </ul>
           </NavigationMenuContent>
+        </NavigationMenuItem> */}
+        <NavigationMenuItem>
+          <NavigationMenuLink
+            href="/projects"
+            className={cn("cursor-pointer", navigationMenuTriggerStyle())}
+          >
+            Projects
+          </NavigationMenuLink>
         </NavigationMenuItem>
         <NavContact />
       </NavigationMenuList>
