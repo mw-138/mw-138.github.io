@@ -30,12 +30,12 @@ import { Projects } from "@/data/Projects";
 import Project, { Tag } from "@/data/classes/Project";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Button } from "./ui/button";
 import { Separator } from "./ui/separator";
 import { useTheme } from "next-themes";
 
-interface CommandLink {
+interface CommandOption {
   label: string;
   type: "link" | "action";
   icon: LucideIcon;
@@ -45,7 +45,7 @@ interface CommandLink {
 
 interface CommandSection {
   title: string;
-  links: CommandLink[];
+  options: CommandOption[];
 }
 
 function getProjectIcon(project: Project): LucideIcon {
@@ -88,7 +88,7 @@ export function CommandPanel() {
   const commands: CommandSection[] = [
     {
       title: "Suggestions",
-      links: [
+      options: [
         {
           label: "Home",
           type: "link",
@@ -111,7 +111,7 @@ export function CommandPanel() {
     },
     {
       title: "About",
-      links: [
+      options: [
         {
           label: "Introduction",
           type: "link",
@@ -134,7 +134,7 @@ export function CommandPanel() {
     },
     {
       title: "Projects",
-      links: [
+      options: [
         // {
         //   label: "Game Development",
         //   href: "/projects",
@@ -155,7 +155,7 @@ export function CommandPanel() {
     },
     {
       title: "Theme",
-      links: [
+      options: [
         {
           label: "Light",
           type: "action",
@@ -207,38 +207,39 @@ export function CommandPanel() {
         <CommandList>
           <CommandEmpty>No results found.</CommandEmpty>
           {commands.map((command, commandIndex) => (
-            <>
-              <CommandGroup key={commandIndex} heading={command.title}>
-                {command.links.map((link, linkIndex) => {
-                  return link.type === "link" ? (
-                    <Link key={linkIndex} href={link.href ?? "/"}>
+            <Fragment key={commandIndex}>
+              <CommandGroup heading={command.title}>
+                {command.options.map((option, optionIndex) => {
+                  return option.type === "link" ? (
+                    <Link key={optionIndex} href={option.href ?? "/"}>
                       <CommandItem
                         onSelect={() => {
-                          router.push(link.href ?? "/");
+                          router.push(option.href ?? "/");
                           setOpen(false);
                         }}
                       >
-                        <link.icon className="mr-2 h-4 w-4" />
-                        <span>{link.label}</span>
+                        <option.icon className="mr-2 h-4 w-4" />
+                        <span>{option.label}</span>
                       </CommandItem>
                     </Link>
                   ) : (
                     <CommandItem
+                      key={optionIndex}
                       onSelect={() => {
-                        if (link.action) {
-                          link.action();
+                        if (option.action) {
+                          option.action();
                         }
                         setOpen(false);
                       }}
                     >
-                      <link.icon className="mr-2 h-4 w-4" />
-                      <span>{link.label}</span>
+                      <option.icon className="mr-2 h-4 w-4" />
+                      <span>{option.label}</span>
                     </CommandItem>
                   );
                 })}
               </CommandGroup>
               <CommandSeparator />
-            </>
+            </Fragment>
           ))}
         </CommandList>
       </CommandDialog>
