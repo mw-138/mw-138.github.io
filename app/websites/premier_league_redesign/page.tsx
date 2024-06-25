@@ -1,14 +1,14 @@
-import Footer from "@/components/Footer";
-import WebsiteNavigation from "@/components/WebsiteNavigation";
-import Navbar from "./components/Navbar";
+import PageTemplate from "@/components/PageTemplate";
 import ProjectWipBanner from "@/components/ProjectWipBanner";
-import { AlphabeticalTeams, FixtureSim, GameWeeks } from "./teams";
-import LeagueTable, { LeagueTableStyle } from "./components/LeagueTable";
+import WebProjectNavigation from "@/components/WebProjectNavigation";
 import Image from "next/image";
+import LeagueTable, { LeagueTableStyle } from "./components/LeagueTable";
+import Navbar from "./components/Navbar";
+import { AlphabeticalTeams, FixtureSim, GameWeeks } from "./teams";
 
 const page = () => {
   return (
-    <>
+    <PageTemplate hideNavbar>
       <ProjectWipBanner />
       <main className="font-['Roboto'] selection:bg-premier-league-purple selection:text-white">
         <Navbar teams={AlphabeticalTeams} />
@@ -75,8 +75,8 @@ const page = () => {
           </div>
         </div>
       </main>
-      <WebsiteNavigation />
-    </>
+      <WebProjectNavigation />
+    </PageTemplate>
   );
 };
 

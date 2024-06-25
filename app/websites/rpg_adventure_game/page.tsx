@@ -1,14 +1,13 @@
-import React from "react";
-import { RpgClickerGameProvider } from "./context/RpgClickerGameContext";
-import WebsiteNavigation from "@/components/WebsiteNavigation";
-import Footer from "@/components/Footer";
-import InventoryList from "./components/InventoryList";
+import PageTemplate from "@/components/PageTemplate";
+import WebProjectNavigation from "@/components/WebProjectNavigation";
 import Header from "./components/Header";
+import InventoryList from "./components/InventoryList";
 import Sidebar from "./components/Sidebar";
+import { RpgClickerGameProvider } from "./context/RpgClickerGameContext";
 
 export default function Page() {
   return (
-    <>
+    <PageTemplate hideNavbar>
       <RpgClickerGameProvider>
         <main className="flex h-screen flex-col">
           <Header />
@@ -20,7 +19,7 @@ export default function Page() {
           </div>
         </main>
       </RpgClickerGameProvider>
-      <WebsiteNavigation />
-    </>
+      <WebProjectNavigation />
+    </PageTemplate>
   );
 }

@@ -1,4 +1,4 @@
-import WebsiteNavigation from "@/components/WebsiteNavigation";
+import WebProjectNavigation from "@/components/WebProjectNavigation";
 import Hero from "./components/Hero";
 import MovieRow from "./components/MovieRow";
 import Nav from "./components/Nav";
@@ -7,6 +7,7 @@ import Requests, {
   getUpcomingMovies,
   performMovieQuery,
 } from "./dataFetching";
+import PageTemplate from "@/components/PageTemplate";
 
 const page = async () => {
   const popular = await performMovieQuery(Requests.Popular);
@@ -16,7 +17,7 @@ const page = async () => {
   const randomMovie = getRandomMovie(popular.results);
 
   return (
-    <div className="select-none bg-black">
+    <PageTemplate hideNavbar>
       <Nav />
       <Hero movie={randomMovie} />
       {[
@@ -52,8 +53,8 @@ const page = async () => {
           movies={row.entries}
         />
       ))}
-      <WebsiteNavigation />
-    </div>
+      <WebProjectNavigation />
+    </PageTemplate>
   );
 };
 

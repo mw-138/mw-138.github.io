@@ -1,5 +1,5 @@
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
-import Navbar from "@/components/Navbar";
+import PageTemplate from "@/components/PageTemplate";
 import { Separator } from "@/components/ui/separator";
 import {
   Table,
@@ -42,8 +42,7 @@ const AboutPage = () => {
   ].sort((a, b) => skillLevelOrder[b.level] - skillLevelOrder[a.level]);
 
   return (
-    <>
-      <Navbar />
+    <PageTemplate>
       <MaxWidthWrapper>
         <MaxWidthWrapper className="mt-6 rounded-xl border border-muted bg-cover bg-bottom bg-blend-overlay">
           <div
@@ -120,7 +119,7 @@ const AboutPage = () => {
           </div>
         </MaxWidthWrapper>
       </MaxWidthWrapper>
-    </>
+    </PageTemplate>
   );
 };
 
