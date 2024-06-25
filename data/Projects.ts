@@ -70,6 +70,9 @@ import Google_Screenshot01 from "@/public/projects/google/screenshot_01.png";
 
 import Borderlands3ModdingLibrary_Screenshot01 from "@/public/projects/borderlands_3_modding_library/screenshot_01.jpg";
 
+import DesktopSimulator_Screenshot01 from "@/public/projects/desktop_simulator/screenshot_01.png";
+import DesktopSimulator_Screenshot02 from "@/public/projects/desktop_simulator/screenshot_02.png";
+
 export const Projects: Project[] = [
   new Project(
     new Date("03/21/2024"),
@@ -390,11 +393,11 @@ export const Projects: Project[] = [
     "A desktop simulation project.",
     [Tool.VsCode, Tool.NextJs, Tool.React, Tool.TailwindCSS],
     [Language.TypeScript, Language.HTML, Language.CSS],
-    Google_Screenshot01,
+    DesktopSimulator_Screenshot01,
     "/websites/desktop_simulator",
+    [DesktopSimulator_Screenshot01, DesktopSimulator_Screenshot02],
     [],
-    [],
-    [Tag.Website],
+    [Tag.Website, Tag.WorkInProgress],
   ),
 ];
 
