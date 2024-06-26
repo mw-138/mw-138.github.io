@@ -2,24 +2,20 @@
 
 import SimpleTooltip from "@/components/SimpleTooltip";
 import { Button } from "@/components/ui/button";
+import {
+  ContextMenu,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuSeparator,
+  ContextMenuShortcut,
+  ContextMenuSub,
+  ContextMenuSubContent,
+  ContextMenuSubTrigger,
+  ContextMenuTrigger,
+} from "@/components/ui/context-menu";
 import { useRef } from "react";
 import { useDesktopSimulatorContext } from "../context";
 import DraggableWindow from "./DraggableWindow";
-import {
-  ContextMenuShortcut,
-  ContextMenu,
-  ContextMenuTrigger,
-  ContextMenuContent,
-  ContextMenuItem,
-  ContextMenuSub,
-  ContextMenuSubTrigger,
-  ContextMenuSubContent,
-  ContextMenuSeparator,
-  ContextMenuCheckboxItem,
-  ContextMenuRadioGroup,
-  ContextMenuLabel,
-  ContextMenuRadioItem,
-} from "@/components/ui/context-menu";
 
 export default function Desktop() {
   const { apps, openedAppWindows, toggleAppVisibility } =
@@ -114,6 +110,7 @@ export default function Desktop() {
           dragConstraints={desktopConstraints}
           isTransparent
           isBlurred
+          isScrollable={app.isWindowScrollable}
         >
           {app.content}
         </DraggableWindow>

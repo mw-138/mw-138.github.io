@@ -1,6 +1,7 @@
 "use client";
 
-import { Globe } from "lucide-react";
+import { Globe, Settings, Terminal } from "lucide-react";
+import { useTheme } from "next-themes";
 import {
   Dispatch,
   PropsWithChildren,
@@ -9,14 +10,21 @@ import {
   useContext,
   useState,
 } from "react";
+import SettingsApp from "./components/apps/SettingsApp";
+import TerminalApp from "./components/apps/TerminalApp";
 import App from "./interfaces/App";
 
 type DesktopSimulatorContextValue = {
-  backgroundUrl: string;
-  setBackgroundUrl: Dispatch<SetStateAction<string>>;
+  darkWallpaper: string;
+  setDarkWallpaper: Dispatch<SetStateAction<string>>;
+  lightWallpaper: string;
+  setLightWallpaper: Dispatch<SetStateAction<string>>;
+  currentWallpaper: string;
   apps: App[];
   openedApps: App[];
   openedAppWindows: App[];
+  activeApp: string;
+  setActiveApp: Dispatch<SetStateAction<string>>;
   toggleAppVisibility: (id: string, visible: boolean) => void;
   toggleAppMinimized: (id: string, minimized: boolean) => void;
   toggleAppFullscreen: (id: string, minimized: boolean) => void;
@@ -24,11 +32,16 @@ type DesktopSimulatorContextValue = {
 
 export const DesktopSimulatorContext =
   createContext<DesktopSimulatorContextValue>({
-    backgroundUrl: "",
-    setBackgroundUrl: () => {},
+    darkWallpaper: "",
+    setDarkWallpaper: () => {},
+    lightWallpaper: "",
+    setLightWallpaper: () => {},
+    currentWallpaper: "",
     apps: [],
     openedApps: [],
     openedAppWindows: [],
+    activeApp: "",
+    setActiveApp: () => {},
     toggleAppVisibility: () => {},
     toggleAppMinimized: () => {},
     toggleAppFullscreen: () => {},
@@ -37,10 +50,28 @@ export const DesktopSimulatorContext =
 export default function DesktopSimulatorProvider({
   children,
 }: PropsWithChildren) {
-  const [backgroundUrl, setBackgroundUrl] = useState<string>(
-    "https://blogs.windows.com/wp-content/uploads/prod/sites/2/2021/10/Windows-11-Bloom-Screensaver-Dark-scaled.jpg",
+  const { forcedTheme } = useTheme();
+  const [darkWallpaper, setDarkWallpaper] = useState<string>(
+    "https://i.redd.it/a9vjztlbnys71.png",
   );
+  const [lightWallpaper, setLightWallpaper] = useState<string>(
+    "https://archive.org/download/windows-xp-bliss-wallpaper/windows-xp-bliss-4k-lu-1920x1080.jpg",
+  );
+  const currentWallpaper =
+    forcedTheme === "dark" || forcedTheme === undefined
+      ? darkWallpaper
+      : lightWallpaper;
   const [apps, setApps] = useState<App[]>([
+    {
+      id: "settings",
+      title: "Settings",
+      icon: Settings,
+      content: <SettingsApp />,
+      isOpen: false,
+      isMinimized: false,
+      isFullscreen: false,
+      isWindowScrollable: true,
+    },
     {
       id: "internet",
       title: "Internet",
@@ -49,10 +80,22 @@ export default function DesktopSimulatorProvider({
       isOpen: false,
       isMinimized: false,
       isFullscreen: false,
+      isWindowScrollable: true,
+    },
+    {
+      id: "terminal",
+      title: "Terminal",
+      icon: Terminal,
+      content: <TerminalApp />,
+      isOpen: false,
+      isMinimized: false,
+      isFullscreen: false,
+      isWindowScrollable: false,
     },
   ]);
   const openedApps = apps.filter((app) => app.isOpen);
-  const openedAppWindows = apps.filter((app) => app.isOpen && !app.isMinimized);
+  const openedAppWindows = apps.filter((app) => app.isOpen || app.isMinimized);
+  const [activeApp, setActiveApp] = useState<string>("");
 
   function toggleAppVisibility(id: string, visible: boolean): void {
     setApps((prevApps) =>
@@ -61,6 +104,7 @@ export default function DesktopSimulatorProvider({
         return app.id === id ? { ...app, isOpen: visible, isMinimized } : app;
       }),
     );
+    setActiveApp(visible ? id : "");
   }
 
   function toggleAppMinimized(id: string, minimized: boolean): void {
@@ -69,6 +113,7 @@ export default function DesktopSimulatorProvider({
         app.id === id ? { ...app, isMinimized: minimized } : app,
       ),
     );
+    setActiveApp(minimized ? "" : id);
   }
 
   function toggleAppFullscreen(id: string, fullscreen: boolean): void {
@@ -82,11 +127,16 @@ export default function DesktopSimulatorProvider({
   return (
     <DesktopSimulatorContext.Provider
       value={{
-        backgroundUrl,
-        setBackgroundUrl,
+        darkWallpaper,
+        setDarkWallpaper,
+        lightWallpaper,
+        setLightWallpaper,
+        currentWallpaper,
         apps,
         openedApps,
         openedAppWindows,
+        activeApp,
+        setActiveApp,
         toggleAppVisibility,
         toggleAppMinimized,
         toggleAppFullscreen,

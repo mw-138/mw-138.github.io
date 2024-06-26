@@ -8,4 +8,5 @@ export default interface App {
   isOpen: boolean;
   isMinimized: boolean;
   isFullscreen: boolean;
+  isWindowScrollable: boolean;
 }
