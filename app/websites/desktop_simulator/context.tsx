@@ -87,7 +87,7 @@ export default function DesktopSimulatorProvider({
       title: "Terminal",
       icon: Terminal,
       content: <TerminalApp />,
-      isOpen: true,
+      isOpen: false,
       isMinimized: false,
       isFullscreen: false,
       isWindowScrollable: false,
