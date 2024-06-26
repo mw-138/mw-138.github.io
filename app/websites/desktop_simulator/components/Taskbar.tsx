@@ -64,8 +64,8 @@ export default function Taskbar() {
             </aside>
             <div className="pl-48">
               <ScrollArea>
-                {Array.from({ length: 100 }, () => (
-                  <p>Test</p>
+                {Array.from({ length: 100 }, (_, index) => (
+                  <p key={index}>Test</p>
                 ))}
               </ScrollArea>
             </div>
