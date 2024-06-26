@@ -13,21 +13,15 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { LayoutTemplate } from "lucide-react";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Separator } from "@/components/ui/separator";
+import { cn } from "@/lib/utils";
+import { Power } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useDesktopSimulatorContext } from "../context";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
 
 export default function Taskbar() {
-  const { openedApps, toggleAppMinimized, toggleAppVisibility } =
+  const { openedApps, toggleAppMinimized, toggleAppVisibility, activeApp } =
     useDesktopSimulatorContext();
   const [time, setTime] = useState<Date | undefined>(new Date());
   const timeString = time
@@ -42,25 +36,39 @@ export default function Taskbar() {
   }, []);
 
   return (
-    <div className="flex h-10 items-center justify-between border-t border-muted bg-background/50 backdrop-blur-md">
+    <div className="flex h-10 items-center justify-between border-t border-muted bg-background/20 backdrop-blur-md">
       <div className="flex">
         <Popover>
-          <PopoverTrigger className={buttonVariants({ variant: "ghost" })}>
-            <LayoutTemplate />
+          <PopoverTrigger
+            className={cn(buttonVariants({ variant: "ghost" }), "rounded-none")}
+          >
+            <Power />
           </PopoverTrigger>
-          <PopoverContent align="end" className="h-[700px] w-[500px]">
-            <Card className="border-0 bg-red-500">
-              <CardHeader>
-                <CardTitle>Card Title</CardTitle>
-                <CardDescription>Card Description</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p>Card Content</p>
-              </CardContent>
-              <CardFooter>
-                <p>Card Footer</p>
-              </CardFooter>
-            </Card>
+          <PopoverContent
+            align="end"
+            className="h-[700px] w-[500px] overflow-hidden bg-background/50 backdrop-blur-md"
+          >
+            <aside className="absolute left-0 top-0 flex h-full w-48 flex-col border-r border-muted bg-background">
+              <ScrollArea>
+                <div className="flex flex-col gap-2 p-2">
+                  <h1>Start</h1>
+                  <Separator />
+                  <Button
+                    variant="outline"
+                    className="flex justify-start gap-2"
+                  >
+                    Button
+                  </Button>
+                </div>
+              </ScrollArea>
+            </aside>
+            <div className="pl-48">
+              <ScrollArea>
+                {Array.from({ length: 100 }, () => (
+                  <p>Test</p>
+                ))}
+              </ScrollArea>
+            </div>
           </PopoverContent>
         </Popover>
         {openedApps.map((app, index) => (
@@ -69,6 +77,10 @@ export default function Taskbar() {
               <Button
                 variant="ghost"
                 onClick={() => toggleAppMinimized(app.id, !app.isMinimized)}
+                className={cn("rounded-none", {
+                  "border-b-2 border-muted-foreground bg-muted-foreground/10":
+                    app.id === activeApp,
+                })}
               >
                 <app.icon />
               </Button>
@@ -85,7 +97,9 @@ export default function Taskbar() {
       </div>
       <div>
         <Popover>
-          <PopoverTrigger className={buttonVariants({ variant: "ghost" })}>
+          <PopoverTrigger
+            className={cn(buttonVariants({ variant: "ghost" }), "rounded-none")}
+          >
             {timeString}
           </PopoverTrigger>
           <PopoverContent align="end">

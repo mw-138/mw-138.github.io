@@ -13,6 +13,7 @@ interface DraggableWindowProps extends PropsWithChildren {
   dragConstraints: MutableRefObject<HTMLDivElement | null>;
   isBlurred?: boolean;
   isTransparent?: boolean;
+  isScrollable?: boolean;
 }
 
 export default function DraggableWindow({
@@ -20,16 +21,20 @@ export default function DraggableWindow({
   dragConstraints,
   isBlurred = false,
   isTransparent = false,
+  isScrollable = true,
   children,
 }: DraggableWindowProps) {
-  const { toggleAppVisibility, toggleAppMinimized, toggleAppFullscreen } =
-    useDesktopSimulatorContext();
+  const {
+    toggleAppVisibility,
+    toggleAppMinimized,
+    toggleAppFullscreen,
+    activeApp,
+    setActiveApp,
+  } = useDesktopSimulatorContext();
   const dragControls = useDragControls();
 
   const TitleIcon = app.icon;
   const WindowSizeIcon = app.isFullscreen ? Minimize : Maximize;
-  const WindowWidth = app.isFullscreen ? "100%" : "1280px";
-  const WindowHeight = app.isFullscreen ? "100%" : "720px";
 
   return (
     <motion.div
@@ -40,27 +45,20 @@ export default function DraggableWindow({
       dragMomentum={false}
       dragControls={dragControls}
       className={cn(
-        "absolute left-0 top-0 flex flex-col overflow-hidden rounded-lg border border-muted bg-background text-foreground shadow-2xl",
+        "absolute left-0 top-0 flex h-[720px] w-[1280px] flex-col overflow-hidden rounded-lg border border-muted bg-background text-foreground shadow-md shadow-black/50",
         {
           "backdrop-blur-lg": isBlurred,
           "bg-background/80": isTransparent,
+          "z-50": app.id === activeApp,
+          hidden: app.isMinimized || !app.isOpen,
+          "h-full w-full": app.isFullscreen,
         },
       )}
-      style={{
-        width: WindowWidth,
-        height: WindowHeight,
-      }}
+      onPointerDown={() => setActiveApp(app.id)}
     >
       <div
-        className={cn(
-          "flex h-10 items-center justify-between border-b border-muted bg-muted",
-          {
-            "backdrop-blur-lg": isBlurred,
-            "bg-muted/80": isTransparent,
-          },
-        )}
+        className="relative flex h-10 items-center justify-between border-b border-muted-foreground/20 bg-muted"
         onPointerDown={(e) => {
-          if (app.isFullscreen) return;
           dragControls.start(e);
         }}
       >
@@ -69,14 +67,29 @@ export default function DraggableWindow({
           <span>{app.title}</span>
         </div>
         <div className="flex gap-2 pr-2">
-          <Minus onClick={() => toggleAppMinimized(app.id, !app.isMinimized)} />
-          {/* <WindowSizeIcon
+          <Minus
+            className="rounded-full p-1 hover:bg-background"
+            onClick={() => toggleAppMinimized(app.id, !app.isMinimized)}
+          />
+          <WindowSizeIcon
+            className="rounded-full p-1 hover:bg-background"
             onClick={() => toggleAppFullscreen(app.id, !app.isFullscreen)}
-          /> */}
-          <X onClick={() => toggleAppVisibility(app.id, false)} />
+          />
+          <X
+            className="rounded-full p-1 hover:bg-background"
+            onClick={() => toggleAppVisibility(app.id, false)}
+          />
         </div>
       </div>
-      <ScrollArea className="flex-1 select-all">{children}</ScrollArea>
+      {isScrollable ? (
+        <ScrollArea className="relative flex flex-1 select-text overflow-hidden">
+          {children}
+        </ScrollArea>
+      ) : (
+        <div className="relative flex flex-1 select-text overflow-hidden">
+          {children}
+        </div>
+      )}
     </motion.div>
   );
 }
