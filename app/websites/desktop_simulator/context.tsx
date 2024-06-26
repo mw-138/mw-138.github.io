@@ -50,7 +50,7 @@ export const DesktopSimulatorContext =
 export default function DesktopSimulatorProvider({
   children,
 }: PropsWithChildren) {
-  const { forcedTheme } = useTheme();
+  const { resolvedTheme } = useTheme();
   const [darkWallpaper, setDarkWallpaper] = useState<string>(
     "https://i.redd.it/a9vjztlbnys71.png",
   );
@@ -58,7 +58,7 @@ export default function DesktopSimulatorProvider({
     "https://archive.org/download/windows-xp-bliss-wallpaper/windows-xp-bliss-4k-lu-1920x1080.jpg",
   );
   const currentWallpaper =
-    forcedTheme === "dark" || forcedTheme === undefined
+    resolvedTheme === "dark" || resolvedTheme === undefined
       ? darkWallpaper
       : lightWallpaper;
   const [apps, setApps] = useState<App[]>([
