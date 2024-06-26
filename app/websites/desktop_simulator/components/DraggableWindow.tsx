@@ -61,6 +61,7 @@ export default function DraggableWindow({
         onPointerDown={(e) => {
           dragControls.start(e);
         }}
+        onDoubleClick={() => toggleAppFullscreen(app.id, !app.isFullscreen)}
       >
         <div className="flex gap-2 pl-2">
           <TitleIcon />
