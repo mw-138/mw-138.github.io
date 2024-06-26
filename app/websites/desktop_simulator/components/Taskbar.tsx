@@ -19,10 +19,18 @@ import { cn } from "@/lib/utils";
 import { Power } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useDesktopSimulatorContext } from "../context";
+import TaskbarApp from "./TaskbarApp";
 
 export default function Taskbar() {
-  const { openedApps, toggleAppMinimized, toggleAppVisibility, activeApp } =
-    useDesktopSimulatorContext();
+  const {
+    apps,
+    openedApps,
+    toggleAppMinimized,
+    toggleAppVisibility,
+    activeApp,
+    pinnedApps,
+    taskbarApps,
+  } = useDesktopSimulatorContext();
   const [time, setTime] = useState<Date | undefined>(new Date());
   const timeString = time
     ? time.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
@@ -71,28 +79,8 @@ export default function Taskbar() {
             </div>
           </PopoverContent>
         </Popover>
-        {openedApps.map((app, index) => (
-          <ContextMenu key={index}>
-            <ContextMenuTrigger>
-              <Button
-                variant="ghost"
-                onClick={() => toggleAppMinimized(app.id, !app.isMinimized)}
-                className={cn("rounded-none", {
-                  "border-b-2 border-muted-foreground bg-muted-foreground/10":
-                    app.id === activeApp,
-                })}
-              >
-                <app.icon />
-              </Button>
-            </ContextMenuTrigger>
-            <ContextMenuContent>
-              <ContextMenuItem
-                onClick={() => toggleAppVisibility(app.id, false)}
-              >
-                Close
-              </ContextMenuItem>
-            </ContextMenuContent>
-          </ContextMenu>
+        {taskbarApps.map((app, index) => (
+          <TaskbarApp key={index} app={app} />
         ))}
       </div>
       <div>

@@ -18,36 +18,49 @@ import { useDesktopSimulatorContext } from "../context";
 import DraggableWindow from "./DraggableWindow";
 
 export default function Desktop() {
-  const { apps, openedAppWindows, toggleAppVisibility } =
-    useDesktopSimulatorContext();
+  const {
+    apps,
+    openedAppWindows,
+    toggleAppVisibility,
+    pinnedApps,
+    togglePinnedApp,
+  } = useDesktopSimulatorContext();
   const desktopConstraints = useRef<HTMLDivElement | null>(null);
   return (
     <div className="relative flex-1 overflow-hidden" ref={desktopConstraints}>
       <ContextMenu>
         <ContextMenuTrigger>
           <div className="flex h-full w-fit max-w-full flex-col flex-wrap gap-2 p-2">
-            {apps.map((app, index) => (
-              <ContextMenu key={index}>
-                <ContextMenuTrigger>
-                  <SimpleTooltip message={app.title}>
-                    <Button
-                      variant="outline"
-                      className="h-16 w-16 bg-background/50 backdrop-blur-md"
-                      onClick={() => toggleAppVisibility(app.id, true)}
+            {apps.map((app, index) => {
+              const isPinned = pinnedApps.some((x) => app.id === x);
+              return (
+                <ContextMenu key={index}>
+                  <ContextMenuTrigger>
+                    <SimpleTooltip message={app.title}>
+                      <Button
+                        variant="outline"
+                        className="h-16 w-16 bg-background/50 backdrop-blur-md"
+                        onClick={() => toggleAppVisibility(app.id, true)}
+                      >
+                        <app.icon />
+                      </Button>
+                    </SimpleTooltip>
+                  </ContextMenuTrigger>
+                  <ContextMenuContent>
+                    <ContextMenuItem
+                      onClick={() => toggleAppVisibility(app.id, false)}
                     >
-                      <app.icon />
-                    </Button>
-                  </SimpleTooltip>
-                </ContextMenuTrigger>
-                <ContextMenuContent>
-                  <ContextMenuItem
-                    onClick={() => toggleAppVisibility(app.id, false)}
-                  >
-                    Close
-                  </ContextMenuItem>
-                </ContextMenuContent>
-              </ContextMenu>
-            ))}
+                      Close
+                    </ContextMenuItem>
+                    <ContextMenuItem
+                      onClick={() => togglePinnedApp(app.id, !isPinned)}
+                    >
+                      {isPinned ? "Unpin from taskbar" : "Pin to taskbar"}
+                    </ContextMenuItem>
+                  </ContextMenuContent>
+                </ContextMenu>
+              );
+            })}
           </div>
         </ContextMenuTrigger>
         <ContextMenuContent className="w-64">
