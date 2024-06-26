@@ -1,6 +1,6 @@
 "use client";
 
-import { Globe, Settings, Terminal } from "lucide-react";
+import { Folder, Globe, Music, Settings, Terminal } from "lucide-react";
 import { useTheme } from "next-themes";
 import {
   Dispatch,
@@ -10,6 +10,7 @@ import {
   useContext,
   useState,
 } from "react";
+import FileExplorerApp from "./components/apps/FileExplorerApp";
 import SettingsApp from "./components/apps/SettingsApp";
 import TerminalApp from "./components/apps/TerminalApp";
 import App from "./interfaces/App";
@@ -28,6 +29,10 @@ type DesktopSimulatorContextValue = {
   toggleAppVisibility: (id: string, visible: boolean) => void;
   toggleAppMinimized: (id: string, minimized: boolean) => void;
   toggleAppFullscreen: (id: string, minimized: boolean) => void;
+  pinnedApps: string[];
+  setPinnedApps: Dispatch<SetStateAction<string[]>>;
+  togglePinnedApp: (id: string, pinned: boolean) => void;
+  taskbarApps: App[];
 };
 
 export const DesktopSimulatorContext =
@@ -45,6 +50,10 @@ export const DesktopSimulatorContext =
     toggleAppVisibility: () => {},
     toggleAppMinimized: () => {},
     toggleAppFullscreen: () => {},
+    pinnedApps: [],
+    setPinnedApps: () => {},
+    togglePinnedApp: () => {},
+    taskbarApps: [],
   });
 
 export default function DesktopSimulatorProvider({
@@ -92,10 +101,37 @@ export default function DesktopSimulatorProvider({
       isFullscreen: false,
       isWindowScrollable: false,
     },
+    {
+      id: "music_player",
+      title: "Music Player",
+      icon: Music,
+      content: <></>,
+      isOpen: false,
+      isMinimized: false,
+      isFullscreen: false,
+      isWindowScrollable: false,
+    },
+    {
+      id: "file_explorer",
+      title: "File Explorer",
+      icon: Folder,
+      content: <FileExplorerApp />,
+      isOpen: false,
+      isMinimized: false,
+      isFullscreen: false,
+      isWindowScrollable: false,
+    },
   ]);
   const openedApps = apps.filter((app) => app.isOpen);
   const openedAppWindows = apps.filter((app) => app.isOpen || app.isMinimized);
   const [activeApp, setActiveApp] = useState<string>("");
+  const [pinnedApps, setPinnedApps] = useState<string[]>([
+    "file_explorer",
+    "internet",
+  ]);
+  const taskbarApps = apps.filter(
+    (app) => pinnedApps.includes(app.id) || app.isOpen || app.isMinimized,
+  );
 
   function toggleAppVisibility(id: string, visible: boolean): void {
     setApps((prevApps) =>
@@ -124,6 +160,14 @@ export default function DesktopSimulatorProvider({
     );
   }
 
+  function togglePinnedApp(id: string, pinned: boolean): void {
+    if (pinned) {
+      setPinnedApps((prev) => [...prev, id]);
+    } else {
+      setPinnedApps((prev) => prev.filter((app) => app !== id));
+    }
+  }
+
   return (
     <DesktopSimulatorContext.Provider
       value={{
@@ -140,6 +184,10 @@ export default function DesktopSimulatorProvider({
         toggleAppVisibility,
         toggleAppMinimized,
         toggleAppFullscreen,
+        pinnedApps,
+        setPinnedApps,
+        togglePinnedApp,
+        taskbarApps,
       }}
     >
       {children}
