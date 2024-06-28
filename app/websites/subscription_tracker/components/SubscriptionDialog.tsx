@@ -1,15 +1,15 @@
 "use client";
 
-import { LucideIcon } from "lucide-react";
-
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
+  DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -22,66 +22,71 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { cn } from "@/lib/utils";
+import { LucideIcon } from "lucide-react";
+import { useState } from "react";
 import { useSubscriptionTrackerContext } from "../context/SubscriptionTrackerContext";
 
-interface SubscriptionDialogButtonProps {
+export interface SubscriptionDialogButtonProps {
+  mode: "add" | "edit";
   buttonLabel: string;
   buttonIcon?: LucideIcon;
   buttonIconSize?: number;
   buttonDisabled?: boolean;
-  isEditing?: boolean;
   subscriptionIndex?: number;
 }
 
-export function SubscriptionDialog({
+export function EditSubscriptionDialog({
+  mode,
   buttonLabel,
   buttonIcon: Icon = undefined,
   buttonIconSize = 16,
   buttonDisabled = false,
-  isEditing = false,
   subscriptionIndex = undefined,
 }: SubscriptionDialogButtonProps) {
   const {
-    formDataDialogActive,
-    setFormDataDialogActive,
     handleFormChange,
     handleFormSubmit,
     formData,
-    editingSubscription,
     editSubscription,
     cancelEdit,
   } = useSubscriptionTrackerContext();
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const isEditing = mode === "edit";
   return (
     <Dialog
-      open={formDataDialogActive}
+      open={isOpen}
       onOpenChange={(open: boolean) => {
-        setFormDataDialogActive(open);
-        if (!open && isEditing) {
+        setIsOpen(open);
+        if (!open) {
           cancelEdit();
         }
       }}
     >
-      <Button
-        className="flex items-center gap-2"
+      <DialogTrigger
+        className={cn(
+          buttonVariants({ variant: isEditing ? "outline" : "default" }),
+          "flex items-center gap-2",
+        )}
         onClick={() => {
-          if (isEditing && subscriptionIndex !== undefined) {
-            editSubscription(subscriptionIndex);
-          } else {
-            setFormDataDialogActive(true);
+          if (isEditing) {
+            if (subscriptionIndex !== undefined) {
+              editSubscription(subscriptionIndex);
+            } else {
+              cancelEdit();
+            }
           }
         }}
         disabled={buttonDisabled}
       >
         {Icon !== undefined && <Icon size={buttonIconSize} />}
         {buttonLabel}
-      </Button>
+      </DialogTrigger>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>
-            {editingSubscription ? "Edit" : "Add"} Subscription
-          </DialogTitle>
+          <DialogTitle>{isEditing ? "Edit" : "Add"} Subscription</DialogTitle>
           <DialogDescription>
-            {editingSubscription ? "Update" : "Enter"} subscription details.
+            {isEditing ? "Update" : "Enter"} subscription details.
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">
@@ -129,7 +134,7 @@ export function SubscriptionDialog({
             <Label className="text-right">Date</Label>
             <Input
               name="firstPaymentDate"
-              placeholder="Enter date"
+              placeholder="Enter first payment date"
               className="col-span-3"
               type="date"
               value={formData.firstPaymentDate}
@@ -138,13 +143,17 @@ export function SubscriptionDialog({
           </div>
         </div>
         <DialogFooter>
-          <Button
-            type="submit"
-            onClick={handleFormSubmit}
-            disabled={formData.label === ""}
-          >
-            {isEditing ? "Update" : "Submit"}
-          </Button>
+          <DialogClose asChild>
+            <Button
+              onClick={(e) => {
+                handleFormSubmit(e);
+                setIsOpen(false);
+              }}
+              disabled={formData.label === ""}
+            >
+              {isEditing ? "Update" : "Submit"}
+            </Button>
+          </DialogClose>
         </DialogFooter>
       </DialogContent>
     </Dialog>
