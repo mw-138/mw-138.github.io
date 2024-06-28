@@ -14,8 +14,8 @@ import { Plus } from "lucide-react";
 import { MdBackup, MdDeleteForever } from "react-icons/md";
 import { useSubscriptionTrackerContext } from "../context/SubscriptionTrackerContext";
 import { currencies, locales } from "../locales";
+import { EditSubscriptionDialog } from "./SubscriptionDialog";
 import ImportDialog from "./ImportDialog";
-import { SubscriptionDialog } from "./SubscriptionDialog";
 
 export default function Header() {
   const {
@@ -96,7 +96,11 @@ export default function Header() {
             <MdDeleteForever />
             Delete All
           </Button>
-          <SubscriptionDialog buttonLabel="Add New" buttonIcon={Plus} />
+          <EditSubscriptionDialog
+            mode="add"
+            buttonLabel="Add New"
+            buttonIcon={Plus}
+          />
         </div>
       </div>
     </div>

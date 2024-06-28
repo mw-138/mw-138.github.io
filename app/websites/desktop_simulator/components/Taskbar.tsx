@@ -44,7 +44,7 @@ export default function Taskbar() {
   }, []);
 
   return (
-    <div className="flex h-10 items-center justify-between border-t border-muted bg-background/20 backdrop-blur-md">
+    <div className="flex h-10 items-center justify-between border-t border-background/20 bg-background/20 backdrop-blur-md">
       <div className="flex">
         <Popover>
           <PopoverTrigger
@@ -86,7 +86,10 @@ export default function Taskbar() {
       <div>
         <Popover>
           <PopoverTrigger
-            className={cn(buttonVariants({ variant: "ghost" }), "rounded-none")}
+            className={cn(
+              buttonVariants({ variant: "ghost" }),
+              "rounded-none hover:bg-background/20",
+            )}
           >
             {timeString}
           </PopoverTrigger>

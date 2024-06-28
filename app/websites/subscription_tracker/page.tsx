@@ -4,6 +4,7 @@ import WebProjectNavigation from "@/components/WebProjectNavigation";
 import Header from "./components/Header";
 import SubscriptionButtonList from "./components/SubscriptionButtonList";
 import { SubscriptionTrackerProvider } from "./context/SubscriptionTrackerContext";
+// import DataTableDemo from "./components/DataTableDemo";
 
 export default function Page() {
   return (
@@ -13,6 +14,7 @@ export default function Page() {
           <main className="flex h-screen select-none flex-col font-['Fira_Sans']">
             <Header />
             <SubscriptionButtonList />
+            {/* <DataTableDemo /> */}
           </main>
         </MaxWidthWrapper>
       </SubscriptionTrackerProvider>

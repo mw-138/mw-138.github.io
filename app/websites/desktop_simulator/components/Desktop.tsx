@@ -6,6 +6,9 @@ import {
   ContextMenu,
   ContextMenuContent,
   ContextMenuItem,
+  ContextMenuLabel,
+  ContextMenuRadioGroup,
+  ContextMenuRadioItem,
   ContextMenuSeparator,
   ContextMenuShortcut,
   ContextMenuSub,
@@ -39,10 +42,11 @@ export default function Desktop() {
                     <SimpleTooltip message={app.title}>
                       <Button
                         variant="outline"
-                        className="h-16 w-16 bg-background/50 backdrop-blur-md"
+                        className="flex h-16 w-16 flex-col items-center justify-between border-none bg-background/0 hover:bg-background/20"
                         onClick={() => toggleAppVisibility(app.id, true)}
                       >
                         <app.icon />
+                        <p className="text-[9px]">{app.title}</p>
                       </Button>
                     </SimpleTooltip>
                   </ContextMenuTrigger>
@@ -67,27 +71,43 @@ export default function Desktop() {
           <ContextMenuSub>
             <ContextMenuSubTrigger inset>View</ContextMenuSubTrigger>
             <ContextMenuSubContent className="w-48">
-              <ContextMenuItem>
-                Save Page As...
-                <ContextMenuShortcut>⇧⌘S</ContextMenuShortcut>
-              </ContextMenuItem>
-              <ContextMenuItem>Create Shortcut...</ContextMenuItem>
-              <ContextMenuItem>Name Window...</ContextMenuItem>
+              <ContextMenuRadioGroup value="small_icons">
+                <ContextMenuRadioItem value="large_icons">
+                  Large icons
+                </ContextMenuRadioItem>
+                <ContextMenuRadioItem value="medium_icons">
+                  Medium icons
+                </ContextMenuRadioItem>
+                <ContextMenuRadioItem value="small_icons">
+                  Small icons
+                </ContextMenuRadioItem>
+              </ContextMenuRadioGroup>
               <ContextMenuSeparator />
-              <ContextMenuItem>Developer Tools</ContextMenuItem>
+              <ContextMenuItem inset disabled>
+                Auto arrange icons
+              </ContextMenuItem>
+              <ContextMenuItem inset disabled>
+                Align icons to grid
+              </ContextMenuItem>
+              <ContextMenuSeparator />
+              <ContextMenuItem inset>Show desktop icons</ContextMenuItem>
             </ContextMenuSubContent>
           </ContextMenuSub>
           <ContextMenuSub>
             <ContextMenuSubTrigger inset>Sort By</ContextMenuSubTrigger>
             <ContextMenuSubContent className="w-48">
-              <ContextMenuItem>
-                Save Page As...
-                <ContextMenuShortcut>⇧⌘S</ContextMenuShortcut>
+              <ContextMenuItem inset disabled>
+                Name
               </ContextMenuItem>
-              <ContextMenuItem>Create Shortcut...</ContextMenuItem>
-              <ContextMenuItem>Name Window...</ContextMenuItem>
-              <ContextMenuSeparator />
-              <ContextMenuItem>Developer Tools</ContextMenuItem>
+              <ContextMenuItem inset disabled>
+                Size
+              </ContextMenuItem>
+              <ContextMenuItem inset disabled>
+                Item type
+              </ContextMenuItem>
+              <ContextMenuItem inset disabled>
+                Date modified
+              </ContextMenuItem>
             </ContextMenuSubContent>
           </ContextMenuSub>
           <ContextMenuItem inset>Refresh</ContextMenuItem>
@@ -97,10 +117,6 @@ export default function Desktop() {
           </ContextMenuItem>
           <ContextMenuItem inset disabled>
             Paste shortcut
-          </ContextMenuItem>
-          <ContextMenuItem inset>
-            Undo Rename
-            <ContextMenuShortcut>Ctrl+Z</ContextMenuShortcut>
           </ContextMenuItem>
           <ContextMenuItem inset>Open in Terminal</ContextMenuItem>
           <ContextMenuSeparator />

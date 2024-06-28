@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import {
   Card,
   CardDescription,
@@ -9,10 +9,20 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Edit } from "lucide-react";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Edit, Eye } from "lucide-react";
 import { useSubscriptionTrackerContext } from "../context/SubscriptionTrackerContext";
 import Subscription from "../interfaces/Subscription";
-import { SubscriptionDialog } from "./SubscriptionDialog";
+import { EditSubscriptionDialog } from "./SubscriptionDialog";
 
 type SubscriptionButtonProps = {
   index: number;
@@ -31,6 +41,8 @@ export default function SubscriptionButton({
     toggleMultiselectedSubscription,
     multiselectedSubscriptionsIds,
     deleteSubscription,
+    getNextPaymentDate,
+    getSubscriptionTotalSpend,
   } = useSubscriptionTrackerContext();
   const isMultiselected = multiselectedSubscriptionsIds.includes(
     subscription.id,
@@ -46,7 +58,10 @@ export default function SubscriptionButton({
         <CardHeader>
           <CardTitle className="flex items-center justify-between">
             {subscription.label}
-            <span>{formatToCurrencyString(subscription.price)}</span>
+            <span>
+              {formatToCurrencyString(subscription.price)}
+              {}
+            </span>
           </CardTitle>
           <CardDescription>
             {isSubscriptionDueToday(subscription) ? (
@@ -60,20 +75,86 @@ export default function SubscriptionButton({
           </CardDescription>
         </CardHeader>
         <CardFooter className="flex justify-between">
-          <Button
-            variant="outline"
-            disabled={isMultiselected}
-            onClick={() => deleteSubscription(index)}
-          >
-            Delete
-          </Button>
-          <SubscriptionDialog
-            buttonLabel="Edit"
-            isEditing
-            subscriptionIndex={index}
-            buttonDisabled={isMultiselected}
-            buttonIcon={Edit}
-          />
+          <Dialog>
+            <DialogTrigger className={buttonVariants({ variant: "outline" })}>
+              Delete
+            </DialogTrigger>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>Are you sure?</DialogTitle>
+                <DialogDescription>
+                  This action cannot be undone. This will permanently delete
+                  this subscription.
+                </DialogDescription>
+              </DialogHeader>
+              <DialogFooter>
+                <DialogClose asChild>
+                  <Button variant="outline">No</Button>
+                </DialogClose>
+                <DialogClose asChild>
+                  <Button
+                    variant="outline"
+                    onClick={() => deleteSubscription(index)}
+                  >
+                    Yes
+                  </Button>
+                </DialogClose>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
+          <div className="flex gap-2">
+            <EditSubscriptionDialog
+              mode="edit"
+              buttonLabel="Edit"
+              subscriptionIndex={index}
+              buttonDisabled={isMultiselected}
+              buttonIcon={Edit}
+            />
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button className="flex items-center gap-2">
+                  <Eye />
+                  View
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-[425px]">
+                <DialogHeader>
+                  <DialogTitle>Viewing Subscription</DialogTitle>
+                  <DialogDescription>
+                    View subscription details.
+                  </DialogDescription>
+                </DialogHeader>
+                <div className="space-y-2">
+                  <div>
+                    <span className="font-semibold">Label:</span>{" "}
+                    {subscription.label}
+                  </div>
+                  <div>
+                    <span className="font-semibold">Price:</span>{" "}
+                    {formatToCurrencyString(subscription.price)}
+                  </div>
+                  <div>
+                    <span className="font-semibold">Type:</span>{" "}
+                    <span className="capitalize">{subscription.type}</span>
+                  </div>
+                  <div>
+                    <span className="font-semibold">First Payment Date:</span>{" "}
+                    {subscription.firstPaymentDate}
+                  </div>
+                  <div>
+                    <span className="font-semibold">Next Payment Date:</span>{" "}
+                    {getNextPaymentDate(subscription)}
+                  </div>
+                  <div>
+                    <span className="font-semibold">Total Spend:</span>{" "}
+                    {formatToCurrencyString(
+                      getSubscriptionTotalSpend(subscription),
+                    )}
+                  </div>
+                </div>
+              </DialogContent>
+            </Dialog>
+          </div>
         </CardFooter>
       </Card>
     </div>
