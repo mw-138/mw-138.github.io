@@ -37,7 +37,7 @@ export default function TaskbarApp({ app }: TaskbarAppProps) {
               toggleAppMinimized(app.id, !app.isMinimized);
             }
           }}
-          className={cn("rounded-none", {
+          className={cn("rounded-none hover:bg-background/20", {
             "border-b-2 border-muted-foreground": app.isOpen || app.isMinimized,
             "bg-muted-foreground/10": app.id === activeApp,
           })}
