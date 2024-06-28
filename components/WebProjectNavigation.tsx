@@ -7,7 +7,7 @@ import { MdChevronLeft } from "react-icons/md";
 
 const WebProjectNavigation = () => {
   return (
-    <div className="bg-background py-2">
+    <div className="relative bg-background py-2">
       <MaxWidthWrapper className="flex items-center justify-between bg-background">
         <Link
           href="/projects"
