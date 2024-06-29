@@ -1,6 +1,6 @@
 "use client";
 
-import { Folder, Globe, Music, Settings, Terminal } from "lucide-react";
+import { Folder, Globe, Music, Settings, Store, Terminal } from "lucide-react";
 import { useTheme } from "next-themes";
 import {
   Dispatch,
@@ -14,6 +14,7 @@ import FileExplorerApp from "./components/apps/FileExplorerApp";
 import SettingsApp from "./components/apps/SettingsApp";
 import TerminalApp from "./components/apps/TerminalApp";
 import App from "./interfaces/App";
+import AppStore from "./components/apps/AppStore";
 
 type DesktopSimulatorContextValue = {
   darkWallpaper: string;
@@ -80,6 +81,18 @@ export default function DesktopSimulatorProvider({
       isMinimized: false,
       isFullscreen: false,
       isWindowScrollable: true,
+      isBlurred: true,
+    },
+    {
+      id: "app_store",
+      title: "App Store",
+      icon: Store,
+      content: <AppStore />,
+      isOpen: false,
+      isMinimized: false,
+      isFullscreen: false,
+      isWindowScrollable: false,
+      isBlurred: false,
     },
     {
       id: "internet",
@@ -90,16 +103,18 @@ export default function DesktopSimulatorProvider({
       isMinimized: false,
       isFullscreen: false,
       isWindowScrollable: true,
+      isBlurred: true,
     },
     {
       id: "terminal",
       title: "Terminal",
       icon: Terminal,
       content: <TerminalApp />,
-      isOpen: true,
+      isOpen: false,
       isMinimized: false,
       isFullscreen: false,
       isWindowScrollable: false,
+      isBlurred: true,
     },
     {
       id: "music_player",
@@ -110,6 +125,7 @@ export default function DesktopSimulatorProvider({
       isMinimized: false,
       isFullscreen: false,
       isWindowScrollable: false,
+      isBlurred: true,
     },
     {
       id: "file_explorer",
@@ -120,12 +136,14 @@ export default function DesktopSimulatorProvider({
       isMinimized: false,
       isFullscreen: false,
       isWindowScrollable: false,
+      isBlurred: true,
     },
   ]);
   const openedApps = apps.filter((app) => app.isOpen);
   const openedAppWindows = apps.filter((app) => app.isOpen || app.isMinimized);
   const [activeApp, setActiveApp] = useState<string>("");
   const [pinnedApps, setPinnedApps] = useState<string[]>([
+    "app_store",
     "file_explorer",
     "internet",
   ]);

@@ -9,4 +9,5 @@ export default interface App {
   isMinimized: boolean;
   isFullscreen: boolean;
   isWindowScrollable: boolean;
+  isBlurred: boolean;
 }

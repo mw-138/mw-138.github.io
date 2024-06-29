@@ -100,8 +100,8 @@ export default function Desktop() {
           key={index}
           app={app}
           dragConstraints={desktopConstraints}
-          isTransparent
-          isBlurred
+          isTransparent={app.isBlurred}
+          isBlurred={app.isBlurred}
           isScrollable={app.isWindowScrollable}
         >
           {app.content}
