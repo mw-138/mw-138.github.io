@@ -88,7 +88,7 @@ export default function DesktopSimulatorProvider({
       title: "App Store",
       icon: Store,
       content: <AppStore />,
-      isOpen: true,
+      isOpen: false,
       isMinimized: false,
       isFullscreen: false,
       isWindowScrollable: false,
