@@ -9,6 +9,13 @@ import {
   ContextMenuTrigger,
 } from "@/components/ui/context-menu";
 import { Input } from "@/components/ui/input";
+import {
+  Menubar,
+  MenubarContent,
+  MenubarItem,
+  MenubarMenu,
+  MenubarTrigger,
+} from "@/components/ui/menubar";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { copyToClipboard } from "@/utils/helperFunctions";
 import { useState } from "react";
@@ -31,12 +38,11 @@ const Commands: { [key: string]: Command } = {
   },
 };
 
+const EmptyCommand: CommandTextEntry = { date: "", input: "" };
+
 export default function TerminalApp() {
   const [entries, setEntries] = useState<CommandTextEntry[]>([]);
-  const [command, setCommand] = useState<CommandTextEntry>({
-    date: "",
-    input: "",
-  });
+  const [command, setCommand] = useState<CommandTextEntry>(EmptyCommand);
 
   function submitCommand(): void {
     const entry =
@@ -46,20 +52,29 @@ export default function TerminalApp() {
     const date = new Date().toLocaleTimeString();
     const inputEntry = { date, input: command.input };
     const outputEntry = { date, input: entry };
+    if (inputEntry === EmptyCommand || outputEntry === EmptyCommand) return;
     setEntries((prev) => [...prev, inputEntry, outputEntry]);
-    setCommand({ date: "", input: "" });
+    setCommand(EmptyCommand);
   }
 
   return (
     <div className="flex w-full flex-col">
-      <ScrollArea className="flex flex-1 p-0">
+      <Menubar className="rounded-none border-x-0 border-b border-t-0">
+        <MenubarMenu>
+          <MenubarTrigger>File</MenubarTrigger>
+          <MenubarContent>
+            <MenubarItem>Clear</MenubarItem>
+          </MenubarContent>
+        </MenubarMenu>
+      </Menubar>
+      <ScrollArea className="flex flex-1 p-0 font-[Consolas]">
         {entries.map((entry, index) => (
           <ContextMenu key={index}>
             <ContextMenuTrigger>
               <SimpleTooltip message="Right click for more...">
                 <p
                   key={index}
-                  className="select-none border-b p-2 transition-colors hover:bg-muted/50"
+                  className="border-b p-2 transition-colors hover:bg-muted/50"
                 >
                   {entry.date}: {entry.input}
                 </p>
@@ -70,6 +85,7 @@ export default function TerminalApp() {
                 onClick={() => {
                   toast("Copied entry to clipboard.");
                   copyToClipboard(entry.input);
+                  // copyToClipboard(`${entry.date}: ${entry.input}`);
                 }}
               >
                 Copy
@@ -86,21 +102,26 @@ export default function TerminalApp() {
           onChange={(e) =>
             setCommand((prev) => ({ ...prev, input: e.target.value }))
           }
-          onSubmit={submitCommand}
           value={command.input}
         />
-        <Button
+        {/* <Input
           type="submit"
+          value="Submit"
+          className={cn(
+            buttonVariants({ variant: "outline" }),
+            "w-20 rounded-none border-0 border-l border-t",
+          )}
+        /> */}
+        <Button
           variant="outline"
-          className="rounded-none border-0 border-l border-t"
+          className="w-20 rounded-none border-0 border-l border-t"
           onClick={submitCommand}
         >
-          Enter
+          Submit
         </Button>
         <Button
-          type="submit"
           variant="outline"
-          className="rounded-none border-0 border-l border-t"
+          className="w-20 rounded-none border-0 border-l border-t"
           onClick={() => setEntries([])}
         >
           Clear
