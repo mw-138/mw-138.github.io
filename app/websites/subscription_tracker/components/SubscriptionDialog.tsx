@@ -24,8 +24,9 @@ import {
 } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
 import { LucideIcon } from "lucide-react";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { useSubscriptionTrackerContext } from "../context/SubscriptionTrackerContext";
+import SubscriptionType from "../types/SubscriptionType";
 
 export interface SubscriptionDialogButtonProps {
   mode: "add" | "edit";
@@ -48,6 +49,7 @@ export function EditSubscriptionDialog({
     handleFormChange,
     handleFormSubmit,
     formData,
+    setFormData,
     editSubscription,
     cancelEdit,
   } = useSubscriptionTrackerContext();
@@ -113,13 +115,15 @@ export function EditSubscriptionDialog({
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
             <Label className="text-right">Type</Label>
-            <Select name="type" value={formData.type}>
+            <Select
+              name="type"
+              onValueChange={(e: SubscriptionType) =>
+                setFormData((prev) => ({ ...prev, type: e }))
+              }
+              value={formData.type}
+            >
               <SelectTrigger className="w-[180px] capitalize">
-                <SelectValue
-                  placeholder={formData.type}
-                  defaultValue={formData.type}
-                  onChange={handleFormChange}
-                />
+                <SelectValue placeholder={formData.type} />
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
