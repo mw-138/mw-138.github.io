@@ -61,12 +61,10 @@ export default function DesktopSimulatorProvider({
 }: PropsWithChildren) {
   const { resolvedTheme } = useTheme();
   const [darkWallpaper, setDarkWallpaper] = useState<string>(
-    // "https://i.redd.it/a9vjztlbnys71.png",
-    "https://wallpapersmug.com/download/1920x1080/a3d4db/beautiful-evening-landscape-minimal.jpeg",
+    "https://i.redd.it/a9vjztlbnys71.png",
   );
   const [lightWallpaper, setLightWallpaper] = useState<string>(
-    // "https://archive.org/download/windows-xp-bliss-wallpaper/windows-xp-bliss-4k-lu-1920x1080.jpg",
-    "https://images.hdqwalls.com/download/minimal-landscape-wp-1920x1080.jpg",
+    "https://archive.org/download/windows-xp-bliss-wallpaper/windows-xp-bliss-4k-lu-1920x1080.jpg",
   );
   const currentWallpaper =
     resolvedTheme === "dark" || resolvedTheme === undefined
@@ -98,7 +96,7 @@ export default function DesktopSimulatorProvider({
       title: "Terminal",
       icon: Terminal,
       content: <TerminalApp />,
-      isOpen: false,
+      isOpen: true,
       isMinimized: false,
       isFullscreen: false,
       isWindowScrollable: false,

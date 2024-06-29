@@ -1,16 +1,12 @@
 "use client";
 
-import SimpleTooltip from "@/components/SimpleTooltip";
-import { Button } from "@/components/ui/button";
 import {
   ContextMenu,
   ContextMenuContent,
   ContextMenuItem,
-  ContextMenuLabel,
   ContextMenuRadioGroup,
   ContextMenuRadioItem,
   ContextMenuSeparator,
-  ContextMenuShortcut,
   ContextMenuSub,
   ContextMenuSubContent,
   ContextMenuSubTrigger,
@@ -18,53 +14,20 @@ import {
 } from "@/components/ui/context-menu";
 import { useRef } from "react";
 import { useDesktopSimulatorContext } from "../context";
+import DesktopApp from "./DesktopApp";
 import DraggableWindow from "./DraggableWindow";
 
 export default function Desktop() {
-  const {
-    apps,
-    openedAppWindows,
-    toggleAppVisibility,
-    pinnedApps,
-    togglePinnedApp,
-  } = useDesktopSimulatorContext();
+  const { apps, openedAppWindows } = useDesktopSimulatorContext();
   const desktopConstraints = useRef<HTMLDivElement | null>(null);
   return (
     <div className="relative flex-1 overflow-hidden" ref={desktopConstraints}>
       <ContextMenu>
         <ContextMenuTrigger>
           <div className="flex h-full w-fit max-w-full flex-col flex-wrap gap-2 p-2">
-            {apps.map((app, index) => {
-              const isPinned = pinnedApps.some((x) => app.id === x);
-              return (
-                <ContextMenu key={index}>
-                  <ContextMenuTrigger>
-                    <SimpleTooltip message={app.title}>
-                      <Button
-                        variant="outline"
-                        className="flex h-16 w-16 flex-col items-center justify-between border-none bg-background/0 hover:bg-background/20"
-                        onClick={() => toggleAppVisibility(app.id, true)}
-                      >
-                        <app.icon />
-                        <p className="text-[9px]">{app.title}</p>
-                      </Button>
-                    </SimpleTooltip>
-                  </ContextMenuTrigger>
-                  <ContextMenuContent>
-                    <ContextMenuItem
-                      onClick={() => toggleAppVisibility(app.id, false)}
-                    >
-                      Close
-                    </ContextMenuItem>
-                    <ContextMenuItem
-                      onClick={() => togglePinnedApp(app.id, !isPinned)}
-                    >
-                      {isPinned ? "Unpin from taskbar" : "Pin to taskbar"}
-                    </ContextMenuItem>
-                  </ContextMenuContent>
-                </ContextMenu>
-              );
-            })}
+            {apps.map((app, index) => (
+              <DesktopApp key={index} app={app} />
+            ))}
           </div>
         </ContextMenuTrigger>
         <ContextMenuContent className="w-64">
