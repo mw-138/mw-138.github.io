@@ -1,20 +1,14 @@
 "use client";
 
-import { cn } from "@/lib/utils";
-import { LogIn, UserPlus } from "lucide-react";
-import { useSession } from "next-auth/react";
-import Link from "next/link";
 import { CommandPanel } from "./CommandPanel";
 import { DarkModeToggle } from "./DarkModeToggle";
 import { Icons } from "./Icons";
 import MaxWidthWrapper from "./MaxWidthWrapper";
 import MobileNavbar from "./MobileNavbar";
 import { NavbarLinks } from "./NavbarLinks";
-import SessionAvatar from "./SessionAvatar";
-import { buttonVariants } from "./ui/button";
 
 export default function Navbar() {
-  const { data: session } = useSession();
+  // const { data: session } = useSession();
   return (
     <div className="sticky inset-x-0 top-0 z-50 h-16 bg-background">
       <header className="relative bg-background">
@@ -36,7 +30,7 @@ export default function Navbar() {
                 <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-2">
                   <CommandPanel />
                   <DarkModeToggle />
-                  {session ? (
+                  {/* {session ? (
                     <SessionAvatar />
                   ) : (
                     <div className="flex">
@@ -61,7 +55,7 @@ export default function Navbar() {
                         Sign In
                       </Link>
                     </div>
-                  )}
+                  )} */}
                 </div>
               </div>
             </div>
