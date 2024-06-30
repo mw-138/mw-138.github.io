@@ -11,7 +11,7 @@ import {
   getMonthDifference,
   getYearDifference,
   isIndexOutOfRange,
-} from "@/utils/helperFunctions";
+} from "@/lib/utils";
 import {
   Dispatch,
   FormEvent,
