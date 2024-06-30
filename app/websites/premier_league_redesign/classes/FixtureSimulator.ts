@@ -1,4 +1,4 @@
-import { poissonRandom, shuffleArray } from "@/utils/helperFunctions";
+import { poissonRandom, shuffleArray } from "@/lib/utils";
 import Fixture from "./Fixture";
 import Team from "./Team";
 import Gameweek from "./Gameweek";

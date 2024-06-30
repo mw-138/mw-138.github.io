@@ -28,6 +28,7 @@
     "@radix-ui/react-tabs": "^1.1.0",
     "@radix-ui/react-tooltip": "^1.1.1",
     "@tanstack/react-table": "^8.17.3",
+    "bcryptjs": "^2.4.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "cmdk": "^1.0.0",
@@ -36,7 +37,9 @@
     "framer-motion": "^11.2.12",
     "html-entities": "^2.5.2",
     "lucide-react": "^0.396.0",
+    "mongoose": "^8.4.4",
     "next": "^14.2.3",
+    "next-auth": "^4.24.7",
     "next-themes": "^0.3.0",
     "pako": "^2.1.0",
     "react": "^18.3.1",
@@ -53,6 +56,8 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/mongoose": "^5.11.97",
     "@types/node": "^20",
     "@types/pako": "^2.0.3",
     "@types/react": "^18",

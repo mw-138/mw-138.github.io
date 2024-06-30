@@ -17,7 +17,7 @@ import {
   MenubarTrigger,
 } from "@/components/ui/menubar";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { copyToClipboard } from "@/utils/helperFunctions";
+import { copyToClipboard } from "@/lib/utils";
 import { useState } from "react";
 import { toast } from "sonner";
 

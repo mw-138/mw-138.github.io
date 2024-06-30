@@ -7,7 +7,7 @@ import {
   ReactNode,
   FormEvent,
 } from "react";
-import { formatCurrency } from "@/utils/helperFunctions";
+import { formatCurrency } from "@/lib/utils";
 import Job from "../classes/Job";
 import useLocalStorageState from "@/hooks/useLocalStorageState";
 import { useClampedLocalStorageState } from "@/hooks/useClampedState";

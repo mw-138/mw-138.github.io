@@ -1,4 +1,4 @@
-import { generateUUID } from "@/utils/helperFunctions";
+import { generateUUID } from "@/lib/utils";
 
 export default class Item {
   public id: string;

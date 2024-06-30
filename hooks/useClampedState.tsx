@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 import useLocalStorageState from "./useLocalStorageState";
-import { clamp } from "@/utils/helperFunctions";
+import { clamp } from "@/lib/utils";
 
 export const useClampedState = (
   initialValue: number,

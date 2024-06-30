@@ -3,7 +3,7 @@
 import React, { useContext, useState } from "react";
 import { LifeSimulatorContext } from "../context/LifeSimulatorContext";
 import ProgressButton from "./ProgressButton";
-import { formatCurrency, formatDateToYyyyMmDd } from "@/utils/helperFunctions";
+import { formatCurrency, formatDateToYyyyMmDd } from "@/lib/utils";
 import Home from "../pages/home";
 import Character from "../pages/character";
 import Work from "../pages/work";
