@@ -31,6 +31,7 @@ interface SimpleDialogProps extends PropsWithChildren {
     | "outline"
     | "secondary"
     | "ghost";
+  showFooter?: boolean;
 }
 
 export default function SimpleDialog({
@@ -44,6 +45,7 @@ export default function SimpleDialog({
   onClose,
   isDisabled = false,
   variant = "default",
+  showFooter = true,
 }: SimpleDialogProps) {
   const [open, setOpen] = useState<boolean>(false);
 
@@ -80,20 +82,22 @@ export default function SimpleDialog({
           </DialogHeader>
         )}
         {children}
-        <DialogFooter>
-          <DialogClose asChild>
-            <Button
-            // onClick={(e) => {
-            //   handleFormSubmit(e);
-            //   setIsOpen(false);
-            // }}
-            // disabled={formData.label === ""}
-            >
-              {/* {isEditing ? "Update" : "Submit"} */}
-              Close
-            </Button>
-          </DialogClose>
-        </DialogFooter>
+        {showFooter && (
+          <DialogFooter>
+            <DialogClose asChild>
+              <Button
+              // onClick={(e) => {
+              //   handleFormSubmit(e);
+              //   setIsOpen(false);
+              // }}
+              // disabled={formData.label === ""}
+              >
+                {/* {isEditing ? "Update" : "Submit"} */}
+                Close
+              </Button>
+            </DialogClose>
+          </DialogFooter>
+        )}
       </DialogContent>
     </Dialog>
   );

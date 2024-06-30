@@ -16,9 +16,7 @@ const Footer = () => {
           <div className="border-t border-muted">
             <div className="flex h-16 items-center">
               <div className="ml-4 flex lg:ml-0">
-                <Link href="/">
-                  <Icons.siteLogo className="h-10 w-10 fill-foreground" />
-                </Link>
+                <Icons.siteLogo className="h-10 w-10 fill-foreground" />
               </div>
 
               <div className="z-50 ml-8 flex self-stretch">
