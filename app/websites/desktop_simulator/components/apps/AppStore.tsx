@@ -173,8 +173,8 @@ export default function AppStore() {
           <h1 className="text-4xl font-bold uppercase">Top Rated</h1>
           <Separator className="mt-2" />
           <div className="flex h-48 gap-2 py-2">
-            {Array.from({ length: 4 }, () => (
-              <Card className="flex-1">
+            {Array.from({ length: 4 }, (_, index) => (
+              <Card key={index} className="flex-1">
                 <CardHeader>Header</CardHeader>
                 <CardContent>Content</CardContent>
                 <CardFooter>Footer</CardFooter>
