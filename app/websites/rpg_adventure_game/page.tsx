@@ -4,8 +4,10 @@ import Header from "./components/Header";
 import InventoryList from "./components/InventoryList";
 import Sidebar from "./components/Sidebar";
 import { RpgClickerGameProvider } from "./context/RpgClickerGameContext";
+import { redirect } from "next/navigation";
 
 export default function Page() {
+  redirect("/projects");
   return (
     <PageTemplate hideNavbar>
       <RpgClickerGameProvider>

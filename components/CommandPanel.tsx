@@ -24,16 +24,15 @@ import {
   CommandItem,
   CommandList,
   CommandSeparator,
-  CommandShortcut,
 } from "@/components/ui/command";
-import { Projects } from "@/data/Projects";
+import { EnabledProjects } from "@/data/Projects";
 import Project, { Tag } from "@/data/classes/Project";
+import { useTheme } from "next-themes";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Fragment, useEffect, useState } from "react";
 import { Button } from "./ui/button";
 import { Separator } from "./ui/separator";
-import { useTheme } from "next-themes";
 
 interface CommandOption {
   label: string;
@@ -61,7 +60,7 @@ function getProjectIcon(project: Project): LucideIcon {
 
 function generateProjects(): any[] {
   const projects: any[] = [];
-  Projects.map((project) => {
+  EnabledProjects.map((project) => {
     projects.push(
       {
         label: `${project.title} (Overview)`,
