@@ -317,7 +317,7 @@ export const Projects: Project[] = [
   ),
   new Project(
     new Date("06/15/2024"),
-    true,
+    false,
     "life_simulator",
     "Life Simulator",
     "A WIP life simulation game.",
@@ -359,7 +359,7 @@ export const Projects: Project[] = [
   ),
   new Project(
     new Date("06/20/2024"),
-    true,
+    false,
     "rpg_adventure_game",
     "RPG Adventure Game",
     "An RPG adventure game.",
@@ -401,11 +401,13 @@ export const Projects: Project[] = [
   ),
 ];
 
-export const RecentProjects: Project[] = Projects.filter(
+export const EnabledProjects: Project[] = Projects.filter(
   (project) => project.visible,
-)
-  .sort((a, b) => b.publishDate.getTime() - a.publishDate.getTime())
-  .slice(0, 3);
+);
+
+export const RecentProjects: Project[] = EnabledProjects.sort(
+  (a, b) => b.publishDate.getTime() - a.publishDate.getTime(),
+).slice(0, 3);
 
 export const HighlightedProjects = Projects.filter((project) => {
   const projects = ["coin_catcher", "netflix_redesign", "subscription_tracker"];
