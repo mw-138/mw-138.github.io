@@ -2,7 +2,8 @@ import WebProjectNavigation from "@/components/WebProjectNavigation";
 import Hero from "./components/Hero";
 import MovieRow from "./components/MovieRow";
 import Nav from "./components/Nav";
-import Requests, {
+import {
+  Requests,
   getRandomMovie,
   getUpcomingMovies,
   performMovieQuery,

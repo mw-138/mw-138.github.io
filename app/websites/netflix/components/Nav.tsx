@@ -16,13 +16,15 @@ import { CgLogIn, CgLogOut } from "react-icons/cg";
 
 const Logo = () => {
   return (
-    <Image
-      src="/netflix.png"
-      width={128}
-      height={70}
-      alt=""
-      className="mx-4 mr-8 object-contain"
-    />
+    <Link href="/websites/netflix">
+      <Image
+        src="/netflix.png"
+        width={128}
+        height={70}
+        alt=""
+        className="mx-4 mr-8 object-contain"
+      />
+    </Link>
   );
 };
 

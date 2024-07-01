@@ -1,9 +1,8 @@
-const ApiKey = process.env.TMDB_API_KEY;
 const ApiUrl = "https://api.themoviedb.org/3";
 const ApiImageUrl = "https://image.tmdb.org/t/p";
-const ApiKeyParameter = `api_key=${ApiKey}`;
+const ApiKeyParameter = `api_key=${process.env.TMDB_API_KEY}`;
 
-const Requests = {
+export const Requests = {
   Popular: `${ApiUrl}/movie/popular?${ApiKeyParameter}&language=en-US&page=1`,
   Upcoming: `${ApiUrl}/movie/upcoming?${ApiKeyParameter}&language=en-US&page=1`,
   NowPlaying: `${ApiUrl}/discover/movie?${ApiKeyParameter}&language=en-US&page=1`,
@@ -36,6 +35,24 @@ export interface MovieRequest {
   results: Movie[];
   total_pages: number;
   total_results: number;
+}
+
+export interface MovieVideo {
+  iso_639_1: string;
+  iso_3166_1: string;
+  name: string;
+  key: string;
+  site: string;
+  size: number;
+  type: string;
+  official: boolean;
+  published_at: string;
+  id: string;
+}
+
+export interface MovieVideoRequest {
+  id: number;
+  results: MovieVideo[];
 }
 
 export async function performMovieQuery(url: string): Promise<MovieRequest> {
@@ -77,20 +94,32 @@ export function getRandomMovie(arr: Movie[]): Movie {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
-export async function getMovieVideos(movie: Movie): Promise<any[]> {
+export async function getMovieVideos(movie: Movie): Promise<MovieVideoRequest> {
   const res = await fetch(
     `${ApiUrl}/movie/${movie.id}/videos?${ApiKeyParameter}`,
   );
   const data = await res.json();
-  return data;
+  return data as MovieVideoRequest;
 }
 
-export async function getMovieById(id: number): Promise<Movie | undefined> {
+export async function getMovieById(
+  id: number | string,
+): Promise<Movie | undefined> {
   const res = await performMovieQuery(
     `${ApiUrl}/movie/${id}?${ApiKeyParameter}`,
   );
-  console.log(res);
   return res as unknown as Movie;
 }
 
-export default Requests;
+export async function getAllMovies(): Promise<Movie[]> {
+  const popular = await performMovieQuery(Requests.Popular);
+  const upcoming = await getUpcomingMovies();
+  const nowPlaying = await performMovieQuery(Requests.NowPlaying);
+  const topRated = await performMovieQuery(Requests.TopRated);
+  return [
+    ...popular.results,
+    ...upcoming,
+    ...nowPlaying.results,
+    ...topRated.results,
+  ];
+}
