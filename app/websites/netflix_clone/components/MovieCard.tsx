@@ -28,7 +28,7 @@ const MovieCard = ({ movie }: MovieCardProps) => {
   const hasHalfStar = movie.vote_average % 2 !== 0;
 
   return (
-    <Link href={`/websites/netflix/${movie.id}`}>
+    <Link href={`/websites/netflix_clone/${movie.id}`}>
       <div className="group/card relative m-2 ml-0 inline-block w-[160px] cursor-pointer overflow-hidden rounded-md first:ml-2 sm:w-[200px] md:w-[240px] lg:w-[280px]">
         <Image
           src={`${getMovieBackdropUrl(movie, "w500")}`}

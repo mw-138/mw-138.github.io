@@ -23,7 +23,7 @@ const Hero = ({ movie }: HeroProps) => {
           <button className="rounded-md bg-white px-4 py-2 text-black transition-all hover:bg-gray-200">
             Play
           </button>
-          <Link href={`/websites/netflix/${movie.id}`}>
+          <Link href={`/websites/netflix_clone/${movie.id}`}>
             <button className="rounded-md bg-gray-500/50 px-4 py-2 text-white transition-all hover:bg-gray-500/20">
               More Info
             </button>
