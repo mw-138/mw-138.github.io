@@ -2,7 +2,6 @@
 
 import { Icons } from "@/components/Icons";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { CommandPanel } from "./CommandPanel";
 import { DarkModeToggle } from "./DarkModeToggle";
