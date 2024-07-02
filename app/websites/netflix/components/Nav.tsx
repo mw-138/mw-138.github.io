@@ -1,18 +1,10 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import { Film, Languages, List, LogIn, LogOut, Tv } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import {
-  MdMenu,
-  MdHouse,
-  MdNewReleases,
-  MdLanguage,
-  MdClose,
-} from "react-icons/md";
-import { FaBookOpen, FaList, FaSignInAlt } from "react-icons/fa";
-import { PiTelevision } from "react-icons/pi";
-import { CgLogIn, CgLogOut } from "react-icons/cg";
+import { useEffect, useState } from "react";
+import { MdClose, MdMenu } from "react-icons/md";
 
 const Logo = () => {
   return (
@@ -39,32 +31,31 @@ const Nav = () => {
   const [isSticky, setIsSticky] = useState<boolean>(false);
   const [hamburgerMenuOpen, setHamburgerMenuOpen] = useState<boolean>(false);
   const [mainNavItems] = useState<NavigationEntry[]>([
-    { icon: <MdHouse />, label: "Home", href: "#", hide: "md" },
-    { icon: <FaBookOpen />, label: "Series", href: "#", hide: "md" },
-    { icon: <PiTelevision />, label: "Films", href: "#", hide: "md" },
+    { icon: Tv, label: "Series", href: "#", hide: "md" },
+    { icon: Film, label: "Films", href: "#", hide: "md" },
     {
-      icon: <MdNewReleases />,
+      icon: Tv,
       label: "New & Popular",
       href: "#",
-      hide: "xl",
+      hide: "md",
     },
-    { icon: <FaList />, label: "My List", hide: "md", href: "#" },
+    { icon: List, label: "My List", hide: "md", href: "#" },
     {
-      icon: <MdLanguage />,
+      icon: Languages,
       label: "Browse by Languages",
       href: "#",
-      hide: "xl",
+      hide: "md",
     },
   ]);
   const [authenticationNavItems] = useState<NavigationEntry[]>([
     {
-      icon: <FaSignInAlt />,
+      icon: LogIn,
       label: "Login",
       href: "#",
       hide: "md",
     },
     {
-      icon: <CgLogOut />,
+      icon: LogOut,
       label: "Signup",
       href: "#",
       hide: "md",
@@ -105,33 +96,41 @@ const Nav = () => {
         <div className="flex items-center">
           <Logo />
           <ul className="flex flex-row gap-2">
-            {mainNavItems.map((item, index) => (
-              <li key={index}>
-                <Link
-                  href={item.href}
-                  className={`rounded-md bg-transparent px-4 py-2 text-white transition-all hover:bg-netflix-red ${item.hide}:flex hidden`}
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
+            {mainNavItems.map((item, index) => {
+              const NavIcon = item.icon;
+              return (
+                <li key={index}>
+                  <Link
+                    href={item.href}
+                    className={`items-center justify-center gap-2 rounded-md bg-transparent px-4 py-2 text-white transition-all hover:bg-netflix-red ${item.hide}:flex hidden`}
+                  >
+                    <NavIcon />
+                    {item.label}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
         </div>
         <ul className="hidden flex-row gap-2 md:flex">
-          {authenticationNavItems.map((item, index) => (
-            <li key={index}>
-              <Link
-                href={item.href}
-                className="rounded-md bg-transparent px-4 py-2 text-white transition-all hover:bg-netflix-red"
-              >
-                {item.label}
-              </Link>
-            </li>
-          ))}
+          {authenticationNavItems.map((item, index) => {
+            const NavIcon = item.icon;
+            return (
+              <li key={index}>
+                <Link
+                  href={item.href}
+                  className="flex items-center justify-center gap-2 rounded-md bg-transparent px-4 py-2 text-white transition-all hover:bg-netflix-red"
+                >
+                  <NavIcon />
+                  {item.label}
+                </Link>
+              </li>
+            );
+          })}
         </ul>
         <button
           className="rounded-md bg-transparent px-4 py-2 text-white transition-all hover:bg-netflix-red md:hidden"
-          // onClick={toggleHamburgerMenu}
+          onClick={toggleHamburgerMenu}
         >
           <MdMenu />
         </button>
@@ -150,30 +149,40 @@ const Nav = () => {
           </button>
         </div>
         <ul className="flex flex-col gap-2">
-          {mainNavItems.map((item, index) => (
-            <li key={index}>
-              <Link
-                href={item.href}
-                className={`mx-4 flex items-center gap-2 rounded-md px-4 py-2 text-white transition-all hover:bg-netflix-red`}
-              >
-                <span>{item.icon}</span>
-                {item.label}
-              </Link>
-            </li>
-          ))}
+          {mainNavItems.map((item, index) => {
+            const NavIcon = item.icon;
+            return (
+              <li key={index}>
+                <Link
+                  href={item.href}
+                  className={`mx-4 flex items-center gap-2 rounded-md px-4 py-2 text-white transition-all hover:bg-netflix-red`}
+                >
+                  <span>
+                    <NavIcon />
+                  </span>
+                  {item.label}
+                </Link>
+              </li>
+            );
+          })}
         </ul>
         <ul className="absolute bottom-5 left-5 flex flex-row gap-2">
-          {authenticationNavItems.map((item, index) => (
-            <li key={index}>
-              <Link
-                href={item.href}
-                className="flex items-center gap-2 rounded-md bg-transparent px-4 py-2 text-white transition-all hover:bg-netflix-red"
-              >
-                <span>{item.icon}</span>
-                {item.label}
-              </Link>
-            </li>
-          ))}
+          {authenticationNavItems.map((item, index) => {
+            const NavIcon = item.icon;
+            return (
+              <li key={index}>
+                <Link
+                  href={item.href}
+                  className="flex items-center gap-2 rounded-md bg-transparent px-4 py-2 text-white transition-all hover:bg-netflix-red"
+                >
+                  <span>
+                    <NavIcon />
+                  </span>
+                  {item.label}
+                </Link>
+              </li>
+            );
+          })}
         </ul>
       </div>
     </>

@@ -52,8 +52,8 @@ import Portfolio_Screenshot01 from "@/public/projects/portfolio/screenshot_01.pn
 import Portfolio_Screenshot02 from "@/public/projects/portfolio/screenshot_02.png";
 import Portfolio_Screenshot03 from "@/public/projects/portfolio/screenshot_03.png";
 
-import NetflixReDesign_Screenshot01 from "@/public/projects/netflix_redesign/screenshot_01.png";
-import NetflixReDesign_Screenshot02 from "@/public/projects/netflix_redesign/screenshot_02.png";
+import NetflixClone_Screenshot01 from "@/public/projects/netflix_redesign/screenshot_01.png";
+import NetflixClone_Screenshot02 from "@/public/projects/netflix_redesign/screenshot_02.png";
 
 import PremierLeagueReDesign_Screenshot01 from "@/public/projects/premier_league_redesign/screenshot_01.png";
 
@@ -272,17 +272,17 @@ export const Projects: Project[] = [
     tags: [Tag.Website],
   },
   {
-    id: "netflix_redesign",
+    id: "netflix_clone",
     visible: true,
-    title: "Netflix Re-Design",
+    title: "Netflix Clone",
     description:
-      "A Netflix re-design that uses TMDB API to retrieve movies and TV shows.",
+      "A Netflix clone that uses TMDB API to retrieve movies and TV shows.",
     publishDate: new Date("05/26/2024"),
     tools: [Tool.VsCode, Tool.NextJs, Tool.React, Tool.TailwindCSS],
     languages: [Language.TypeScript, Language.HTML, Language.CSS],
-    thumbnail: NetflixReDesign_Screenshot01,
+    thumbnail: NetflixClone_Screenshot01,
     pageUrl: "/websites/netflix",
-    screenshots: [NetflixReDesign_Screenshot01, NetflixReDesign_Screenshot02],
+    screenshots: [NetflixClone_Screenshot01, NetflixClone_Screenshot02],
     tags: [Tag.Website, Tag.WorkInProgress],
   },
   {
@@ -410,7 +410,7 @@ export const RecentProjects: Project[] = EnabledProjects.sort(
 ).slice(0, 3);
 
 export const HighlightedProjects = EnabledProjects.filter((project) => {
-  const projects = ["coin_catcher", "netflix_redesign", "subscription_tracker"];
+  const projects = ["coin_catcher", "netflix_clone", "subscription_tracker"];
   return projects.includes(project.id);
 })
   .sort((a, b) => b.publishDate.getTime() - a.publishDate.getTime())

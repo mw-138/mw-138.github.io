@@ -89,10 +89,12 @@ export function formatCurrency(
   amount: number,
   locale: string = "en-UK",
   currency: string = "GBP",
+  minimumFractionDigits: number = 2,
 ): string {
   return new Intl.NumberFormat(locale, {
     style: "currency",
     currency,
+    minimumFractionDigits: minimumFractionDigits,
   }).format(amount);
 }
 
