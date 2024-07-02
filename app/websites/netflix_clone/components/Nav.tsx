@@ -8,7 +8,7 @@ import { MdClose, MdMenu } from "react-icons/md";
 
 const Logo = () => {
   return (
-    <Link href="/websites/netflix">
+    <Link href="/websites/netflix_clone">
       <Image
         src="/netflix.png"
         width={128}
