@@ -70,12 +70,12 @@ const ProjectPage = async ({ params: { id } }: { params: { id: string } }) => {
                   <p>{project.publishDate.getFullYear()}</p>
                 </>
               )}
-              {project.toolsUsed && (
+              {project.tools && (
                 <>
                   <Separator />
-                  <h1 className="text-2xl font-extrabold">Tools Used</h1>
+                  <h1 className="text-2xl font-extrabold">Tools</h1>
                   <div className="flex flex-wrap gap-2">
-                    {project.toolsUsed.map((tool, index) => (
+                    {project.tools.map((tool, index) => (
                       <Badge key={index} variant="outline">
                         {tool}
                       </Badge>
@@ -83,14 +83,12 @@ const ProjectPage = async ({ params: { id } }: { params: { id: string } }) => {
                   </div>
                 </>
               )}
-              {project.languagesUsed && (
+              {project.languages && (
                 <>
                   <Separator />
-                  <h1 className="text-2xl font-extrabold">
-                    Languages/Markup Syntax Used
-                  </h1>
+                  <h1 className="text-2xl font-extrabold">Languages</h1>
                   <div className="flex flex-wrap gap-2">
-                    {project.languagesUsed.map((language, index) => (
+                    {project.languages.map((language, index) => (
                       <Badge key={index} variant="outline">
                         {language}
                       </Badge>
@@ -121,7 +119,7 @@ const ProjectPage = async ({ params: { id } }: { params: { id: string } }) => {
               )}
             </div>
             <div className="flex w-full flex-col gap-2 xl:ml-5 xl:w-4/6">
-              {project.screenshots.length > 0 && (
+              {project.screenshots && project.screenshots.length > 0 && (
                 <>
                   <h1 className="text-2xl font-extrabold">Screenshots</h1>
                   <Separator />
@@ -152,112 +150,19 @@ const ProjectPage = async ({ params: { id } }: { params: { id: string } }) => {
                   </div>
                 </>
               )}
-              {project.videos.length > 0 && (
+              {project.videos && project.videos.length > 0 && (
                 <>
                   <Separator />
                   <h1 className="text-2xl font-extrabold">Videos</h1>
                   <Separator />
                 </>
               )}
-              {project.screenshots.length == 0 &&
+              {project.screenshots &&
+                project.screenshots.length == 0 &&
+                project.videos &&
                 project.videos.length == 0 && <h1>No media available</h1>}
             </div>
           </div>
-          {/* <div className="flex h-fit w-full flex-col bg-red-500 xl:flex-row">
-            <div className="flex w-96 flex-col bg-blue-500">
-              {project.title && (
-                <h1 className="text-2xl font-extrabold">{project.title}</h1>
-              )}
-              {project.description && (
-                <>
-                  <div className="divider" />
-                  <h1 className="text-2xl font-extrabold">Description</h1>
-                  <p>{project.description}</p>
-                </>
-              )}
-              {project.publishDate && (
-                <>
-                  <div className="divider" />
-                  <h1 className="text-2xl font-extrabold">Year</h1>
-                  <p>{project.publishDate.getFullYear()}</p>
-                </>
-              )}
-              {project.toolsUsed && (
-                <>
-                  <div className="divider" />
-                  <h1 className="text-2xl font-extrabold">Tools Used</h1>
-                  <p>{project.GetFormattedToolsUsed()}</p>
-                </>
-              )}
-              {project.languagesUsed && (
-                <>
-                  <div className="divider" />
-                  <h1 className="text-2xl font-extrabold">
-                    Languages/Markup Syntax Used
-                  </h1>
-                  <p>{project.GetFormattedLanguagesUsed()}</p>
-                </>
-              )}
-              {project.tags && (
-                <>
-                  <div className="divider" />
-                  <h1 className="text-2xl font-extrabold">Tags</h1>
-                  <p>{project.GetFormattedTags()}</p>
-                </>
-              )}
-              {project.pageUrl && (
-                <>
-                  <div className="divider" />
-                  <Link href={project.pageUrl} className="btn btn-primary">
-                    Visit Project Page
-                  </Link>
-                </>
-              )}
-            </div>
-            <div className="divider divider-horizontal" />
-            <div className="flex-1">
-              {project.screenshots.length > 0 && (
-                <>
-                  <div className="divider xl:hidden" />
-                  <h1 className="text-2xl font-extrabold">Screenshots</h1>
-                  <div className="xl:divider" />
-                  <div className="carousel h-96 w-full">
-                    {project.screenshots.map((screenshot, index) => (
-                      <div
-                        key={index}
-                        id={`item_${index}`}
-                        className="carousel-item w-full"
-                      >
-                        <Image
-                          src={screenshot}
-                          width={0}
-                          height={0}
-                          alt=""
-                          className="w-full object-contain"
-                        />
-                      </div>
-                    ))}
-                  </div>
-                  <div className="flex w-full justify-center gap-2 py-2">
-                    {project.screenshots.map((_screenshot, index) => (
-                      <a key={index} href={`#item_${index}`} className="btn">
-                        {index + 1}
-                      </a>
-                    ))}
-                  </div>
-                </>
-              )}
-              {project.videos.length > 0 && (
-                <>
-                  <div className="divider" />
-                  <h1 className="text-2xl font-extrabold">Videos</h1>
-                  <div className="divider" />
-                </>
-              )}
-              {project.screenshots.length == 0 &&
-                project.videos.length == 0 && <h1>No media available</h1>}
-            </div>
-          </div> */}
         </div>
       </MaxWidthWrapper>
     </PageTemplate>

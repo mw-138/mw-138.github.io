@@ -34,7 +34,7 @@ export default function Page() {
             <div className="mt-6 flex flex-col gap-4 sm:flex-row">
               {HeroProject && (
                 <Link
-                  href={HeroProject.GetSiteUrl()}
+                  href={`/projects/${HeroProject.id}`}
                   className={buttonVariants()}
                 >
                   Visit Showcased Project
