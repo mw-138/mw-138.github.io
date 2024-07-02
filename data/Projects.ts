@@ -52,8 +52,8 @@ import Portfolio_Screenshot01 from "@/public/projects/portfolio/screenshot_01.pn
 import Portfolio_Screenshot02 from "@/public/projects/portfolio/screenshot_02.png";
 import Portfolio_Screenshot03 from "@/public/projects/portfolio/screenshot_03.png";
 
-import NetflixClone_Screenshot01 from "@/public/projects/netflix_redesign/screenshot_01.png";
-import NetflixClone_Screenshot02 from "@/public/projects/netflix_redesign/screenshot_02.png";
+import NetflixClone_Screenshot01 from "@/public/projects/netflix_clone/screenshot_01.png";
+import NetflixClone_Screenshot02 from "@/public/projects/netflix_clone/screenshot_02.png";
 
 import PremierLeagueReDesign_Screenshot01 from "@/public/projects/premier_league_redesign/screenshot_01.png";
 
