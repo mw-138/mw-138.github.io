@@ -37,7 +37,7 @@ export default interface Project {
   tools: Tool[];
   languages: Language[];
   thumbnail: StaticImageData;
-  pageUrl: string;
+  pageUrl?: string;
   screenshots?: StaticImageData[];
   videos?: string[];
   tags: Tag[];
