@@ -245,7 +245,6 @@ export const Projects: Project[] = [
     tools: [Tool.DotNet, Tool.ASP],
     languages: [Language.CSharp, Language.HTML, Language.CSS, Language.Razor],
     thumbnail: MiyooMiniThemePreview_Screenshot03,
-    pageUrl: "",
     screenshots: [
       MiyooMiniThemePreview_Screenshot01,
       MiyooMiniThemePreview_Screenshot02,
@@ -281,7 +280,7 @@ export const Projects: Project[] = [
     tools: [Tool.VsCode, Tool.NextJs, Tool.React, Tool.TailwindCSS],
     languages: [Language.TypeScript, Language.HTML, Language.CSS],
     thumbnail: NetflixClone_Screenshot01,
-    pageUrl: "/websites/netflix",
+    pageUrl: "/websites/netflix_clone",
     screenshots: [NetflixClone_Screenshot01, NetflixClone_Screenshot02],
     tags: [Tag.Website, Tag.WorkInProgress],
   },
