@@ -95,23 +95,23 @@ export default function TerminalApp() {
         ))}
       </ScrollArea>
       <div className="flex">
-        <Input
-          type="text"
-          className="h-10 rounded-b-lg rounded-t-none border-x-0 border-b-0 focus-visible:ring-0"
-          placeholder="Enter command"
-          onChange={(e) =>
-            setCommand((prev) => ({ ...prev, input: e.target.value }))
-          }
-          value={command.input}
-        />
-        {/* <Input
-          type="submit"
-          value="Submit"
-          className={cn(
-            buttonVariants({ variant: "outline" }),
-            "w-20 rounded-none border-0 border-l border-t",
-          )}
-        /> */}
+        <form
+          className="h-10 w-full"
+          onSubmit={(e) => {
+            e.preventDefault();
+            submitCommand();
+          }}
+        >
+          <Input
+            type="text"
+            className="rounded-b-lg rounded-t-none border-x-0 border-b-0 focus-visible:ring-0"
+            placeholder="Enter command"
+            onChange={(e) =>
+              setCommand((prev) => ({ ...prev, input: e.target.value }))
+            }
+            value={command.input}
+          />
+        </form>
         <Button
           variant="outline"
           className="w-20 rounded-none border-0 border-l border-t"
