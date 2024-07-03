@@ -10,11 +10,12 @@ import {
   useContext,
   useState,
 } from "react";
+import AppStore from "./components/apps/AppStore";
 import FileExplorerApp from "./components/apps/FileExplorerApp";
+import InternetApp from "./components/apps/InternetApp";
 import SettingsApp from "./components/apps/SettingsApp";
 import TerminalApp from "./components/apps/TerminalApp";
 import App from "./interfaces/App";
-import AppStore from "./components/apps/AppStore";
 
 type DesktopSimulatorContextValue = {
   darkWallpaper: string;
@@ -98,12 +99,12 @@ export default function DesktopSimulatorProvider({
       id: "internet",
       title: "Internet",
       icon: Globe,
-      content: <></>,
-      isOpen: false,
+      content: <InternetApp />,
+      isOpen: true,
       isMinimized: false,
       isFullscreen: false,
-      isWindowScrollable: true,
-      isBlurred: true,
+      isWindowScrollable: false,
+      isBlurred: false,
     },
     {
       id: "terminal",
