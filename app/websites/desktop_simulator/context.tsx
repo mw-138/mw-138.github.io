@@ -100,7 +100,7 @@ export default function DesktopSimulatorProvider({
       title: "Internet",
       icon: Globe,
       content: <InternetApp />,
-      isOpen: true,
+      isOpen: false,
       isMinimized: false,
       isFullscreen: false,
       isWindowScrollable: false,
