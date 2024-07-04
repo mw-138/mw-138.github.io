@@ -2,7 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import { LucideIcon, LucideProps } from "lucide-react";
-import { MouseEventHandler, PropsWithChildren, useState } from "react";
+import { PropsWithChildren, useState } from "react";
 import { Button, buttonVariants } from "./ui/button";
 import {
   Dialog,
@@ -85,16 +85,7 @@ export default function SimpleDialog({
         {showFooter && (
           <DialogFooter>
             <DialogClose asChild>
-              <Button
-              // onClick={(e) => {
-              //   handleFormSubmit(e);
-              //   setIsOpen(false);
-              // }}
-              // disabled={formData.label === ""}
-              >
-                {/* {isEditing ? "Update" : "Submit"} */}
-                Close
-              </Button>
+              <Button>Close</Button>
             </DialogClose>
           </DialogFooter>
         )}

@@ -1,13 +1,15 @@
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import PageTemplate from "@/components/PageTemplate";
 import ProjectCard from "@/components/ProjectCard";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import {
   HeroProject,
   HighlightedProjects,
   RecentProjects,
 } from "@/data/Projects";
+import { cn } from "@/lib/utils";
+import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 
 export default function Page() {
@@ -40,7 +42,16 @@ export default function Page() {
                   Visit Showcased Project
                 </Link>
               )}
-              <Button variant="ghost">About Me &rarr;</Button>
+              <Link
+                href="/about"
+                className={cn(
+                  buttonVariants({ variant: "ghost" }),
+                  "flex gap-2",
+                )}
+              >
+                About Me
+                <ArrowRight />
+              </Link>
             </div>
           </div>
         </MaxWidthWrapper>
